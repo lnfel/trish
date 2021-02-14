@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin-app')
 
 @section('content')
 <div class="flex items-center items-stretch min-h-screen">
@@ -9,7 +9,7 @@
         <h1 class="text-2xl ml-4">{{ config('app.name', 'Laravel') }} &#12290;</h1>
       </div>
     </a>
-    <form class="px-8 pt-6 pb-8 mb-4 mx-auto" method="POST" action="{{ route('login') }}" style="width: 70%;">
+    <form class="px-8 pt-6 pb-8 mb-4 mx-auto" method="POST" action="{{ route('admin.login.submit') }}" style="width: 70%;">
       @csrf
       <div class="mb-4">
         <label for="email" class="block text-gray-700 text-md font-bold mb-2 @error('email') is-invalid @enderror">{{ __('E-Mail Address') }}</label>
@@ -41,7 +41,7 @@
       </div>
 
       <div class="">
-        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{{ route('admin.password.request') }}">{{ __('Forgot Your Password?') }}</a>
       </div>
 
       <div style="border-top: 1px solid #cbd2d6; position: relative; margin: 25px 0 10px; text-align: center;">
@@ -50,7 +50,7 @@
         </span>
       </div>
 
-      <a class="block text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:text-white" href="{{ route('register') }}">{{ __('Sign up') }}</a>
+      <a class="block text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:text-white" href="{{ route('admin.register') }}">{{ __('Sign up') }}</a>
     </form>
   </div>
   <div class="splash flex-col items-center justify-center p-4 hidden lg:flex">

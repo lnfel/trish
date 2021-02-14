@@ -16,11 +16,25 @@
 		<a class="px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 {{ Route::current()->getName() == 'register' || '/' ? 'hidden' : 'inline' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
 		@endguest
 
-		@auth
-		<form method="POST" action="{{ route('logout') }}" class="inline">
-			@csrf
-			<button type="submit" class="px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline cursor-pointer">{{ __('Logout') }}</button>
-		</form>
+		
+		@if(Auth::guard('admin')->check() && Route::current()->getName() !== 'index')
+			<form method="POST" action="{{ route('admin.logout') }}" class="inline">
+				@csrf
+				<button type="submit" class="px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline cursor-pointer">{{Auth::guard('web')->check() ? 'true' : 'false'}} {{Auth::guard('admin')->check()}} {{ Auth::user()->first_name }} {{ __('Logout') }}</button>
+			</form>
+		@elseif(Auth::guard('web')->check() && Route::current()->getName() !== 'admin.dashboard')
+			<form method="POST" action="{{ route('user.logout') }}" class="inline">
+				@csrf
+				<button type="submit" class="px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline cursor-pointer">{{ Auth::user()->name }} {{ __('Logout') }}</button>
+			</form>
+		@endif
+
+		@auth('admin')
+			
+		@endauth
+
+		@auth('web')
+			
 		@endauth
 	</div>
 	<div class="overlay z-10 fixed inset-0 transition-opacity" style="display: none;">

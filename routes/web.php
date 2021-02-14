@@ -16,12 +16,36 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', function () {
-    return view('index');
-});
+	return view('index');
+})->name('index');
 
+Route::post('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::prefix('admin')->group(function() {
+	// Dashboard
+	Route::get('/', 'Auth\AdminController@index')->name('admin.dashboard');
+
+	// Login Routes
+	Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+	Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+
+	// Logout Route
+	Route::post('/logout', 'Auth\AdminLoginController@adminLogout')->name('admin.logout');
+
+	// Register Routes
+	Route::get('/register', 'Auth\AdminRegisterController@showRegisterForm')->name('admin.register');
+	Route::post('/register', 'Auth\AdminRegisterController@register')->name('admin.register.submit');
+
+	// Password Reset Routes
+	Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+	Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+	Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+	Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
+});
 
 /*Publish mail template to edit: php artisan vendor:publish --tag=laravel-mail*/
 /*
