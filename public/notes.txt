@@ -7,8 +7,9 @@ Users
 - birth_date
 - gender
 - phone_number
+- appointment_id has_many
 
-Address
+Addresses
 - street_address
 - brgy
 - municipality
@@ -16,4 +17,31 @@ Address
 - province
 - region
 - zip_code
-- user_id
+- user_id belongs_to
+- admin_id belongs_to
+
+Appointments
+- service_id has_one
+- slots_id has_one
+
+Slots
+- date
+- time
+- slots_left 10
+- has_many services
+
+8 AM - 5 PM
+8:00, 8:30, 9:00
+
+Services
+- name
+- description
+- price
+- has_many requirements
+- slot_id belongs_to
+
+Requirements
+- name
+- description
+- prerequisite
+- service_id belongs_to

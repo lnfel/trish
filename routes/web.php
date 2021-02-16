@@ -47,6 +47,14 @@ Route::prefix('admin')->group(function() {
 	Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
 });
 
+Route::resources([
+	'addresses' => 'AddressController',
+	'appointments' => 'AppointmentController',
+	'slots' => 'SlotController',
+	'services' => 'ServiceController',
+	'requirements' => 'RequirementController',
+]);
+
 /*Publish mail template to edit: php artisan vendor:publish --tag=laravel-mail*/
 /*
 Route::get('/email', function() {

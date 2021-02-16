@@ -1,4 +1,9 @@
-<nav class="flex fixed w-full items-center justify-between px-6 h-16 text-gray-700 z-10">
+<nav
+	x-data="{ scrollAtTop: true }"
+	class="flex fixed w-full items-center justify-between px-6 h-16 text-gray-700 z-10"
+	:class="{ 'shadow-md' : !scrollAtTop }"
+	@scroll.window="scrollAtTop = (window.pageYOffset > 45) ? false : true"
+>
 	<div class="flex items-center">
 		<button aria-label="Open Menu" class="menu-btn hover:text-yellow-700 focus:outline-none mr-2">
 			<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8">
@@ -18,15 +23,32 @@
 
 		
 		@if(Auth::guard('admin')->check() && Route::current()->getName() !== 'index')
-			<form method="POST" action="{{ route('admin.logout') }}" class="inline">
-				@csrf
-				<button type="submit" class="px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline cursor-pointer">{{Auth::guard('web')->check() ? 'true' : 'false'}} {{Auth::guard('admin')->check()}} {{ Auth::user()->first_name }} {{ __('Logout') }}</button>
-			</form>
+			<div x-data="{ dropdownOpen: false }" class="relative inline">
+				<button @click="dropdownOpen = !dropdownOpen" class="relative px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline cursor-pointer">
+					{{ Auth::user()->first_name }}
+				</button>
+
+				<div x-show="dropdownOpen" x-cloak="" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 text-left w-48 bg-white rounded overflow-hidden shadow-xl z-20">
+					<form method="POST" action="{{ route('admin.logout') }}" class="block">
+						@csrf
+						<button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-800 bg-white hover:bg-gray-200 border-b focus:outline-none focus:shadow-outline cursor-pointer"><i class="fas fa-sign-out-alt mr-2"></i> {{ __('Logout') }}</button>
+					</form>
+				</div>
+			</div>
 		@elseif(Auth::guard('web')->check() && Route::current()->getName() !== 'admin.dashboard')
-			<form method="POST" action="{{ route('user.logout') }}" class="inline">
-				@csrf
-				<button type="submit" class="px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline cursor-pointer">{{ Auth::user()->name }} {{ __('Logout') }}</button>
-			</form>
+			<div x-data="{ dropdownOpen: false }" class="relative inline">
+				<button @click="dropdownOpen = !dropdownOpen" class="relative px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline cursor-pointer">
+					{{ Auth::user()->name }}
+				</button>
+
+				<div x-show="dropdownOpen" x-cloak="" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 text-left w-48 bg-white rounded overflow-hidden shadow-xl z-20">
+					<a href="#" class="block px-4 py-2 text-sm text-gray-800 bg-white hover:bg-gray-200 border-b">My Appointments</a>
+					<form method="POST" action="{{ route('user.logout') }}" class="block">
+						@csrf
+						<button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-800 bg-white hover:bg-gray-200 border-b focus:outline-none focus:shadow-outline cursor-pointer"><i class="fas fa-sign-out-alt mr-2"></i> {{ __('Logout') }}</button>
+					</form>
+				</div>
+			</div>
 		@endif
 
 		@auth('admin')
@@ -40,20 +62,20 @@
 	<div class="overlay z-10 fixed inset-0 transition-opacity" style="display: none;">
 		<div tabindex="0" class="absolute inset-0 bg-black opacity-50"></div>
 	</div>
-	<aside class="main-menu flex flex-col justify-between transform top-0 left-0 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 -translate-x-full">
+	<aside x-data="" x-cloak="" class="main-menu flex flex-col justify-between transform top-0 left-0 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 -translate-x-full">
 		<h1 class="text-2xl font-sans tracking-wider border-b py-4 px-6 mb-4">Online Baranggay Services &#12290;</h1>
 		<ul class="flex flex-col flex-1 justify-start text-xl">
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="1"><i class="fas fa-snowflake"></i> Menu</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="1"><i class=""></i> Menu</a>
 			</li>
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="2"><i class="fas fa-seedling"></i> Menu</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="1"><i class=""></i> Menu</a>
 			</li>
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="3"><i class="fas fa-sun"></i> Menu</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="1"><i class=""></i> Menu</a>
 			</li>
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white active" href="#" data-target="4"><i class="fab fa-canadian-maple-leaf transform rotate-45"></i> Menu</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="1"><i class=""></i> Menu</a>
 			</li>
 		</ul>
 		<div class="p-4 text-center text-sm">
