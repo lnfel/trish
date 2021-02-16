@@ -20,7 +20,8 @@ mix.js('resources/js/app.js', 'public/js')
     	postCss: [
     		tailwindcss('./tailwind.config.js')
     	]
-    });
+    })
+    .copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');
 /*.copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts')*/
 
 /*Run mix: npm run dev, npm run prod*/

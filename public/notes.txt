@@ -45,3 +45,5 @@ Requirements
 - description
 - prerequisite
 - service_id belongs_to
+
+heroku run php artisan migrate -app="flash-raven"
