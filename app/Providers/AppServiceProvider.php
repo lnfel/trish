@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // https://qiita.com/akkie/items/b0fb3ba5cd4d8db70788
+        // force https production in heroku
+        if(\App::environment('production')) {
+            \URL::forceScheme( 'https' );
+        }
     }
 }
