@@ -17,7 +17,8 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('slot_id')->unique();
+            $table->decimal('price', 8, 2)->nullable();
+            $table->unsignedBigInteger('slot_id')->nullable();
             $table->foreign('slot_id')->nullable()->references('id')->on('slots');
             $table->timestamps();
         });

@@ -55,6 +55,12 @@ Route::resources([
 	'requirements' => 'RequirementController',
 ]);
 
+//Route::get('/services', function() {
+//	$services = App\Service::get();
+
+//	return view('partials._service-index.blade.php', ['services' => $services]);
+//})->name('services.index');
+
 /*Publish mail template to edit: php artisan vendor:publish --tag=laravel-mail*/
 /*
 Route::get('/email', function() {

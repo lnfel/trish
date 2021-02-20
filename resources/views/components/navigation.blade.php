@@ -66,16 +66,16 @@
 		<h1 class="text-2xl font-sans tracking-wider border-b py-4 px-6 mb-4">Online Baranggay Services &#12290;</h1>
 		<ul class="flex flex-col flex-1 justify-start text-xl">
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="1"><i class=""></i> Menu</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('services.index') }}" data-target="1"><i class=""></i> Services</a>
 			</li>
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="1"><i class=""></i> Menu</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('slots.index') }}" data-target="1"><i class=""></i> Slots</a>
 			</li>
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="1"><i class=""></i> Menu</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('appointments.index') }}" data-target="1"><i class=""></i> Appointments</a>
 			</li>
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="#" data-target="1"><i class=""></i> Menu</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('requirements.index') }}" data-target="1"><i class=""></i> Requirements</a>
 			</li>
 		</ul>
 		<div class="p-4 text-center text-sm">
