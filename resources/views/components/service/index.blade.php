@@ -1,9 +1,9 @@
 <section x-data="datatables()" {{ $attributes->merge(['class' => 'relative container mx-auto px-4']) }}>
   <div class="p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-between mb-4">
-      <h2 class="inline text-3xl border-b-4 border-green-500">Services</h2>
+      <h2 class="inline text-3xl border-b-4 border-green-500">{{ $title }}</h2>
       <div class="flex items-center justify-end">
-        <a href="{{ route('services.create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="far fa-plus-square mr-2"></i>Create</a>
+        <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
       </div>
     </div>
 
@@ -21,7 +21,11 @@
     <div class="mb-4 flex justify-between items-center">
       <div class="flex-1 pr-4">
         <div class="relative md:w-1/3">
-          <input type="search" name="search" class="w-full pl-10 pr-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="search...">
+          <input 
+            x-ref="searchField"
+            x-model.debounce="search"
+            x-on:keydown.window.prevent.slash="$refs.searchField.focus()"
+            type="search" name="search" class="w-full pl-10 pr-4 py-2 rounded-lg shadow focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="search...">
           <div class="absolute top-0 left-0 inline-flex items-center p-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <rect x="0" y="0" width="24" height="24" stroke="none"></rect>
@@ -67,44 +71,62 @@
       <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
         <thead>
           <tr class="text-left">
-            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-gray-100">
+            <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-blue-100">
               <label
                 class="text-blue-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
                 <input type="checkbox" class="form-checkbox focus:outline-none focus:shadow-outline" @click="selectAllCheckbox($event);">
               </label>
             </th>
             <template x-for="heading in headings">
-              <th class="bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs"
+              <th class="bg-blue-500 sticky top-0 border-b border-gray-200 px-6 py-2 text-white font-bold tracking-wider uppercase text-xs"
                 x-text="heading.value" :x-ref="heading.key" :class="{ [heading.key]: true }"></th>
             </template>
           </tr>
         </thead>
         <tbody>
-          <template x-if="services.length > 0" x-for="service in services" :key="service.id">
+          <template x-if="model.length > 0" x-for="item in filteredData" :key="item">
             <tr>
               <td class="border-dashed border-t border-gray-200 px-3">
                 <label
                   class="text-blue-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
-                  <input type="checkbox" class="form-checkbox rowCheckbox focus:outline-none focus:shadow-outline" :name="service.id"
-                      @click="getRowDetail($event, service.id)">
+                  <input type="checkbox" class="form-checkbox rowCheckbox focus:outline-none focus:shadow-outline" :name="item.id"
+                      @click="getRowDetail($event, item.id)">
                 </label>
               </td>
               <td class="border-dashed border-t border-gray-200 id">
-                <span class="text-gray-700 px-6 py-3 flex items-center" x-text="service.id"></span>
+                <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.id"></span>
               </td>
-              <td class="border-dashed border-t border-gray-200 name">
-                <span class="text-gray-700 px-6 py-3 flex items-center" x-text="service.name"></span>
-              </td>
-              <td class="border-dashed border-t border-gray-200 description">
-                <span class="text-gray-700 px-6 py-3 flex items-center" x-text="service.description ?? 'No description'"></span>
-              </td>
-              <td class="border-dashed border-t border-gray-200 description">
-                <span class="text-gray-700 px-6 py-3 flex items-center" x-text="service.price  ?? '00.00'"></span>
-              </td>
-              <td class="border-dashed border-t border-gray-200 description px-3">
+              @switch($title)
+                @case("Services")
+                  <td class="border-dashed border-t border-gray-200 name">
+                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.name"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 description">
+                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.description ?? 'No description'"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 price">
+                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.price != null ? '&#8369; ' + item.price : '&#8369; 00.00'"></span>
+                  </td>
+                  @break
+
+                @case("Slots")
+                  <td class="border-dashed border-t border-gray-200 name">
+                    <!-- <span class="text-gray-700 px-6 py-3 flex items-center" x-text="new Date(item.date).toDateString()"></span> -->
+                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.date"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 name">
+                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.time"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 name">
+                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.slots_left"></span>
+                  </td>
+                  @break
+              @endswitch
+              
+              <td class="border-dashed border-t border-gray-200 action px-3">
                 <div class="flex items-center">
-                  <a class="text-sm inline px-3 py-2 bg-blue-400 text-white hover:bg-blue-500 rounded mr-2" x-bind:href="'/services/' + service.id + '/edit'"><i class="fas fa-edit"></i></a>
-                  <form class="text-sm inline" method="post" x-bind:action="'/services/' + service.id">
+                  <a class="text-sm inline px-3 py-2 bg-blue-400 text-white hover:bg-blue-500 rounded mr-2" x-bind:href="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id + '/edit'"><i class="fas fa-edit"></i></a>
+                  <form class="text-sm inline" method="post" x-bind:action="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id">
                     @csrf
                     @method('DELETE')
                     <button class="px-4 py-2 bg-gray-400 text-white hover:bg-gray-500 rounded focus:outline-none focus:shadow-outline"><i class="fas fa-times"></i></button>
@@ -114,7 +136,7 @@
             </tr>
           </template>
 
-          <template x-if="services.length == 0">
+          <template x-if="model.length == 0">
             <tr>
               <td class="border-dashed border-t border-gray-200" colspan="6">
                 <span class="text-gray-700 py-3 flex items-center justify-center">No Available data</span>
@@ -130,11 +152,36 @@
 <script>
   function datatables() {
     return {
-      services: {!! $services !!},
+      search: "",
+      model: {!! $model !!},
       headings: {!! $headings !!},
       selectedRows: [],
 
       open: false,
+
+      get filteredData() {
+        // filtered search
+        if (this.search === "") {
+          return this.model;
+        }
+
+        return this.model.filter((item) => {
+          let title = "{!! strtolower($title) !!}";
+          switch(title) {
+            case "services":
+              return item.name
+                .toLowerCase()
+                .includes(this.search.toLowerCase());
+              break;
+
+            case "slots":
+              return item.date
+                .toLowerCase()
+                .includes(this.search.toLowerCase());
+              break;
+          }
+        });
+      },
       
       toggleColumn(key) {
         // Note: All td must have the same class name as the headings key! 

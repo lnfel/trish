@@ -10,12 +10,12 @@
 				<path d="M4 6h16M4 12h16M4 18h16"></path>
 			</svg>
 		</button>
-		<h1 class="text-2xl font-sans tracking-wider">{{ config('app.name', 'Laravel') }} &#12290;</h1>
+		<h1 class="text-2xl font-sans tracking-wider"><a href="{{ URL::to('/') }}">{{ config('app.name', 'Laravel') }} &#12290;</a></h1>
 	</div>
 	<div class="flex items-center hidden md:block">
 		<!-- horizontal nav -->
 		<a class="px-4 py-2 mr-2 font-bold hover:underline" href="{{ URL::to('/') }}">{{ __('Home') }}</a>
-		<a class="px-4 py-2 mr-2 font-bold hover:underline" href="#">{{ __('Services') }}</a>
+		<a class="px-4 py-2 mr-2 font-bold hover:underline" href="{{ Auth::guard('admin')->check() ? route('services.index') : URL::to('/community-services') }}">{{ __('Services') }}</a>
 		@guest
 		<a class="px-4 py-2 mr-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 {{ Route::current()->getName() == 'login' ? 'hidden' : 'inline' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
 		<a class="px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 {{ Route::current()->getName() == 'register' || '/' ? 'hidden' : 'inline' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -25,7 +25,7 @@
 		@if(Auth::guard('admin')->check() && Route::current()->getName() !== 'index')
 			<div x-data="{ dropdownOpen: false }" class="relative inline">
 				<button @click="dropdownOpen = !dropdownOpen" class="relative px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline cursor-pointer">
-					{{ Auth::user()->first_name }}
+					{{ Auth::user()->first_name }} <i class="fas fa-ellipsis-v ml-4"></i>
 				</button>
 
 				<div x-show="dropdownOpen" x-cloak="" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 text-left w-48 bg-white rounded overflow-hidden shadow-xl z-20">
@@ -38,7 +38,7 @@
 		@elseif(Auth::guard('web')->check() && Route::current()->getName() !== 'admin.dashboard')
 			<div x-data="{ dropdownOpen: false }" class="relative inline">
 				<button @click="dropdownOpen = !dropdownOpen" class="relative px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline cursor-pointer">
-					{{ Auth::user()->name }}
+					{{ Auth::user()->name }} <i class="fas fa-ellipsis-v ml-4"></i>
 				</button>
 
 				<div x-show="dropdownOpen" x-cloak="" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 text-left w-48 bg-white rounded overflow-hidden shadow-xl z-20">

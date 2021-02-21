@@ -9,5 +9,5 @@
   <div class="intro-bg"></div>
 </section>
 
-<x-service.index :model="$model" :headings="$headings" title="Services" class="-mt-80"/>
+<x-service.index :model="$model" :headings="$headings" title="Slots" class="-mt-80"/>
 @endsection

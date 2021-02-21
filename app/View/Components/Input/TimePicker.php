@@ -4,7 +4,7 @@ namespace App\View\Components\Input;
 
 use Illuminate\View\Component;
 
-class DatePicker extends Component
+class TimePicker extends Component
 {
     public $action;
     public $model;
@@ -27,6 +27,6 @@ class DatePicker extends Component
      */
     public function render()
     {
-        return view('components.input.date-picker');
+        return view('components.input.time-picker');
     }
 }

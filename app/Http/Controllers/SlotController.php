@@ -4,9 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Slot;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use DateTime;
 
 class SlotController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +28,15 @@ class SlotController extends Controller
      */
     public function index()
     {
-        //
+        $model = Slot::get()->toJson();
+        $headings = collect([
+            ['key' => 'id', 'value' => 'ID'],
+            ['key' => 'date', 'value' => 'Date'],
+            ['key' => 'time', 'value' => 'Time'],
+            ['key' => 'slotsLeft', 'value' => 'Slots left'],
+            ['key' => 'action', 'value' => 'Action']
+        ])->toJson();
+        return view('slot.index', ['model' => $model, 'headings' => $headings]);
     }
 
     /**
@@ -24,7 +46,12 @@ class SlotController extends Controller
      */
     public function create()
     {
-        //
+        $columns = collect([
+            ['key' => 'date', 'value' => 'Date', 'type' => 'date', 'first' => 'autofocus'],
+            ['key' => 'time', 'value' => 'Time', 'type' => 'time'],
+            ['key' => 'slots_left', 'value' => 'Slots left', 'type' => 'number']
+        ]);
+        return view('slot.create', ['columns' => $columns]);
     }
 
     /**
@@ -35,7 +62,34 @@ class SlotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate form data
+        $validator = Validator::make($request->all(),
+            [
+                'date' => 'required|date|unique:slots',
+                'hour' => 'nullable|string',
+                'minute' => 'nullable|string',
+                'meridiem' => 'nullable|string',
+                'slots_left' => 'nullable|numeric'
+            ],
+            [
+                'date.unique' => 'Date slot already exists.'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->only('date', 'hour', 'minute', 'meridiem', 'slots_left'))->withErrors($validator);
+        }
+
+        // create slot
+        $time = new DateTime($request->hour.':'.$request->minute.' '.$request->meridiem);
+
+        $slot = Slot::create([
+            'date' => $request->date,
+            'time' => date_format($time, "h:i A"),
+            'slots_left' => $request->slots_left ?? 10
+        ]);
+
+        return redirect()->route('slots.create')->with('status', 'Slot created successfully!');
     }
 
     /**
@@ -57,7 +111,12 @@ class SlotController extends Controller
      */
     public function edit(Slot $slot)
     {
-        //
+        $columns = collect([
+            ['key' => 'date', 'value' => 'Date', 'type' => 'date', 'first' => 'autofocus'],
+            ['key' => 'time', 'value' => 'Time', 'type' => 'time'],
+            ['key' => 'slots_left', 'value' => 'Slots left', 'type' => 'number']
+        ]);
+        return view('slot.edit', ['model' => $slot, 'columns' => $columns]);
     }
 
     /**
@@ -69,7 +128,20 @@ class SlotController extends Controller
      */
     public function update(Request $request, Slot $slot)
     {
-        //
+        $time = new DateTime($request->hour.':'.$request->minute.' '.$request->meridiem);
+        $data = [
+            'date' => $request->date,
+            'time' => date_format($time, "h:i A"),
+            'slots_left' => $request->slots_left
+        ];
+
+        try {
+            Slot::findOrFail($slot->id)->update($data);
+            return redirect()->route('slots.edit', $slot->id)->with('status', 'Slot edited successfully!');
+        }
+        catch(ModelNotFoundException $err) {
+            // this won't even run unless app is being attacked via injection
+        }
     }
 
     /**
@@ -80,6 +152,7 @@ class SlotController extends Controller
      */
     public function destroy(Slot $slot)
     {
-        //
+        Slot::findOrFail($slot->id)->delete();
+        return redirect()->route('slots.index')->with('status', 'Slot has been deleted!');
     }
 }

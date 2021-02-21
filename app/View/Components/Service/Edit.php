@@ -1,12 +1,14 @@
 <?php
 
-namespace App\View\Components\Input;
+namespace App\View\Components\Service;
 
 use Illuminate\View\Component;
 
-class DatePicker extends Component
+class Edit extends Component
 {
-    public $action;
+    public $columns;
+    public $title;
+    public $route;
     public $model;
 
     /**
@@ -14,9 +16,11 @@ class DatePicker extends Component
      *
      * @return void
      */
-    public function __construct($action, $model = '')
+    public function __construct($columns, $title, $route, $model)
     {
-        $this->action = $action;
+        $this->columns = $columns;
+        $this->title = $title;
+        $this->route = $route;
         $this->model = $model;
     }
 
@@ -27,6 +31,6 @@ class DatePicker extends Component
      */
     public function render()
     {
-        return view('components.input.date-picker');
+        return view('components.service.edit');
     }
 }

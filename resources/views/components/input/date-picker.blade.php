@@ -1,9 +1,7 @@
 <div class="antialiased sans-serif">
   <div x-data="app()" x-init="[initDate(), getNoOfDays()]" x-cloak>
-      <div class="container mx-auto px-4 py-2 md:py-10">
-          <div class="mb-5 w-64">
-
-              <label for="datepicker" class="font-bold mb-1 text-gray-700 block">Select Date</label>
+      <div>
+          <div class="w-64">
               <div class="relative">
                   <input type="hidden" name="date" x-ref="date">
                   <input 
@@ -12,7 +10,7 @@
                       x-model="datepickerValue"
                       @click="showDatepicker = !showDatepicker"
                       @keydown.escape="showDatepicker = false"
-                      class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                      class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-gray-600 font-medium"
                       placeholder="Select date">
 
                       <div class="absolute top-0 right-0 px-3 py-2">
@@ -101,6 +99,20 @@
       const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+      let action = "{!! $action !!}";
+
+      console.log(action);
+      let dummy = document.querySelector("[name='date']").defaultValue = new Date().toJSON().slice(0,10);
+      switch(action){
+        case "create":
+          document.querySelector("[name='date']").defaultValue = new Date().toJSON().slice(0,10);
+          break;
+
+        case "edit":
+          document.querySelector("[name='date']").defaultValue = "{!! $model != null ? $model->date : '' !!}";
+          break;
+      }
+
       function app() {
           return {
               showDatepicker: false,
@@ -116,7 +128,11 @@
                   let today = new Date();
                   this.month = today.getMonth();
                   this.year = today.getFullYear();
-                  this.datepickerValue = new Date(this.year, this.month, today.getDate()).toDateString();
+                  if ("{!! $action !!}" == 'create') {
+                    this.datepickerValue = new Date(this.year, this.month, today.getDate()).toDateString();
+                  } else {
+                    this.datepickerValue = new Date("{!! $model != null ? $model->date : '' !!}").toDateString();
+                  }
               },
 
               isToday(date) {

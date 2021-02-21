@@ -17,7 +17,7 @@ class CreateSlotsTable extends Migration
             $table->id();
             $table->date('date');
             $table->timestamp('time');
-            $table->integer('slots_left')->default('10');
+            $table->integer('slots_left')->nullable()->default('10');
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ServiceController extends Controller
 {
@@ -26,7 +27,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::get()->toJson();
+        $model = Service::get()->toJson();
         $headings = collect([
             ['key' => 'id', 'value' => 'ID'],
             ['key' => 'name', 'value' => 'Name'],
@@ -34,7 +35,7 @@ class ServiceController extends Controller
             ['key' => 'price', 'value' => 'Price'],
             ['key' => 'action', 'value' => 'Action']
         ])->toJson();
-        return view('service.index', ['services' => $services, 'headings' => $headings]);
+        return view('service.index', ['model' => $model, 'headings' => $headings]);
     }
 
     /**
@@ -45,7 +46,12 @@ class ServiceController extends Controller
     public function create()
     {
         //
-        return view('service.create');
+        $columns = collect([
+            ['key' => 'name', 'value' => 'Name', 'type' => 'text', 'first' => 'autofocus'],
+            ['key' => 'description', 'value' => 'Description', 'type' => 'textarea'],
+            ['key' => 'price', 'value' => 'Price in pesos', 'type' => 'number']
+        ]);
+        return view('service.create', ['columns' => $columns]);
     }
 
     /**
@@ -102,6 +108,12 @@ class ServiceController extends Controller
     public function edit(Service $service)
     {
         //
+        $columns = collect([
+            ['key' => 'name', 'value' => 'Name', 'type' => 'text', 'first' => 'autofocus'],
+            ['key' => 'description', 'value' => 'Description', 'type' => 'textarea'],
+            ['key' => 'price', 'value' => 'Price in pesos', 'type' => 'price']
+        ]);
+        return view('service.edit', ['model' => $service, 'columns' => $columns]);
     }
 
     /**
@@ -114,6 +126,19 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         //
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price
+        ];
+
+        try {
+            Service::findOrFail($service->id)->update($data);
+            return redirect()->route('services.edit', $service->id)->with('status', 'Service edited successfully!');
+        }
+        catch(ModelNotFoundException $err) {
+            // this won't even run unless app is being attacked via injection
+        }
     }
 
     /**
@@ -125,5 +150,7 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         //
+        Service::findOrFail($service->id)->delete();
+        return redirect()->route('services.index')->with('status', 'Service has been deleted!');
     }
 }

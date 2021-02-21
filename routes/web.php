@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-Route::get('/', function () {
-	return view('index');
-})->name('index');
+Route::get('/', 'MainController@index')->name('client.index');
+Route::get('/community-services', 'MainController@services')->name('client.services');
 
 Route::post('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Auth::routes();

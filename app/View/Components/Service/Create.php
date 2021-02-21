@@ -3,25 +3,23 @@
 namespace App\View\Components\Service;
 
 use Illuminate\View\Component;
-use App\Service;
 
-class Index extends Component
+class Create extends Component
 {
-    public $model;
-    public $headings;
+    public $columns;
     public $title;
+    public $route;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($model, $headings, $title)
+    public function __construct($columns, $title, $route)
     {
-        //
-        $this->model = $model;
-        $this->headings = $headings;
+        $this->columns = $columns;
         $this->title = $title;
+        $this->route = $route;
     }
 
     /**
@@ -31,6 +29,6 @@ class Index extends Component
      */
     public function render()
     {
-        return view('components.service.index');
+        return view('components.service.create');
     }
 }

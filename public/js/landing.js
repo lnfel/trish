@@ -1,3 +1,11 @@
+(function() {
+	let css = document.createElement('link');
+	css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css';
+	css.rel = 'stylesheet';
+	css.type = 'text/css';
+	document.getElementsByTagName('head')[0].appendChild(css);
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
 
 	function select(selector) {
@@ -13,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const menuBtn = select(".menu-btn");
 	const mainMenu = select(".main-menu");
 	const overlay = select(".overlay");
+	const alertClose = select("#js-alert-close");
 
 	menuBtn.addEventListener('click', function(event) {
 		overlay.setAttribute("style", "display: block;");
@@ -24,6 +33,36 @@ document.addEventListener('DOMContentLoaded', function() {
 		mainMenu.classList.add('-translate-x-full');
 	});
 
+	if (alertClose) {
+		alertClose.addEventListener('click', function(event) {
+			let alert = document.getElementById("js-alert");
+			alert.parentNode.removeChild(alert);
+		});
+	}
+
+	// put autofocus cursor at the end of text input
+	let $el = document.querySelector('[autofocus]');
+
+	function _autofocus($el) {
+		let inputLength = $el.value.length;
+
+		if ($el.setSelectionRange) {
+			$el.focus();
+			$el.setSelectionRange(inputLength, inputLength);
+		} else if ($el.createTextRange) {
+			let t = $el.createTextRange();
+			t.collapse(true);
+			t.moveEnd('character', inputLength);
+			t.moveStart('character', inputLength);
+			t.select();
+		}
+	}
+
+	if ($el) {
+		_autofocus($el);
+	}
+
+/*
 	var navItems = _getAll(".nav-item");
 	if (navItems.length > 0) {
 			navItems.forEach(function(el) {
@@ -58,4 +97,5 @@ document.addEventListener('DOMContentLoaded', function() {
 				});
 			});
 		}
+/**/
 });

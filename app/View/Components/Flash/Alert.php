@@ -1,23 +1,22 @@
 <?php
 
-namespace App\View\Components\Input;
+namespace App\View\Components\Flash;
 
 use Illuminate\View\Component;
 
-class DatePicker extends Component
+class Alert extends Component
 {
-    public $action;
-    public $model;
+    public $status;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($action, $model = '')
+    public function __construct($status)
     {
-        $this->action = $action;
-        $this->model = $model;
+        //
+        $this->status = $status;
     }
 
     /**
@@ -27,6 +26,6 @@ class DatePicker extends Component
      */
     public function render()
     {
-        return view('components.input.date-picker');
+        return view('components.flash.alert');
     }
 }
