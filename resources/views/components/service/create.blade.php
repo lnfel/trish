@@ -29,11 +29,11 @@
 							@break
 
 						@case("date")
-							<x-input.datepicker action="create"/>
+							<x-input.date-picker action="create"/>
 							@break
 
 						@case("time")
-							<x-input.timepicker action="create"/>
+							<x-input.time-picker action="create"/>
 							@break
 
 						@case("number")

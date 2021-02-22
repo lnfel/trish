@@ -30,11 +30,11 @@
 							@break
 
 						@case("date")
-							<x-input.datepicker action="edit" :model="$model"/>
+							<x-input.date-picker action="edit" :model="$model"/>
 							@break
 
 						@case("time")
-							<x-input.timepicker action="edit" :model="$model"/>
+							<x-input.time-picker action="edit" :model="$model"/>
 							@break
 
 						@case("number")
