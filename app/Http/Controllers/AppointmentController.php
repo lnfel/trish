@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
+use PDF;
 
 class AppointmentController extends Controller
 {
@@ -121,6 +122,26 @@ class AppointmentController extends Controller
         //$timeSlots = Slot::where('date', $request->date)->pluck('time')->all();
         $timeSlots = Slot::where('date', $request->date)->get()->pluck('time');
         return $timeSlots;
+    }
+
+    public function download($service_id = null)
+    {
+        if ($service_id) {
+            $service = Service::find($service_id);
+        }
+        $serviceTitle = $service ? $service->name.'.pdf' : 'Angono-document.pdf';
+        $user = auth()->user();
+        $data = [
+            'serviceTitle' => $serviceTitle,
+            'service' => $service,
+            'user' => $user
+        ];
+
+        // share data to view
+        $pdf = PDF::loadView('pdf.download', $data);
+        
+        // download PDF file with download method
+        return $pdf->download($serviceTitle);
     }
 
     protected function _login()

@@ -52,7 +52,7 @@
 						      	<a href="{{ route('appointments.create', $service->id) }}" class="text-blue-400 hover:text-blue-600 hover:underline">Request appointment</a>
 						      </td>
 						      <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-						      	<a href="#" class="text-blue-400 hover:text-blue-600 hover:underline">Download</a>
+						      	<a href="{{ route('pdf.download', $service->id) }}" class="text-blue-400 hover:text-blue-600 hover:underline">Download</a>
 						      </td>
 						    </tr>
 						    @empty

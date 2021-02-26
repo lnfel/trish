@@ -47,7 +47,7 @@
 				<label for="service" class="block text-gray-700 text-md font-bold mb-2 @error('service') is-invalid @enderror">Service</label>
 				<div class="w-64">
 					<div class="relative">
-						<input type="hidden" name="service" x-ref="service" value="{{ $service->id }}">
+						<input type="hidden" name="service" x-ref="service" value="{{ $service->id ?? '' }}">
 						<input
 							type="text"
 							readonly
@@ -179,7 +179,7 @@
 			showServicepicker: false,
 			datepickerValue: '',
 			timepickerValue: '',
-			serviceValue: '{!! $service->name !!}',
+			serviceValue: '{!! $service->name ?? "" !!}',
 			services: {!! $services !!},
 			slots: {!! $slots !!},
 			availableTimeSlots: [],

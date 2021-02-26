@@ -130,3 +130,10 @@ $watch(
 				)
 
 @submit.prevent="submit"
+
+php load_font.php Nunito fonts/Nunito-Regular.ttf fonts/Nunito-Italic.ttf fonts/Nunito-Bold.ttf fonts/Nunito-BoldItalic.ttf
+
+php load_font.php Nunito ./Nunito-Regular.ttf ./Nunito-Italic.ttf ./Nunito-Bold.ttf ./Nunito-BoldItalic.ttf ./Nunito-Black.ttf ./Nunito-BlackItalic.ttf  ./Nunito-ExtraBold.ttf ./Nunito-ExtraBoldItalic.ttf ./Nunito-ExtraLight.ttf ./Nunito-ExtraLightItalic.ttf  ./Nunito-Light.ttf ./Nunito-LightItalic.ttf  ./Nunito-SemiBold.ttf ./Nunito-SemiBoldItalic.ttf
+
+server
+php -S localhost:8000 -t public

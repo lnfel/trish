@@ -66,6 +66,8 @@ Route::resources([
 
 Route::get('/slots/available-slots/', 'AppointmentController@availableTimeSlots');
 
+Route::get('/download/{service_id}', 'AppointmentController@download')->name('pdf.download');
+
 //Route::get('/slot', function () {
 //  return new SlotResource(Slot::findOrFail(4));
 //});
