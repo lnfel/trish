@@ -144,8 +144,8 @@
 		          	<div class="flex flex-col items-base">
 		          		<template x-for="(slot, timeIndex) in availableTimeSlots" :key="timeIndex">
 		          			<div 
-		          				@click="{$refs.time.value = slot.time, timepickerValue = slot.time, showTimepicker = false}"
-		          				x-text="slot.time"
+		          				@click="{$refs.time.value = slot.time, timepickerValue = new Date(`2021-02-28 ${slot.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true}), showTimepicker = false}"
+		          				x-text="new Date(`2021-02-28 ${slot.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"
 		          				class="cursor-pointer text-sm leading-none leading-loose transition ease-in-out duration-100 px-2 hover:bg-blue-500 hover:text-white">
 										</div>
 		          		</template>
@@ -191,7 +191,7 @@
 				//console.log(this.slots);
 			},
 			login() {
-				fetch('http://localhost:8001/api/login', {
+				fetch('http://localhost/api/login', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -208,7 +208,7 @@
 				});
 			},
 			fetchDates() {
-				fetch('http://localhost:8001/api/all-slot-dates', {
+				fetch('http://localhost/api/all-slot-dates', {
 					method: 'GET',
 				})
 				.then(response => response.json())
@@ -221,7 +221,7 @@
 				});
 			},
 			fetchTimes(selectedDate) {
-				fetch(`http://localhost:8001/api/all-slot-date-times/${selectedDate}`, {
+				fetch(`http://localhost/api/all-slot-date-times/${selectedDate}`, {
 					method: 'GET',
 				})
 				.then(response => response.json())

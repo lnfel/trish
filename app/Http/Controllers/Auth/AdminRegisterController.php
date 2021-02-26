@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Admin;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AdminRegisterController extends Controller
 {
@@ -18,17 +19,17 @@ class AdminRegisterController extends Controller
     public function register(Request $request)
     {
     	// validate form data
-    	$this->validate($request,
-    		[
-    			'first_name' => 'required|string',
-    			'last_name' => 'required|string',
-    			'email' => 'required|string|email|unique:admins',
-    			'password' => 'required|string|min:8'
-    		],
-    		[
-    			'email.unique' => 'The email you entered is already registered.'
-    		]
-    	);
+        $validator = Validator::make($request->all(),
+            [
+                'first_name' => 'required|string',
+                'last_name' => 'required|string',
+                'email' => 'required|string|email|unique:admins',
+                'password' => 'required|string|min:8'
+            ],
+            [
+                'email.unique' => 'The email you entered is already registered.'
+            ]
+        );
 
     	// create admin
     	try {
@@ -43,7 +44,7 @@ class AdminRegisterController extends Controller
 	    	Auth::guard('admin')->loginUsingId($admin->id);
 	    	return redirect()->route('admin.dashboard');
 	    } catch(\Exception $e) {
-	    	return redirect()->back()->withInput($request->only('first_name', 'last_name', 'email'))->withErrors();
+	    	return redirect()->back()->withInput($request->only('first_name', 'last_name', 'email'))->withErrors($validator);
     	}
 
     }
