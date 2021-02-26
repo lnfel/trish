@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Mail\UserRegisteredMail;
 use Illuminate\Support\Facades\Mail;
+//use App\Http\Resources\Slot as SlotResource;
+//use App\Slot;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/', 'MainController@index')->name('client.index');
 Route::get('/community-services', 'MainController@services')->name('client.services');
+Route::get('/user/appointments', 'MainController@userAppointments')->name('client.user.appointments');
 
 Route::post('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Auth::routes();
@@ -46,13 +49,26 @@ Route::prefix('admin')->group(function() {
 	Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
 });
 
+/*
+Route::resource('appointments', 'AppointmentController')->parameters([
+	'create' => 'service_id'
+]);
+/**/
+Route::resource('appointments', 'AppointmentController');
+Route::get('/appointments/create/{service_id}', 'AppointmentController@create')->name('appointments.create');
+
 Route::resources([
 	'addresses' => 'AddressController',
-	'appointments' => 'AppointmentController',
 	'slots' => 'SlotController',
 	'services' => 'ServiceController',
 	'requirements' => 'RequirementController',
 ]);
+
+Route::get('/slots/available-slots/', 'AppointmentController@availableTimeSlots');
+
+//Route::get('/slot', function () {
+//  return new SlotResource(Slot::findOrFail(4));
+//});
 
 //Route::get('/services', function() {
 //	$services = App\Service::get();

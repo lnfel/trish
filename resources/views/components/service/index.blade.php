@@ -105,7 +105,9 @@
                     <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.description ?? 'No description'"></span>
                   </td>
                   <td class="border-dashed border-t border-gray-200 price">
-                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.price != null ? '&#8369; ' + item.price : '&#8369; 00.00'"></span>
+                    <span class="text-gray-700 px-6 py-3 flex items-center">
+                      <div class="flex-shrink-0" x-text="item.price != null ? '&#8369; ' + item.price : '&#8369; 00.00'"></div>
+                    </span>
                   </td>
                   @break
 

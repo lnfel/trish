@@ -17,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', 'Api\AuthController@login')->name('login');
+Route::post('/register', 'Api\AuthController@register')->name('register');
+
+Route::get('/all-slot-dates', 'Api\SlotApiController@allSlotDates')->name('allSlotDates');
+Route::get('/all-slot-date-times/{date}', 'Api\SlotApiController@allSlotDateTimes')->name('allSlotDateTimes');
+
+Route::middleware('auth:api')->group(function() {
+	Route::resource('/slots', 'Api\SlotApiController');
+	Route::post('/logout', 'Api\AuthController@logout')->name('logout');
+});

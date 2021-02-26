@@ -7,7 +7,7 @@ Users
 - birth_date
 - gender
 - phone_number
-- appointment_id has_many
+- has_many appointments
 
 Addresses
 - street_address
@@ -23,6 +23,7 @@ Addresses
 Appointments
 - service_id has_one
 - slots_id has_one
+- user_id belongs_to
 
 Slots
 - date
@@ -47,3 +48,85 @@ Requirements
 - service_id belongs_to
 
 heroku run php artisan migrate -app="flash-raven"
+
+Migration Step
+--path="/database/migrations/"
+
+2014_10_12_000000_create_users_table.php
+2014_10_12_100000_create_password_resets_table.php
+2019_08_19_000000_create_failed_jobs_table.php
+2021_02_13_235057_create_admins_table.php
+2021_02_14_001022_create_addresses_table.php
+2021_02_15_151638_create_slots_table.php
+2021_02_15_153309_create_services_table.php
+2021_02_15_151359_create_appointments_table.php
+2021_02_15_153836_create_requirements_table.php
+
+php artisan migrate --path="/database/migrations/" --force
+
+http://localhost:8000/slots/available-slots/2021-04-01
+
+C:\xampp\htdocs\trish>php artisan passport:install
+Encryption keys generated successfully.
+Personal access client created successfully.
+Client ID: 1
+Client secret: S3QUhqn1LwkfI8psonWxApwyJ8TuHZBRdZfuh9av
+Password grant client created successfully.
+Client ID: 2
+Client secret: 6J1eQ9qWEqtVgxrNe9RhAneLMa7hnZ3Sj20qTL2e
+
+factory(App\Slot::class, 10)->create()
+factory(App\User::class, 1)->create()
+factory(App\Admin::class, 1)->create()
+
+php artisan passport:client --password
+
+Password grant client created successfully.
+Client ID: 1
+Client secret: HedT4cehfAm1hbTMARnODnhBCyd1KE3iuBJnf5t5
+
+$http = new GuzzleHttp\Client;
+
+$response = $http->post('http://your-app.com/oauth/token', [
+    'form_params' => [
+        'grant_type' => 'password',
+        'client_id' => 'client-id',
+        'client_secret' => 'client-secret',
+        'username' => 'taylor@laravel.com',
+        'password' => 'my-password',
+        'scope' => '',
+    ],
+]);
+
+return json_decode((string) $response->getBody(), true);
+
+Still uses username for params even if we only had email on user model
+
+php artisan make:controller Api/SlotApiController --model=Slot --api
+
+Password grant client created successfully.
+Client ID: 6
+Client secret: apTTkkUmkOMHhC5Np2zYvbF2J4MehjvuFOwPHiIY
+
+submit() {
+				fetch('http://localhost:8000/api/slots/available-slots/?'+ new URLSearchParams({
+					date: `${this.form.date}`
+				}), {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json'
+					}
+				})
+				.then(response => response)
+				.then(data => this.availableTimeSlots = data);
+			}
+login(),
+$watch(
+					'showDatepicker',
+					() => { 
+						fetchDates();
+					}
+				)
+
+@submit.prevent="submit"

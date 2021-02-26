@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use DateTime;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class SlotController extends Controller
 {
@@ -18,7 +20,8 @@ class SlotController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin')->except('availableTimeSlots', 'update');
+        $this->middleware('auth:web')->only('availableTimeSlots', 'update');
     }
 
     /**
@@ -36,7 +39,8 @@ class SlotController extends Controller
             ['key' => 'slotsLeft', 'value' => 'Slots left'],
             ['key' => 'action', 'value' => 'Action']
         ])->toJson();
-        return view('slot.index', ['model' => $model, 'headings' => $headings]);
+        $slots = Slot::all();
+        return view('slot.index', ['model' => $model, 'headings' => $headings, 'slots' => $slots]);
     }
 
     /**
@@ -65,7 +69,7 @@ class SlotController extends Controller
         // validate form data
         $validator = Validator::make($request->all(),
             [
-                'date' => 'required|date|unique:slots',
+                'date' => 'required|date',
                 'hour' => 'nullable|string',
                 'minute' => 'nullable|string',
                 'meridiem' => 'nullable|string',
@@ -155,4 +159,13 @@ class SlotController extends Controller
         Slot::findOrFail($slot->id)->delete();
         return redirect()->route('slots.index')->with('status', 'Slot has been deleted!');
     }
+
+    public function availableTimeSlots(Request $request)
+    {
+        //$timeSlots = DB::table('slots')->select('time')->whereDate('date', '=', $request)->orderBy('time', 'asc')->get()->toJson();
+        //$timeSlots = Slot::where('date', $request->date)->pluck('time')->all();
+        $timeSlots = Slot::where('date', $request->date)->get()->pluck('time')->toJson();
+        return response()->$timeSlots;
+    }
+
 }

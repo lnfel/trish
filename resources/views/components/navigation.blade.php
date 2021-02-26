@@ -42,7 +42,7 @@
 				</button>
 
 				<div x-show="dropdownOpen" x-cloak="" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 text-left w-48 bg-white rounded overflow-hidden shadow-xl z-20">
-					<a href="#" class="block px-4 py-2 text-sm text-gray-800 bg-white hover:bg-gray-200 border-b">My Appointments</a>
+					<a href="{{ route('client.user.appointments') }}" class="block px-4 py-2 text-sm text-gray-800 bg-white hover:bg-gray-200 border-b">My Appointments</a>
 					<form method="POST" action="{{ route('user.logout') }}" class="block">
 						@csrf
 						<button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-800 bg-white hover:bg-gray-200 border-b focus:outline-none focus:shadow-outline cursor-pointer"><i class="fas fa-sign-out-alt mr-2"></i> {{ __('Logout') }}</button>
@@ -66,16 +66,18 @@
 		<h1 class="text-2xl font-sans tracking-wider border-b py-4 px-6 mb-4">Online Baranggay Services &#12290;</h1>
 		<ul class="flex flex-col flex-1 justify-start text-xl">
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('services.index') }}" data-target="1"><i class=""></i> Services</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ Auth::guard('admin')->check() ? route('services.index') : route('client.services') }}" data-target="1"><i class=""></i> Services</a>
+			</li>
+			@if(Auth::guard('admin')->check())
+			<li class="mb-2">
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('requirements.index') }}" data-target="1"><i class=""></i> Requirements</a>
 			</li>
 			<li class="mb-2">
 				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('slots.index') }}" data-target="1"><i class=""></i> Slots</a>
 			</li>
+			@endif
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('appointments.index') }}" data-target="1"><i class=""></i> Appointments</a>
-			</li>
-			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('requirements.index') }}" data-target="1"><i class=""></i> Requirements</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ Auth::guard('admin')->check() ? route('appointments.index') : route('client.user.appointments') }}" data-target="1"><i class=""></i> Appointments</a>
 			</li>
 		</ul>
 		<div class="p-4 text-center text-sm">
