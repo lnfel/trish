@@ -1,61 +1,106 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Angono Baranggay Services
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+### Installation
+- Install development tools: [Git](https://git-scm.com/download/win), [XAMPP](https://www.apachefriends.org/download.html), [Sublime](https://www.sublimetext.com/3), [Node JS](https://nodejs.org/en/download/)
 
-## About Laravel
+### XAMPP
+- After installing XAMPP we can proceed with the steps below
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Node Setup
+- After installing Node JS we can proceed with the steps below
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Git Setup
+- Open cmd and and test if git works, enter:
+```
+git
+```
+- Next enter the following code with your credentials:
+```
+git config --global user.name "Your Name Here"
+git config --global user.email "Your Email Here"
+```
+- This will allow us to gain access to github repositories
+- Navigate to "C:\xampp\htdocs" by entering the following line of code in cmd:
+```
+cd C:\xampp\htdocs
+```
+- Clone the project
+```
+git clone https://github.com/lnfel/trish.git
+```
+- Now our project directory path would be "C:\xampp\htdocs\trish"
+- Continue now with composer setup
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Composer Setup
+- After installing XAMPP, we will need [composer](https://getcomposer.org/download/) for our laravel project.
+- Right click on "My Computer" or "This PC" (if using windows 10)
+- Click "Properties" -> "Advanced system settings" -> "Environment variables"
+- On "User variables for Admin", select the "Path" variable
+- Click "Edit" -> "New"
+- Then paste "C:\xampp\php", Finally press "OK" then close other windows.
+- Close all cmd instances to load and refresh php path
+- Open another cmd then enter:
+```
+php --version
+```
+- If it showed the current php version installed we are good to continue to our composer installation
+- Enter the following lines in sequence (you can read more about the installation guide on composer downloads [page](https://getcomposer.org/download/)):
+```
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php --filename="composer" --install-dir="C:\xampp\htdocs\trish"
+```
+- Last line of code above installs composer.phar in our project directory and the --filename option changes its name to "composer"
+- Navigate back to the project directory:
+```
+cd C:\xampp\htdocs\trish
+```
+- Then run `php composer install` to install our laravel project dependencies
 
-## Learning Laravel
+### Installing Laravel
+- We haven't installed laravel yet, just enter this code while inside the project directory:
+```
+php composer global require laravel/installer
+```
+- Generate application key:
+```
+php artisan key:generate
+```
+- Laravel will automatically override APP_KEY value in our .env file at the root of our project folder
+- Generate Laravel Passport Keys for the API:
+```
+php artisan passport:keys --force
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Installing Node dependencies
+- Enter this code while inside the project directory:
+```
+npm install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### XAMPP Setup
+- Going back to xampp and configuring its settings for the project
+- Open XAMPP control panel
+- On the control panel, click on Apache Config button then select "Apache (httpd.conf)", it will open that file in your system's default text editor (notepad).
+- Search for:
+```
+DocumentRoot "C:/xampp/htdocs"
+<Directory "C:/xampp/htdocs">
+```
+- Change it to "C:/xampp/htdocs/the project folder path/public":
+```
+DocumentRoot "C:/xampp/htdocs/trish/public"
+<Directory "C:/xampp/htdocs/trish/public">
+```
+- This will allow us to navigate to the project using "http://localhost" on the browser
 
-## Laravel Sponsors
+### Database
+- On xampp control panel "Start" Apache and MySQL
+- On the browser navigate to "http://localhost/phpmyadmin"
+- Click "New"
+- Enter database name (db_trish) then select "utf8_bin" on the next input selector and hit "Create" button
+- Click on the newly created database -> Click on "Import" button
+- Import the database schema on `trish/database/data.sql` the hit "GO" button at the lower right corner
+- This will load the database table and columns schema
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 

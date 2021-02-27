@@ -14,7 +14,7 @@
       <h3 class="text-xl font-bold text-gray-700 mb-4">Register</h3>
       <div class="mb-4">
         <label for="name" class="block text-gray-700 text-md font-bold mb-2 @error('name') is-invalid @enderror">{{ __('Name') }}</label>
-        <input id="name" type="text" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+        <input id="name" type="text" class="shadow appearance-none border border-blue-400 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
         @error('name')
           <span class="is-invalid" role="alert">
             <strong>{{ $message }}</strong>
@@ -24,7 +24,7 @@
 
       <div class="mb-4">
         <label for="email" class="block text-gray-700 text-md font-bold mb-2 @error('email') is-invalid @enderror">{{ __('E-Mail Address') }}</label>
-        <input id="email" type="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" value="{{ old('email') }}" required>
+        <input id="email" type="email" name="email" class="shadow appearance-none border border-blue-400 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" value="{{ old('email') }}" required>
         @error('email')
           <span class="is-invalid" role="alert">
             <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
 
       <div class="mb-4">
         <label for="password" class="block text-gray-700 text-md font-bold mb-2 @error('password') is-invalid @enderror">{{ __('Password') }}</label>
-        <input id="password" type="password" name="password" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" required="">
+        <input id="password" type="password" name="password" class="shadow appearance-none border border-blue-400 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" required="">
         @error('password')
           <span class="text-red-400" role="alert">
             <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
 
       <div class="mb-4">
         <label for="password-confirm" class="block text-gray-700 text-md font-bold mb-2">{{ __('Confirm Password') }}</label>
-        <input id="password-confirm" type="password" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" name="password_confirmation" required autocomplete="new-password">
+        <input id="password-confirm" type="password" class="shadow appearance-none border border-blue-400 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" name="password_confirmation" required autocomplete="new-password">
       </div>
 
       <div class="flex items-center justify-between mb-6">

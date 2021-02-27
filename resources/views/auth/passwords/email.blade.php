@@ -14,7 +14,7 @@
       <h3 class="text-xl mb-4">Reset Password</h3>
       <div class="mb-4">
         <label for="email" class="block text-gray-700 text-md font-bold mb-2 @error('email') is-invalid @enderror">{{ __('E-Mail Address') }}</label>
-        <input id="email" type="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" value="{{ old('email') }}" required autocomplete="email" autofocus="">
+        <input id="email" type="email" name="email" class="shadow appearance-none border border-blue-400 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" value="{{ old('email') }}" required autocomplete="email" autofocus="">
         @error('email')
           <span class="is-invalid" role="alert">
             <strong>{{ $message }}</strong>

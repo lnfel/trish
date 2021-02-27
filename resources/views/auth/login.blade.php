@@ -13,7 +13,7 @@
       @csrf
       <div class="mb-4">
         <label for="email" class="block text-gray-700 text-md font-bold mb-2 @error('email') is-invalid @enderror">{{ __('E-Mail Address') }}</label>
-        <input id="email" type="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" autofocus="">
+        <input id="email" type="email" name="email" class="shadow appearance-none border border-blue-400 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" required="" autofocus="">
         @error('email')
           <span class="is-invalid" role="alert">
             <strong>{{ $message }}</strong>
@@ -23,7 +23,7 @@
 
       <div class="mb-4">
         <label for="password" class="block text-gray-700 text-md font-bold mb-2">{{ __('Password') }}</label>
-        <input id="password" type="password" name="password" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" required="">
+        <input id="password" type="password" name="password" class="shadow appearance-none border border-blue-400 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" required="">
         @error('password')
           <span class="is-invalid" role="alert">
             <strong>{{ $message }}</strong>
