@@ -44,7 +44,7 @@
 			@csrf
 			<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 			<div class="mb-4">
-				<label for="service" class="block text-gray-700 text-md font-bold mb-2 @error('service') is-invalid @enderror">Service</label>
+				<label for="service" class="inline-block text-gray-700 text-md font-bold mb-2 @error('service') is-invalid @enderror">Service</label>
 				<div class="w-64">
 					<div class="relative">
 						<input type="hidden" name="service" x-ref="service" value="{{ $service->id ?? '' }}">
@@ -81,7 +81,7 @@
 			</div>
 
 			<div class="mb-4">
-				<label for="date" class="block text-gray-700 text-md font-bold mb-2 @error('date') is-invalid @enderror">Date</label>
+				<label for="date" class="inline-block text-gray-700 text-md font-bold mb-2 @error('date') is-invalid @enderror">Date</label>
 				<div class="w-64">
 					<div class="relative">
 						<input type="hidden" name="date" x-ref="date">
@@ -120,7 +120,7 @@
 
 			<template x-if="form.date">
 				<div class="mb-4">
-					<label for="time" class="block text-gray-700 text-md font-bold mb-2 @error('time') is-invalid @enderror">Time</label>
+					<label for="time" class="inline-block text-gray-700 text-md font-bold mb-2 @error('time') is-invalid @enderror">Time</label>
 					<div class="w-64">
 						<div class="relative">
 							<input type="hidden" name="time" x-ref="time">
