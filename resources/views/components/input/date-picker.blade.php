@@ -10,7 +10,7 @@
             x-model="datepickerValue"
             @click="showDatepicker = !showDatepicker"
             @keydown.escape="showDatepicker = false"
-            class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-gray-600 font-medium"
+            class="w-full pl-4 pr-10 py-3 border border-blue-400 leading-none rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-gray-600 font-medium"
             placeholder="Select date">
 
           <div class="absolute top-0 right-0 px-3 py-2">

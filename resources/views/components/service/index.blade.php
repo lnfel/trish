@@ -117,7 +117,7 @@
                     <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.date"></span>
                   </td>
                   <td class="border-dashed border-t border-gray-200 name">
-                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.time"></span>
+                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="new Date(`2021-02-28 ${item.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span>
                   </td>
                   <td class="border-dashed border-t border-gray-200 name">
                     <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.slots_left"></span>

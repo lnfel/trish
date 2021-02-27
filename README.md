@@ -99,8 +99,29 @@ DocumentRoot "C:/xampp/htdocs/trish/public"
 - On the browser navigate to "http://localhost/phpmyadmin"
 - Click "New"
 - Enter database name (db_trish) then select "utf8_bin" on the next input selector and hit "Create" button
+- Database schema is already created so, just run on cmd:
+```
+php artisan migrate
+```
+
+### Importing Database from MySQL schema
+- On xampp control panel "Start" Apache and MySQL
+- On the browser navigate to "http://localhost/phpmyadmin"
+- Click "New"
+- Enter database name (db_trish) then select "utf8_bin" on the next input selector and hit "Create" button
 - Click on the newly created database -> Click on "Import" button
 - Import the database schema on `trish/database/data.sql` the hit "GO" button at the lower right corner
 - This will load the database table and columns schema
 
-### 
+### Generate sample data using Factory
+- Run `php artisan tinker` then use the code below:
+```
+// Generate 10 rows of Slots
+factory(App\Slot::class, 10)->create();
+
+// Generate 1 User, note: password is password
+factory(App\User::class)->create();
+
+// Generate 1 Admin, note: password is password
+factory(App\Admin::class)->create();
+```

@@ -164,8 +164,8 @@ class AppointmentController extends Controller
                     'grant_type' => 'password',
                     'client_id' => config('services.passport.client_id'),
                     'client_secret' => config('services.passport.client_secret'),
-                    'username' => 'succman@usa.com',
-                    'password' => '12345678',
+                    'username' => 'bk2o1.syndicates@gmail.com',
+                    'password' => 'password',
                 ]
             ]);
 

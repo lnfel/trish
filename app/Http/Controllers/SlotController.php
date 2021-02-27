@@ -20,8 +20,8 @@ class SlotController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:admin')->except('availableTimeSlots', 'update');
-        $this->middleware('auth:web')->only('availableTimeSlots', 'update');
+        $this->middleware('auth:admin')->except('availableTimeSlots');
+        $this->middleware('auth:web')->only('availableTimeSlots');
     }
 
     /**

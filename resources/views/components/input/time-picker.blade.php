@@ -1,4 +1,4 @@
-<div x-data="timepicker()" x-init="timepicker().fill()" class="inline-flex rounded-md p-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-gray-600 font-medium">
+<div x-data="timepicker()" x-init="timepicker().fill()" class="inline-flex border border-blue-400 rounded-md p-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-gray-600 font-medium">
   <select name="hour" id="hour" class="px-2 outline-none appearance-none bg-transparent">
   	<template x-for="hour in hours">
   		<option x-bind:value="hour" x-text="hour"></option>	
@@ -49,7 +49,8 @@
 					let hour = timeParts[0];
 					timeParts = timeParts[1].split(" ");
 					let minute = timeParts[0];
-					let meridiem = timeParts[1].toUpperCase();
+					//let meridiem = timeParts[1].toUpperCase();
+					let meridiem = new Date(`2021-02-28 ${time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true}).slice(-2);
 					
 					function selectElement(id, valueToSelect) {    
 						let element = document.getElementById(id);
