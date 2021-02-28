@@ -14,4 +14,9 @@ class Service extends Model
     protected $fillable = [
         'name', 'description', 'price',
     ];
+
+    public function appointments()
+    {
+    	return $this->hasMany('App\Appointment');
+    }
 }

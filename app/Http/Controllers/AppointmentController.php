@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Appointment;
 use App\Slot;
 use App\Service;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use PDF;
+use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {
@@ -57,7 +59,7 @@ class AppointmentController extends Controller
         $services = Service::all();
 
         //$slots = DB::table('slots')->whereDate('date', '>=', Carbon::today()->toDateString())->orderBy('date', 'asc')->get()->toJson();
-        $slots = Slot::where('date', '>=', Carbon::today()->toDateString())->groupBy('date')->orderBy('date', 'asc')->get();
+        $slots = Slot::where('date', '>=', Carbon::today()->toDateString())->where('slots_left', '>', 0)->groupBy('date')->orderBy('date', 'asc')->get();
         //dd($slots);
         //$slots = $this->_fetchDates();
 
@@ -72,7 +74,47 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate form data
+        $validator = Validator::make($request->all(),
+            [
+                'date' => 'required',
+                'time' => 'required',
+                'service' => 'required',
+                'user_id' => 'required',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->only('date', 'time', 'service'))->withErrors($validator);
+        }
+
+        $service = Service::find($request->service);
+        $serviceName = $service->name;
+        $user = User::find($request->user_id);
+        $slot = Slot::where(['date' => $request->date], ['time' => $request->time])->first();
+        $appointment = new Appointment();
+        $appointment->service_id = $service->id;
+        $appointment->slot_id = $slot->id;
+        $appointment->user_id = $user->id;
+        $pending = $user->appointments->where('status', 'Pending');
+        $pending->each(function ($appointment, $index) use($serviceName) {
+            if ($appointment->service->name == $serviceName) {
+                // User still had pending appointment with this service
+                return redirect()->back()->with('error', 'You still have pending appointment with '.$service->name);
+            }
+        });
+
+
+        if ($slot->slots_left > 0) {
+            if ($appointment->save()) {
+                $remaining_slot = $slot->slots_left - 1;
+                $slot->slots_left = $remaining_slot;
+                $slot->save();
+                //dd([$slot, $appointment]);
+                return redirect()->route('appointments.show', $appointment->id)->with('status', 'Appointment requested successfully!');
+            }
+        }
+        //return redirect()->back()->with('error', 'Appointment cannot be requested at the moment.');
     }
 
     /**

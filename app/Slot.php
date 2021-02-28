@@ -14,4 +14,9 @@ class Slot extends Model
     protected $fillable = [
         'date', 'time', 'slots_left',
     ];
+
+    public function appointments()
+    {
+    	return $this->hasMany('App\Appointment');
+    }
 }

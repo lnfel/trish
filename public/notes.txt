@@ -137,3 +137,7 @@ php load_font.php Nunito ./Nunito-Regular.ttf ./Nunito-Italic.ttf ./Nunito-Bold.
 
 server
 php -S localhost:8000 -t public
+
+$u = App\User::find(1)
+$a = App\Appointment::find(1)
+$u->appointments->where('id', $a->id)->first()->service

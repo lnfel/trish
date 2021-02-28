@@ -4,6 +4,9 @@
 @if (session('status'))
 	<x-flash.alert :status="session('status')"/>
 @endif
+@if (session('error'))
+	<x-flash.alert :status="session('error')" bg="bg-red-200"/>
+@endif
 
 <section class="intro relative">
   <div class="intro-bg"></div>
@@ -40,7 +43,7 @@
 					}
 				)
 			]"
-			method="get" action="{{ route('appointments.store') }}" class="mt-4">
+			method="post" action="{{ route('appointments.store') }}" class="mt-4">
 			@csrf
 			<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 			<div class="mb-4">
