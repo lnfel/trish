@@ -116,7 +116,7 @@ class AppointmentController extends Controller
                     $slot->slots_left = $remaining_slot;
                     $slot->save();
                     //dd([$slot, $appointment]);
-                    return redirect()->route('appointments.show', $appointment->id)->with('status', 'Appointment requested successfully!');
+                    return redirect()->route('appointments.index')->with('status', 'Appointment requested successfully!');
                 }
             }
         }

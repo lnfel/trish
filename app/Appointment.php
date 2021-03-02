@@ -13,6 +13,7 @@ class Appointment extends Model
      */
     protected $fillable = [
         'status',
+        'paid',
     ];
 
     public function service()

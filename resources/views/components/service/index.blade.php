@@ -3,8 +3,12 @@
     <div class="flex justify-between mb-4">
       <h2 class="inline text-3xl border-b-4 border-green-500">{{ $title }}</h2>
       <div class="flex items-center justify-end">
-        @if(Auth::getDefaultDriver() == 'web')
-        <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
+        @if($title == 'Appointments')
+          @if(Auth::getDefaultDriver() == 'web')
+            <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
+          @endif
+        @else
+          <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
         @endif
       </div>
     </div>
@@ -68,8 +72,40 @@
         </div>
       </div>
     </div>
+    <!-- MODAL -->
+    <div
+      x-cloak
+      x-show.transition="showModal"
+      class="flex items-center justify-center fixed left-0 bottom-0 w-full bg-gray-200 bg-opacity-75 h-full z-40">
+      <div class="bg-white rounded-lg w-1/2 overflow-hidden shadow">
+        <div class="flex flex-col items-start p-4">
+          <div class="flex items-center w-full">
+            <div class="text-gray-900 font-medium text-lg">GCash</div>
+            <svg @click="showModal = false" class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+            </svg>
+          </div>
+          <hr>
+          <div>Continue payment with GCash? Amount to be paid: &#8369; <span x-text="amount"></span></div>
+          <hr>
+          <div class="ml-auto">
+            <form method="POST" action="{{ route('ewallet.pay') }}">
+              @csrf
+              <input type="hidden" name="type" value="gcash">
+              <input type="hidden" name="amount" value="10000">
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Continue
+              </button>
+            </form>
+            <!-- <button class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+              Close
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- TABLES -->
-    <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style="max-height: 405px;">
+    <div x-cloak class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style="max-height: 405px;">
       <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
         <thead>
           <tr class="text-center">
@@ -147,13 +183,29 @@
               
               <td class="border-dashed border-t border-gray-200 action px-3">
                 <div class="flex items-center justify-center">
-                  @if(Auth::getDefaultDriver() == 'admin')
-                    @if($title == 'Appointments')
+                  @if($title == 'Appointments')
+                    @if(Auth::getDefaultDriver() == 'admin')
                       <a class="text-sm inline px-3 py-2 bg-blue-400 text-white hover:bg-blue-500 rounded mr-2" x-bind:href="'{{ url('/admin/'.strtolower($title)) }}'+ '/' + item.id + '/edit'"><i class="fas fa-edit"></i></a>
+                    @else
+                      <a class="text-sm inline px-3 py-2 bg-blue-400 text-white hover:bg-blue-500 rounded mr-2" x-bind:class="item.status == 'Pending' ? '' : 'hidden' " x-bind:href="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id + '/edit'"><i class="fas fa-edit"></i></a>
                     @endif
                   @else
-                  <a class="text-sm inline px-3 py-2 bg-blue-400 text-white hover:bg-blue-500 rounded mr-2" x-bind:href="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id + '/edit'"><i class="fas fa-edit"></i></a>
+                    @if(Auth::getDefaultDriver() == 'web')
+                      <a class="text-sm inline px-3 py-2 bg-blue-400 text-white hover:bg-blue-500 rounded mr-2" x-bind:class="item.status == 'Pending' ? '' : 'hidden' " x-bind:href="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id + '/edit'"><i class="fas fa-edit"></i></a>
+                    @else
+                      <a class="text-sm inline px-3 py-2 bg-blue-400 text-white hover:bg-blue-500 rounded mr-2" x-bind:href="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id + '/edit'"><i class="fas fa-edit"></i></a>
+                    @endif
                   @endif
+
+                  @if(Auth::getDefaultDriver() == 'web' && $title == 'Appointments')
+                    <div
+                      x-bind:class="item.paid == false ? '' : 'hidden'"
+                      @click="showModal = !showModal, amount = item.service.price"
+                      class="p-1 rounded bg-green-100 hover:bg-green-200 cursor-pointer">
+                      <img src="{{ asset('img/gcash.png') }}" width="30px">
+                    </div>
+                  @endif
+                  
                   @if(Auth::getDefaultDriver() == 'admin')
                     <form class="text-sm inline" method="post" x-bind:action="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id">
                       @csrf
@@ -187,6 +239,8 @@
       headings: {!! $headings !!},
       auth: '{!! Auth::getDefaultDriver() !!}',
       selectedRows: [],
+      amount: "",
+      showModal: false,
 
       open: false,
 
@@ -268,6 +322,23 @@
           });
           this.selectedRows = [];
         }
+      },
+
+      pay() {
+        fetch('http://localhost/e-wallet/pay', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              type: 'gcash',
+              amount: '10000',
+            }
+          ),
+        })
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
       }
     }
   }

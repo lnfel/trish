@@ -46,6 +46,48 @@
 				<label class="inline-block text-gray-500 text-md font-bold mb-2">Appointment details</label>
 				<p class="text-2xl"><span x-text="new Date(date).toDateString()"></span> <span class="text-gray-500">at </span><span x-text="new Date(`2021-02-28 ${time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span></p>
 			</div>
+
+			<div class="mb-4">
+				<label for="paid" class="inline-block text-gray-500 text-md font-bold mb-2">Payment</label>
+				<div class="w-64">
+					<div class="relative">
+						<input type="hidden" name="paid" x-ref="paid" value="{{ $appointment->paid == 0 ? 'Unpaid' : 'Paid' }}">
+						<input
+							type="text"
+							readonly
+							x-model="paidpickerValue"
+							@click="showPaidpicker = !showPaidpicker"
+							@keydown.escape="showPaidpicker = false"
+							id="paid"
+							class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-gray-600 font-medium" placeholder="Paid?">
+
+						<div class="absolute top-0 right-0 px-3 py-2">
+	            <i class="relative h-6 w-6 fas fa-chevron-down text-gray-400 text-xl"></i>
+	          </div>
+
+	          <div
+	          	class="w-full bg-white mt-12 rounded-lg shadow absolute top-0 left-0 overflow-hidden z-10"
+	          	x-show.transition="showPaidpicker"
+	          	@click.away="showPaidpicker = false">
+	          	<div class="flex flex-col items-base">
+	          		<template x-for="(status, index) in paid" :key="index">
+	          			<div 
+	          				@click="{$refs.paid.value = 1, paidpickerValue = status, showPaidpicker = false}"
+	          				x-text="status"
+	          				class="cursor-pointer text-sm leading-none leading-loose transition ease-in-out duration-100 px-2 hover:bg-blue-500 hover:text-white">
+									</div>
+	          		</template>
+	          	</div>
+	          </div>
+					</div>
+				</div>
+				@error('paid')
+	        <span class="is-invalid" role="alert">
+	          <strong>{{ $message }}</strong>
+	        </span>
+	      @enderror
+			</div>
+
 			<div class="mb-4">
 				<label for="status" class="inline-block text-gray-500 text-md font-bold mb-2">Status</label>
 				<div class="w-64">
@@ -98,10 +140,15 @@
 <script>
 	function format() {
 		return {
+			paidpickerValue: '{!! $appointment->paid == 0 ? "Unpaid" : "Paid" !!}',
 			statuspickerValue: '{!! $appointment->status !!}',
 			showStatuspicker: false,
+			showPaidpicker: false,
 			statuses: [
 			'Pending', 'Complete'
+			],
+			paid: [
+			'Paid',
 			],
 			date: '{!! $appointment->slot->date !!}',
 			time: '{!! $appointment->slot->time !!}',

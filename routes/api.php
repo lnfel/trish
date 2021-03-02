@@ -28,3 +28,5 @@ Route::middleware('auth:api')->group(function() {
 	Route::resource('/slots', 'Api\SlotApiController');
 	Route::post('/logout', 'Api\AuthController@logout')->name('logout');
 });
+
+Route::post('webhook/paymongo', 'Api\PaymongoWebhookController')->middleware('paymongo.signature');

@@ -22,6 +22,8 @@ class CreateAppointmentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->nullable()->references('id')->on('users');
             $table->string('status')->nullable()->default('Pending');
+            $table->boolean('paid')->nullable()->default(false);
+            $table->string('source_id')->nullable();
             $table->timestamps();
         });
     }

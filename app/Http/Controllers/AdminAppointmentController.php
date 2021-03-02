@@ -46,6 +46,7 @@ class AdminAppointmentController extends Controller
     {
     	$data = [
         'status' => $request->status,
+        'paid' => $request->paid
       ];
 
       try {
