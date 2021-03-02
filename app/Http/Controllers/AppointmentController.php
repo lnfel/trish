@@ -33,7 +33,17 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $model = Appointment::where('user_id', auth()->user()->id)->with(['slot', 'service', 'user'])->get()->toJson();
+        $headings = collect([
+            ['key' => 'id', 'value' => 'ID'],
+            ['key' => 'service', 'value' => 'Service'],
+            ['key' => 'slotDate', 'value' => 'Date'],
+            ['key' => 'slotTime', 'value' => 'Time'],
+            ['key' => 'user', 'value' => 'Client'],
+            ['key' => 'status', 'value' => 'Status'],
+            ['key' => 'action', 'value' => 'Action']
+        ])->toJson();
+        return view('appointment.index', ['model' => $model, 'headings' => $headings]);
     }
 
     /**
@@ -96,25 +106,31 @@ class AppointmentController extends Controller
         $appointment->service_id = $service->id;
         $appointment->slot_id = $slot->id;
         $appointment->user_id = $user->id;
-        $pending = $user->appointments->where('status', 'Pending');
-        $pending->each(function ($appointment, $index) use($serviceName) {
-            if ($appointment->service->name == $serviceName) {
-                // User still had pending appointment with this service
-                return redirect()->back()->with('error', 'You still have pending appointment with '.$service->name);
-            }
-        });
-
-
-        if ($slot->slots_left > 0) {
-            if ($appointment->save()) {
-                $remaining_slot = $slot->slots_left - 1;
-                $slot->slots_left = $remaining_slot;
-                $slot->save();
-                //dd([$slot, $appointment]);
-                return redirect()->route('appointments.show', $appointment->id)->with('status', 'Appointment requested successfully!');
+        $pending = Appointment::where(['service_id' => $service->id, 'user_id' => $user->id, 'status' => 'Pending'])->first();
+        if ($pending) {
+            return redirect()->route('appointments.create', $appointment->service->id)->with('error', 'Appointment exists with '.$serviceName.' on '.Carbon::parse($pending->slot->date)->format('D M d, Y'));
+        } else if (!$pending) {
+            if ($slot->slots_left > 0) {
+                if ($appointment->save()) {
+                    $remaining_slot = $slot->slots_left - 1;
+                    $slot->slots_left = $remaining_slot;
+                    $slot->save();
+                    //dd([$slot, $appointment]);
+                    return redirect()->route('appointments.show', $appointment->id)->with('status', 'Appointment requested successfully!');
+                }
             }
         }
-        //return redirect()->back()->with('error', 'Appointment cannot be requested at the moment.');
+
+        /*
+        $pending = $user->appointments->where('status', 'Pending');
+        $pending->each(function ($appointment, $index) use($serviceName, $slot) {
+            if ($appointment->service->name == $serviceName) {
+                //dd($appointment->service->name, $serviceName);
+                // User still had pending appointment with this service
+                return redirect()->route('appointments.create', $appointment->service->id)->with('error', 'You still have pending appointment with '.$serviceName);
+            }
+        });
+        /**/
     }
 
     /**
@@ -159,7 +175,8 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        //
+        Appointment::findOrFail($appointment->id)->delete();
+        return redirect()->route('appointments.index')->with('status', 'Appointment has been deleted!');
     }
 
     /**

@@ -16,7 +16,7 @@
     </div>
 
     <div class="bg-white shadow-md rounded-lg border-b-4 border-blue-500 hover:bg-blue-600 hover:text-white">
-      <a href="{{ route('appointments.index') }}" class="block p-8 text-xl font-bold"><i class="fas fa-calendar-check mr-2"></i>Appointments</a>
+      <a href="{{ route('client.user.appointments') }}" class="block p-8 text-xl font-bold"><i class="fas fa-calendar-check mr-2"></i>Appointments</a>
     </div>
 
     <div class="bg-white shadow-md rounded-lg border-b-4 border-yellow-500 hover:bg-yellow-600 hover:text-white">

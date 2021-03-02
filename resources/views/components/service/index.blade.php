@@ -3,7 +3,9 @@
     <div class="flex justify-between mb-4">
       <h2 class="inline text-3xl border-b-4 border-green-500">{{ $title }}</h2>
       <div class="flex items-center justify-end">
+        @if(Auth::getDefaultDriver() == 'web')
         <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
+        @endif
       </div>
     </div>
 
@@ -70,7 +72,7 @@
     <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative" style="max-height: 405px;">
       <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
         <thead>
-          <tr class="text-left">
+          <tr class="text-center">
             <th class="py-2 px-3 sticky top-0 border-b border-gray-200 bg-blue-100">
               <label
                 class="text-blue-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
@@ -88,51 +90,77 @@
             <tr>
               <td class="border-dashed border-t border-gray-200 px-3">
                 <label
-                  class="text-blue-500 inline-flex justify-between items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
+                  class="text-blue-500 flex justify-center items-center hover:bg-gray-200 px-2 py-2 rounded-lg cursor-pointer">
                   <input type="checkbox" class="form-checkbox rowCheckbox focus:outline-none focus:shadow-outline" :name="item.id"
                       @click="getRowDetail($event, item.id)">
                 </label>
               </td>
               <td class="border-dashed border-t border-gray-200 id">
-                <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.id"></span>
+                <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.id"></span>
               </td>
               @switch($title)
                 @case("Services")
                   <td class="border-dashed border-t border-gray-200 name">
-                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.name"></span>
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.name"></span>
                   </td>
                   <td class="border-dashed border-t border-gray-200 description">
-                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.description ?? 'No description'"></span>
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.description ?? 'No description'"></span>
                   </td>
                   <td class="border-dashed border-t border-gray-200 price">
-                    <span class="text-gray-700 px-6 py-3 flex items-center">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center">
                       <div class="flex-shrink-0" x-text="item.price != null ? '&#8369; ' + item.price : '&#8369; 00.00'"></div>
                     </span>
                   </td>
                   @break
 
                 @case("Slots")
-                  <td class="border-dashed border-t border-gray-200 name">
-                    <!-- <span class="text-gray-700 px-6 py-3 flex items-center" x-text="new Date(item.date).toDateString()"></span> -->
-                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.date"></span>
+                  <td class="border-dashed border-t border-gray-200 date">
+                    <!-- <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="new Date(item.date).toDateString()"></span> -->
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.date"></span>
                   </td>
-                  <td class="border-dashed border-t border-gray-200 name">
-                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="new Date(`2021-02-28 ${item.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span>
+                  <td class="border-dashed border-t border-gray-200 time">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="new Date(`2021-02-28 ${item.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span>
                   </td>
-                  <td class="border-dashed border-t border-gray-200 name">
-                    <span class="text-gray-700 px-6 py-3 flex items-center" x-text="item.slots_left"></span>
+                  <td class="border-dashed border-t border-gray-200 slots_left">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.slots_left"></span>
+                  </td>
+                  @break
+
+                @case("Appointments")
+                  <td class="border-dashed border-t border-gray-200 service">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.service.name"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 slotDate">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.slot.date"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 slotTime">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="new Date(`2021-02-28 ${item.slot.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 user">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.user.name"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 status">
+                    <span x-bind:class="item.status == 'Cancelled' || item.status == 'Pending' ? 'text-gray-700 px-6 py-3 flex items-center justify-center text-red-500' : 'text-gray-700 px-6 py-3 flex items-center justify-center text-green-500'" x-text="item.status"></span>
                   </td>
                   @break
               @endswitch
               
               <td class="border-dashed border-t border-gray-200 action px-3">
-                <div class="flex items-center">
+                <div class="flex items-center justify-center">
+                  @if(Auth::getDefaultDriver() == 'admin')
+                    @if($title == 'Appointments')
+                      <a class="text-sm inline px-3 py-2 bg-blue-400 text-white hover:bg-blue-500 rounded mr-2" x-bind:href="'{{ url('/admin/'.strtolower($title)) }}'+ '/' + item.id + '/edit'"><i class="fas fa-edit"></i></a>
+                    @endif
+                  @else
                   <a class="text-sm inline px-3 py-2 bg-blue-400 text-white hover:bg-blue-500 rounded mr-2" x-bind:href="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id + '/edit'"><i class="fas fa-edit"></i></a>
-                  <form class="text-sm inline" method="post" x-bind:action="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id">
-                    @csrf
-                    @method('DELETE')
-                    <button class="px-4 py-2 bg-gray-400 text-white hover:bg-gray-500 rounded focus:outline-none focus:shadow-outline"><i class="fas fa-times"></i></button>
-                  </form>
+                  @endif
+                  @if(Auth::getDefaultDriver() == 'admin')
+                    <form class="text-sm inline" method="post" x-bind:action="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id">
+                      @csrf
+                      @method('DELETE')
+                      <button class="px-4 py-2 bg-gray-400 text-white hover:bg-gray-500 rounded focus:outline-none focus:shadow-outline"><i class="fas fa-times"></i></button>
+                    </form>
+                  @endif
                 </div>
               </td>
             </tr>
@@ -140,7 +168,7 @@
 
           <template x-if="model.length == 0">
             <tr>
-              <td class="border-dashed border-t border-gray-200" colspan="6">
+              <td class="border-dashed border-t border-gray-200" x-bind:colspan="headings.length == '7' ? '8' : '6'">
                 <span class="text-gray-700 py-3 flex items-center justify-center">No Available data</span>
               </td>
             </tr>
@@ -157,6 +185,7 @@
       search: "",
       model: {!! $model !!},
       headings: {!! $headings !!},
+      auth: '{!! Auth::getDefaultDriver() !!}',
       selectedRows: [],
 
       open: false,
@@ -180,6 +209,18 @@
               return item.date
                 .toLowerCase()
                 .includes(this.search.toLowerCase());
+              break;
+
+            case "appointments":
+              if (this.auth == 'admin') {
+                return item.user.name
+                  .toLowerCase()
+                  .includes(this.search.toLowerCase());
+              } else {
+                return item.service.name
+                  .toLowerCase()
+                  .includes(this.search.toLowerCase());
+              }
               break;
           }
         });

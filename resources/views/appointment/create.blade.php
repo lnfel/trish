@@ -5,7 +5,7 @@
 	<x-flash.alert :status="session('status')"/>
 @endif
 @if (session('error'))
-	<x-flash.alert :status="session('error')" bg="bg-red-200"/>
+	<x-flash.alert :status="session('error')" bg="bg-red-200" textColor="text-red-800"/>
 @endif
 
 <section class="intro relative">
@@ -81,6 +81,11 @@
 	          </div>
 					</div>
 				</div>
+				@error('service')
+	        <span class="is-invalid" role="alert">
+	          <strong>{{ $message }}</strong>
+	        </span>
+	      @enderror
 			</div>
 
 			<div class="mb-4">
@@ -119,6 +124,11 @@
 	          </div>
 					</div>
 				</div>
+				@error('date')
+	        <span class="is-invalid" role="alert">
+	          <strong>{{ $message }}</strong>
+	        </span>
+	      @enderror
 			</div>
 
 			<template x-if="form.date">
@@ -156,6 +166,11 @@
 		          </div>
 						</div>
 					</div>
+					@error('time')
+		        <span class="is-invalid" role="alert">
+		          <strong>{{ $message }}</strong>
+		        </span>
+		      @enderror
 				</div>
 			</template>
 

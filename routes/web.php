@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/', 'MainController@index')->name('client.index');
 Route::get('/community-services', 'MainController@services')->name('client.services');
-Route::get('/user/appointments', 'MainController@userAppointments')->name('client.user.appointments');
+Route::get('/admin/appointments/all', 'AdminAppointmentController@index')->name('client.user.appointments');
+Route::get('/admin/appointments/{appointment}/edit', 'AdminAppointmentController@edit')->name('client.user.appointments.edit');
+Route::patch('/admin/appointments/{appointment}', 'AdminAppointmentController@update')->name('client.user.appointments.update');
 
 Route::post('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Auth::routes();

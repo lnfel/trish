@@ -42,7 +42,7 @@
 				</button>
 
 				<div x-show="dropdownOpen" x-cloak="" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 text-left w-48 bg-white rounded overflow-hidden shadow-xl z-20">
-					<a href="{{ route('client.user.appointments') }}" class="block px-4 py-2 text-sm text-gray-800 bg-white hover:bg-gray-200 border-b">My Appointments</a>
+					<a href="{{ route('appointments.index') }}" class="block px-4 py-2 text-sm text-gray-800 bg-white hover:bg-gray-200 border-b">My Appointments</a>
 					<form method="POST" action="{{ route('user.logout') }}" class="block">
 						@csrf
 						<button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-800 bg-white hover:bg-gray-200 border-b focus:outline-none focus:shadow-outline cursor-pointer"><i class="fas fa-sign-out-alt mr-2"></i> {{ __('Logout') }}</button>
@@ -62,7 +62,7 @@
 	<div class="overlay z-10 fixed inset-0 transition-opacity" style="display: none;">
 		<div tabindex="0" class="absolute inset-0 bg-black opacity-50"></div>
 	</div>
-	<aside x-data="" x-cloak="" class="main-menu flex flex-col justify-between transform top-0 left-0 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 -translate-x-full">
+	<aside x-data="" x-cloak class="main-menu flex flex-col justify-between transform top-0 left-0 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 -translate-x-full">
 		<h1 class="text-2xl font-sans tracking-wider border-b py-4 px-6 mb-4">Online Baranggay Services &#12290;</h1>
 		<ul class="flex flex-col flex-1 justify-start text-xl">
 			<li class="mb-2">
@@ -77,7 +77,7 @@
 			</li>
 			@endif
 			<li class="mb-2">
-				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ Auth::guard('admin')->check() ? route('appointments.index') : route('client.user.appointments') }}" data-target="1"><i class=""></i> Appointments</a>
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ Auth::guard('admin')->check() ? route('client.user.appointments') : route('appointments.index') }}" data-target="1"><i class=""></i> Appointments</a>
 			</li>
 		</ul>
 		<div class="p-4 text-center text-sm">
