@@ -26,7 +26,7 @@
 
 					@switch($column['type'])
 						@case("text")
-							<input id="name" type="text" name="{{ $column['key'] }}" value="{{ $model->name }}" class="block shadow appearance-none border border-blue-400 rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" {{ $column['first'] ?? '' }}>
+							<input type="text" name="{{ $column['key'] }}" value="{{ $model->name }}" class="block shadow appearance-none border border-blue-400 rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" {{ $column['first'] ?? '' }}>
 							@break
 
 						@case("date")
@@ -46,7 +46,7 @@
 							@break
 
 						@case("textarea")
-							<textarea id="{{ $column['key'] }}" name="{{ $column['key'] }}" class="block resize-y w-full md:w-1/4 shadow appearance-none border border-blue-400 rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" rows="4" placeholder="Describe the service...">{{ $model->description }}</textarea>
+							<textarea id="{{ $column['key'] }}" name="{{ $column['key'] }}" class="block resize-y w-full md:w-1/4 shadow appearance-none border border-blue-400 rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" rows="4" placeholder="Describe the {{ rtrim($route, 's') }}...">{{ $model->description }}</textarea>
 							@break
 					@endswitch
 

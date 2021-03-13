@@ -1,4 +1,4 @@
-<section x-data="datatables()" {{ $attributes->merge(['class' => 'relative container mx-auto px-4']) }}>
+<section x-data="datatables()" {{ $attributes->merge(['class' => 'relative container mx-auto px-4 mb-10']) }}>
   <div class="p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-between mb-4">
       <h2 class="inline text-3xl border-b-4 border-green-500">{{ $title }}</h2>
@@ -179,6 +179,29 @@
                     <span x-bind:class="item.status == 'Cancelled' || item.status == 'Pending' ? 'text-gray-700 px-6 py-3 flex items-center justify-center text-red-500' : 'text-gray-700 px-6 py-3 flex items-center justify-center text-green-500'" x-text="item.status"></span>
                   </td>
                   @break
+
+                @case("Requirements")
+                  <td class="border-dashed border-t border-gray-200 name">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.name"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 description">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.description ?? 'No Prerequisite'"></span>
+                  </td>
+                  <!-- <td class="border-dashed border-t border-gray-200 prerequisite">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.prerequisite ?? 'No prerequisites'"></span>
+                  </td> -->
+                  <!-- <td class="border-dashed border-t border-gray-200 services">
+                    <span class="flex flex-col md:flex-row items-center text-gray-700 px-6 py-3">
+                      <template x-for="(service, index) in item.services" :key="index">
+                          <div class="rounded-full text-sm bg-blue-100 px-2 py-1 mr-2 mb-2" x-text="service.name"></div>
+                      </template>
+                    </span>
+
+                    <template x-if="item.services.length == 0">
+                      <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="No services"></span>
+                    </template>
+                  </td> -->
+                  @break
               @endswitch
               
               <td class="border-dashed border-t border-gray-200 action px-3">
@@ -219,9 +242,10 @@
           </template>
 
           <template x-if="model.length == 0">
+            <!-- <td class="border-dashed border-t border-gray-200" x-bind:colspan="headings.length == '7' ? '8' : '6'"> -->
             <tr>
-              <td class="border-dashed border-t border-gray-200" x-bind:colspan="headings.length == '7' ? '8' : '6'">
-                <span class="text-gray-700 py-3 flex items-center justify-center">No Available data</span>
+              <td colspan="100%">
+                <span class="text-gray-400 font-medium py-8 flex items-center justify-center"><i class="fas fa-inbox text-2xl mr-2"></i> No Available data</span>
               </td>
             </tr>
           </template>
@@ -275,6 +299,12 @@
                   .toLowerCase()
                   .includes(this.search.toLowerCase());
               }
+              break;
+
+            case "requirements":
+              return item.name
+                .toLowerCase()
+                .includes(this.search.toLowerCase());
               break;
           }
         });

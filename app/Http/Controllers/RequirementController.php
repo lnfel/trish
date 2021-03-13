@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Requirement;
+use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class RequirementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,17 @@ class RequirementController extends Controller
      */
     public function index()
     {
-        //
+        $model = Requirement::get()->load('services')->toJson();
+        $headings = collect([
+            ['key' => 'id', 'value' => 'ID'],
+            ['key' => 'name', 'value' => 'Name'],
+            ['key' => 'description', 'value' => 'Prerequisite'],
+            /*['key' => 'prerequisite', 'value' => 'Prerequisite'],*/
+            /*['key' => 'services', 'value' => 'Services'],*/
+            ['key' => 'action', 'value' => 'Action']
+        ])->toJson();
+        $requirements = Requirement::all();
+        return view('requirement.index', ['model' => $model, 'headings' => $headings, 'requirements' => $requirements]);
     }
 
     /**
@@ -24,7 +42,14 @@ class RequirementController extends Controller
      */
     public function create()
     {
-        //
+        $columns = collect([
+            ['key' => 'name', 'value' => 'Requirement', 'type' => 'text', 'first' => 'autofocus'],
+            ['key' => 'description', 'value' => 'Prerequisites', 'type' => 'textarea'],
+            /*['key' => 'prerequisite', 'value' => 'Prerequisites', 'type' => 'text'],*/
+            /*['key' => 'service_id', 'value' => 'Service', 'type' => 'multiselect'],*/
+        ]);
+        $services = Service::all();
+        return view('requirement.create', ['columns' => $columns, 'services' => $services]);
     }
 
     /**
@@ -35,7 +60,36 @@ class RequirementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate form data
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required|string|unique:requirements',
+                'description' => 'nullable|string',
+                'prerequisite' => 'nullable|string'
+            ],
+            [
+                'name.unique' => 'The requirement you are trying to create already exists.'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->only('name', 'description', 'prerequisite'))->withErrors($validator);
+        }
+
+        // separate service ids from string and format into new array
+        $serviceIds = explode(',', $request->services);
+
+        $requirement = new Requirement();
+        $requirement->name = $request->name;
+        $requirement->description = $request->description;
+        $requirement->prerequisite = $request->prerequisite;
+        $requirement->save();
+
+        /*foreach ($serviceIds as $key => $serviceId) {
+            $requirement->services()->attach($serviceId);
+        }*/
+        //dd($request, $requirement);
+        return redirect()->route('requirements.create')->with('status', 'Requirement created successfully!');
     }
 
     /**
@@ -57,7 +111,12 @@ class RequirementController extends Controller
      */
     public function edit(Requirement $requirement)
     {
-        //
+        $columns = collect([
+            ['key' => 'name', 'value' => 'Requirement', 'type' => 'text', 'first' => 'autofocus'],
+            ['key' => 'description', 'value' => 'Prerequisites', 'type' => 'textarea'],
+            /*['key' => 'prerequisite', 'value' => 'Prerequisites', 'type' => 'text'],*/
+        ]);
+        return view('requirement.edit', ['model' => $requirement, 'columns' => $columns]);
     }
 
     /**
@@ -69,7 +128,33 @@ class RequirementController extends Controller
      */
     public function update(Request $request, Requirement $requirement)
     {
-        //
+        // validate form data
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required|string|unique:requirements',
+                'description' => 'nullable|string',
+            ],
+            [
+                'name.unique' => 'Cannot update the requirement to the one that is already on file.'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->only('name', 'description'))->withErrors($validator);
+        }
+
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+        ];
+
+        try {
+            Requirement::findOrFail($requirement->id)->update($data);
+            return redirect()->route('requirements.edit', $requirement->id)->with('status', 'Requirement edited successfully!');
+        }
+        catch(ModelNotFoundException $err) {
+            // this won't even run unless app is being attacked via injection
+        }
     }
 
     /**
@@ -80,6 +165,8 @@ class RequirementController extends Controller
      */
     public function destroy(Requirement $requirement)
     {
-        //
+        //$requirement->services()->toggle([1, 2]);
+        Requirement::findOrFail($requirement->id)->delete();
+        return redirect()->route('requirements.index')->with('status', 'Requirement has been deleted!');
     }
 }

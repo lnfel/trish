@@ -19,4 +19,9 @@ class Service extends Model
     {
     	return $this->hasMany('App\Appointment');
     }
+
+    public function requirements()
+    {
+        return $this->belongsToMany('App\Requirement')->as('requirement')->withTimestamps();
+    }
 }

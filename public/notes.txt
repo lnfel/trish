@@ -78,6 +78,8 @@ Client secret: 6J1eQ9qWEqtVgxrNe9RhAneLMa7hnZ3Sj20qTL2e
 factory(App\Slot::class, 10)->create()
 factory(App\User::class, 1)->create()
 factory(App\Admin::class, 1)->create()
+php artisan db:seed --class=RequirementSeeder
+factory(App\Requirement::class)->create()
 
 php artisan passport:client --password
 

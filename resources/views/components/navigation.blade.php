@@ -1,11 +1,11 @@
 <nav
 	x-data="{ scrollAtTop: true }"
-	class="flex fixed w-full items-center justify-between px-6 h-16 text-gray-700 z-10"
+	class="flex fixed w-full items-center justify-between px-6 h-16 text-white z-10"
 	:class="{ 'shadow-md' : !scrollAtTop }"
 	@scroll.window="scrollAtTop = (window.pageYOffset > 45) ? false : true"
 >
 	<div class="flex items-center">
-		<button aria-label="Open Menu" class="menu-btn hover:text-yellow-700 focus:outline-none mr-2">
+		<button aria-label="Open Menu" class="menu-btn rounded border-2 border-transparent hover:border-white focus:outline-none mr-2">
 			<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8">
 				<path d="M4 6h16M4 12h16M4 18h16"></path>
 			</svg>
@@ -14,8 +14,8 @@
 	</div>
 	<div class="flex items-center hidden md:block">
 		<!-- horizontal nav -->
-		<a class="px-4 py-2 mr-2 font-bold hover:underline" href="{{ URL::to('/') }}">{{ __('Home') }}</a>
-		<a class="px-4 py-2 mr-2 font-bold hover:underline" href="{{ Auth::guard('admin')->check() ? route('services.index') : URL::to('/community-services') }}">{{ __('Services') }}</a>
+		<a class="px-4 py-2 mr-2 font-medium tracking-wider hover:underline" href="{{ URL::to('/') }}">{{ __('Home') }}</a>
+		<a class="px-4 py-2 mr-2 font-medium tracking-widers hover:underline" href="{{ Auth::guard('admin')->check() ? route('services.index') : URL::to('/community-services') }}">{{ __('Services') }}</a>
 		@guest
 		<a class="px-4 py-2 mr-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 {{ Route::current()->getName() == 'login' ? 'hidden' : 'inline' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
 		<a class="px-4 py-2 font-bold text-white rounded bg-blue-500 hover:bg-blue-700 {{ Route::current()->getName() == 'register' || '/' ? 'hidden' : 'inline' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -62,8 +62,8 @@
 	<div class="overlay z-10 fixed inset-0 transition-opacity" style="display: none;">
 		<div tabindex="0" class="absolute inset-0 bg-black opacity-50"></div>
 	</div>
-	<aside x-data="" x-cloak class="main-menu flex flex-col justify-between transform top-0 left-0 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 -translate-x-full">
-		<h1 class="text-2xl font-sans tracking-wider border-b py-4 px-6 mb-4">Online Baranggay Services &#12290;</h1>
+	<aside x-data="" x-cloak class="main-menu text-gray-700 flex flex-col justify-between transform top-0 left-0 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 -translate-x-full">
+		<h1 class="text-2xl bg-green-600 font-sans tracking-wider border-b py-4 px-6 mb-4">Online Baranggay Services &#12290;</h1>
 		<ul class="flex flex-col flex-1 justify-start text-xl">
 			<li class="mb-2">
 				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ Auth::guard('admin')->check() ? route('services.index') : route('client.services') }}" data-target="1"><i class=""></i> Services</a>
