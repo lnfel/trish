@@ -18,6 +18,8 @@ class CreateRequirementsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('prerequisite')->nullable();
+            //$table->unsignedBigInteger('purpose_id')->unique();
+            //$table->foreign('purpose_id')->nullable()->references('id')->on('purposes');
             //$table->unsignedBigInteger('service_id')->unique();
             //$table->foreign('service_id')->nullable()->references('id')->on('services');
             $table->timestamps();

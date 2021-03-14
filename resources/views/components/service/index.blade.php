@@ -166,6 +166,16 @@
                   <td class="border-dashed border-t border-gray-200 service">
                     <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.service.name"></span>
                   </td>
+                  <td class="border-dashed border-t border-gray-200 purpose">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.purpose.name"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 purpose">
+                    <ul class="list-disc text-gray-700 px-6 py-3 flex flex-col max-h-24 overflow-y-auto">
+                    <template x-for="(requirement, index) in item.purpose.requirements" :key="index">
+                      <li x-text="requirement.name"></li>
+                    </template>
+                    </ul>
+                  </td>
                   <td class="border-dashed border-t border-gray-200 slotDate">
                     <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.slot.date"></span>
                   </td>

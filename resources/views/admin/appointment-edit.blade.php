@@ -35,20 +35,24 @@
 			@csrf
 			@method('PATCH')
 			<div class="mb-4">
-				<label class="inline-block text-gray-500 text-md font-bold mb-2">Client</label>
-				<p class="text-2xl">{{ $appointment->user->name }}</p>
+				<label class="inline-block text-gray-500 text-md font-medium mb-2">Client</label>
+				<p class="text-lg">{{ $appointment->user->name }}</p>
 			</div>
 			<div class="mb-4">
-				<label class="inline-block text-gray-500 text-md font-bold mb-2">Service requested</label>
-				<p class="text-2xl">{{ $appointment->service->name }}</p>
+				<label class="inline-block text-gray-500 text-md font-medium mb-2">Service requested</label>
+				<p class="text-lg">{{ $appointment->service->name }}</p>
 			</div>
 			<div class="mb-4">
-				<label class="inline-block text-gray-500 text-md font-bold mb-2">Appointment details</label>
-				<p class="text-2xl"><span x-text="new Date(date).toDateString()"></span> <span class="text-gray-500">at </span><span x-text="new Date(`2021-02-28 ${time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span></p>
+				<label class="inline-block text-gray-500 text-md font-medium mb-2">Purpose of request</label>
+				<p class="text-lg">{{ $appointment->purpose->name }}</p>
+			</div>
+			<div class="mb-4">
+				<label class="inline-block text-gray-500 text-md font-medium mb-2">Appointment details</label>
+				<p class="text-lg"><span x-text="new Date(date).toDateString()"></span> <span class="text-gray-500">at </span><span x-text="new Date(`2021-02-28 ${time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span></p>
 			</div>
 
 			<div class="mb-4">
-				<label for="paid" class="inline-block text-gray-500 text-md font-bold mb-2">Payment</label>
+				<label for="paid" class="inline-block text-gray-500 text-md font-medium mb-2">Payment</label>
 				<div class="w-64">
 					<div class="relative">
 						<input type="hidden" name="paid" x-ref="paid" value="{{ $appointment->paid == 0 ? 'Unpaid' : 'Paid' }}">
@@ -89,7 +93,7 @@
 			</div>
 
 			<div class="mb-4">
-				<label for="status" class="inline-block text-gray-500 text-md font-bold mb-2">Status</label>
+				<label for="status" class="inline-block text-gray-500 text-md font-medium mb-2">Status</label>
 				<div class="w-64">
 					<div class="relative">
 						<input type="hidden" name="status" x-ref="status" value="{{ $appointment->status }}">

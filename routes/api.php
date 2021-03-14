@@ -23,6 +23,7 @@ Route::post('/register', 'Api\AuthController@register')->name('register');
 
 Route::get('/all-slot-dates', 'Api\SlotApiController@allSlotDates')->name('allSlotDates');
 Route::get('/all-slot-date-times/{date}', 'Api\SlotApiController@allSlotDateTimes')->name('allSlotDateTimes');
+Route::get('/service/{service}/purposes', 'Api\PurposeApiController@allServicePurposes')->name('allServicePurposes');
 
 Route::middleware('auth:api')->group(function() {
 	Route::resource('/slots', 'Api\SlotApiController');

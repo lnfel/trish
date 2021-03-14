@@ -30,4 +30,10 @@ class Appointment extends Model
     {
     	return $this->belongsTo('App\User');
     }
+
+    public function purpose()
+    {
+        return $this->belongsTo('App\Purpose');
+    }
+
 }

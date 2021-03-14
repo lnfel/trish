@@ -24,7 +24,8 @@ class CreateAppointmentsTable extends Migration
             $table->string('status')->nullable()->default('Pending');
             $table->boolean('paid')->nullable()->default(false);
             $table->string('source_id')->nullable(); // used in gcash implementation
-            $table->string('purpose');
+            $table->unsignedBigInteger('purpose_id');
+            $table->foreign('purpose_id')->nullable()->references('id')->on('purposes');
             $table->timestamps();
         });
     }

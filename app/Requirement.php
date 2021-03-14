@@ -14,4 +14,9 @@ class Requirement extends Model
     {
     	return $this->belongsToMany('App\Service')->as('service')->withTimestamps();
     }
+
+    public function purposes()
+    {
+    	return $this->belongsToMany('App\Purpose')->as('purposes');
+    }
 }

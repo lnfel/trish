@@ -33,10 +33,12 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $model = Appointment::where('user_id', auth()->user()->id)->with(['slot', 'service', 'user'])->get()->toJson();
+        $model = Appointment::where('user_id', auth()->user()->id)->with(['slot', 'service', 'user', 'purpose', 'purpose.requirements'])->get()->toJson();
         $headings = collect([
             ['key' => 'id', 'value' => 'ID'],
             ['key' => 'service', 'value' => 'Service'],
+            ['key' => 'purpose', 'value' => 'Purpose'],
+            ['key' => 'requirements', 'value' => 'Requirements'],
             ['key' => 'slotDate', 'value' => 'Date'],
             ['key' => 'slotTime', 'value' => 'Time'],
             ['key' => 'user', 'value' => 'Client'],
@@ -91,6 +93,10 @@ class AppointmentController extends Controller
                 'time' => 'required',
                 'service' => 'required',
                 'user_id' => 'required',
+                'purpose_id' => 'required',
+            ],
+            [
+                'purpose_id.required' => 'The purpose of document request is required.',
             ]
         );
 
@@ -106,6 +112,7 @@ class AppointmentController extends Controller
         $appointment->service_id = $service->id;
         $appointment->slot_id = $slot->id;
         $appointment->user_id = $user->id;
+        $appointment->purpose_id = $request->purpose_id;
         $pending = Appointment::where(['service_id' => $service->id, 'user_id' => $user->id, 'status' => 'Pending'])->first();
         if ($pending) {
             return redirect()->route('appointments.create', $appointment->service->id)->with('error', 'Appointment exists with '.$serviceName.' on '.Carbon::parse($pending->slot->date)->format('D M d, Y'));
@@ -269,7 +276,7 @@ class AppointmentController extends Controller
     protected function _service($service_id)
     {
         //$service = Service::where('id', $service_id)->first(); // alternative
-        $service = Service::find($service_id);
+        $service = Service::find($service_id)->load('purposes');
         return $service;
     }
 

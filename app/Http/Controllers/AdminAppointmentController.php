@@ -24,10 +24,11 @@ class AdminAppointmentController extends Controller
 
     public function index()
     {
-    	$model = Appointment::with(['slot', 'service', 'user'])->get()->toJson();
+    	$model = Appointment::with(['slot', 'service', 'user', 'purpose'])->get()->toJson();
         $headings = collect([
             ['key' => 'id', 'value' => 'ID'],
             ['key' => 'service', 'value' => 'Service'],
+            ['key' => 'purpose', 'value' => 'Purpose'],
             ['key' => 'slotDate', 'value' => 'Date'],
             ['key' => 'slotTime', 'value' => 'Time'],
             ['key' => 'user', 'value' => 'Client'],

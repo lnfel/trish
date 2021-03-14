@@ -71,7 +71,7 @@ h1 {
 
 .splash {
 	min-width: 50vw;
-	background: linear-gradient(222deg, #ffbf78, #ff6126);
+	background: linear-gradient(222deg, #b6f7ae, #52ca55);/*(222deg, #ffbf78, #ff6126);*/
 }
 
 .is-invalid {
