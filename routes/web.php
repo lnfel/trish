@@ -58,6 +58,7 @@ Route::resource('appointments', 'AppointmentController')->parameters([
 /**/
 Route::resource('appointments', 'AppointmentController');
 Route::get('/appointments/create/{service_id}', 'AppointmentController@create')->name('appointments.create');
+Route::patch('/appointments/{appointment}', 'AppointmentController@update')->name('appointments.update');
 
 Route::resources([
 	'addresses' => 'AddressController',

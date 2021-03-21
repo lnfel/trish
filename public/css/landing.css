@@ -53,6 +53,12 @@ h1 {
 	-webkit-text-fill-color: transparent;
 }
 
+h1.login {
+	background: linear-gradient(312deg, rgb(107 38 171) 0%, rgb(56 189 202) 35%, rgb(49 38 220) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;	
+}
+
 .active {
 	color: white;
 	background-color: rgba(59,130,246,1);

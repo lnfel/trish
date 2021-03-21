@@ -33,7 +33,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $model = Appointment::where('user_id', auth()->user()->id)->with(['slot', 'service', 'user', 'purpose', 'purpose.requirements'])->get()->toJson();
+        $model = Appointment::where('user_id', auth()->user()->id)->with(['slot', 'service', 'user', 'purpose', 'purpose.requirements', 'purpose.service'])->get()->toJson();
         $headings = collect([
             ['key' => 'id', 'value' => 'ID'],
             ['key' => 'service', 'value' => 'Service'],
@@ -41,7 +41,6 @@ class AppointmentController extends Controller
             ['key' => 'requirements', 'value' => 'Requirements'],
             ['key' => 'slotDate', 'value' => 'Date'],
             ['key' => 'slotTime', 'value' => 'Time'],
-            ['key' => 'user', 'value' => 'Client'],
             ['key' => 'status', 'value' => 'Status'],
             ['key' => 'action', 'value' => 'Action']
         ])->toJson();
@@ -159,7 +158,7 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        return view('appointment.edit', ['appointment' => $appointment]);
     }
 
     /**
@@ -171,7 +170,22 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, Appointment $appointment)
     {
-        //
+        //dd($request->all(), $appointment->slot->slots_left + 1, $appointment->slot);
+        $data = [
+            'status' => $request->status,
+        ];
+
+        try {
+            if ($request->status === 'Cancel') {
+                $appointment->slot->update(['slots_left' => $appointment->slot->slots_left + 1,]);
+            }
+            
+            Appointment::findOrFail($appointment->id)->update($data);
+            return redirect()->route('appointments.edit', $appointment->id)->with('status', 'Appointment updated successfully!');
+        }
+        catch(ModelNotFoundException $err) {
+            // this won't even run unless app is being attacked via injection
+        }
     }
 
     /**

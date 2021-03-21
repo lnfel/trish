@@ -169,7 +169,7 @@
                   <td class="border-dashed border-t border-gray-200 purpose">
                     <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.purpose.name"></span>
                   </td>
-                  <td class="border-dashed border-t border-gray-200 purpose">
+                  <td class="border-dashed border-t border-gray-200 requirements">
                     <ul class="list-disc text-gray-700 px-6 py-3 flex flex-col max-h-24 overflow-y-auto">
                     <template x-for="(requirement, index) in item.purpose.requirements" :key="index">
                       <li x-text="requirement.name"></li>
@@ -177,14 +177,16 @@
                     </ul>
                   </td>
                   <td class="border-dashed border-t border-gray-200 slotDate">
-                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.slot.date"></span>
+                    <span class="whitespace-nowrap text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.slot.date"></span>
                   </td>
                   <td class="border-dashed border-t border-gray-200 slotTime">
-                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="new Date(`2021-02-28 ${item.slot.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span>
+                    <span class="whitespace-nowrap text-gray-700 px-6 py-3 flex items-center justify-center" x-text="new Date(`2021-02-28 ${item.slot.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span>
                   </td>
+                  @auth('admin')
                   <td class="border-dashed border-t border-gray-200 user">
                     <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.user.name"></span>
                   </td>
+                  @endauth
                   <td class="border-dashed border-t border-gray-200 status">
                     <span x-bind:class="item.status == 'Cancelled' || item.status == 'Pending' ? 'text-gray-700 px-6 py-3 flex items-center justify-center text-red-500' : 'text-gray-700 px-6 py-3 flex items-center justify-center text-green-500'" x-text="item.status"></span>
                   </td>
