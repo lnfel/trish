@@ -22,7 +22,7 @@
 			@method('PATCH')
 			@foreach($columns as $column)
 				<div class="mb-4">
-					<label for="{{ $column['key'] }}" class="block text-gray-700 text-md font-bold mb-2 @error($column['key']) is-invalid @enderror">{{ $column['value'] }}</label>	
+					<label for="{{ $column['key'] }}" class="block text-gray-700 text-md font-bold mb-2 @error($column['key']) is-invalid @enderror">{{ $column['value'] }}</label>
 
 					@switch($column['type'])
 						@case("text")
@@ -57,6 +57,33 @@
 		      @enderror
 				</div>
 			@endforeach
+
+			@if($title === 'Edit Requirement')
+				<div class="mb-4">
+					<label for="" class="block text-gray-700 text-md font-bold mb-2">Current Purposes attached to {{ $model->name }}</label>
+					<ul name="purposes[]" class="inline-block shadow appearance-none border border-blue-400 rounded py-3 px-4 pl-8 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 list-disc">
+						@forelse($model->purposes as $purpose)
+							<li>{{ $purpose->service->name }} {{ $purpose->name }}</li>
+						@empty
+							<span>No available options</span>
+						@endforelse
+					</ul>
+				</div>
+
+				<div class="mb-4">
+					<label for="" class="block text-gray-700 text-md font-bold mb-2">Select purposes for {{ $model->name }}</label>
+					<span class="block text-sm text-gray-700 mb-2">To select multiple options "Ctrl + left click" </span>
+					<span class="block text-sm text-gray-700 mb-2">For keyboard users "Hold Ctrl then press up or down arrow key to navigate."</span>
+					<span class="block text-sm text-gray-700 mb-2">Then press spacebar to select or deselect current highlighted option</span>
+					<select name="purposes[]" class="shadow appearance-none border border-blue-400 rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 h-64" multiple>
+						@forelse($purposes as $purpose)
+							<option value="{{ $purpose->id }}">{{ $purpose->service->name }} {{ $purpose->name }}</option>
+						@empty
+							<option hidden="">No available options</option>
+						@endforelse
+					</select>
+				</div>
+			@endif
 
 			<div class="flex items-center justify-between mb-6">
 	      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">{{ __('Submit') }}</button>

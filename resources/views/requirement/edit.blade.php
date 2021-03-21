@@ -9,5 +9,5 @@
   <div class="intro-bg"></div>
 </section>
 
-<x-service.edit route="requirements" title="Edit Requirement" :model="$model" :columns="$columns"/>
+<x-service.edit route="requirements" title="Edit Requirement" :model="$model" :columns="$columns" :purposes="$purposes"/>
 @endsection

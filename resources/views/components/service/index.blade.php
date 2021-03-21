@@ -192,25 +192,18 @@
 
                 @case("Requirements")
                   <td class="border-dashed border-t border-gray-200 name">
-                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.name"></span>
+                    <span class="text-gray-700 px-6 py-3 flex items-center max-w-sm" x-text="item.name"></span>
                   </td>
-                  <td class="border-dashed border-t border-gray-200 description">
-                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.description ?? 'No Prerequisite'"></span>
-                  </td>
-                  <!-- <td class="border-dashed border-t border-gray-200 prerequisite">
-                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.prerequisite ?? 'No prerequisites'"></span>
-                  </td> -->
-                  <!-- <td class="border-dashed border-t border-gray-200 services">
-                    <span class="flex flex-col md:flex-row items-center text-gray-700 px-6 py-3">
-                      <template x-for="(service, index) in item.services" :key="index">
-                          <div class="rounded-full text-sm bg-blue-100 px-2 py-1 mr-2 mb-2" x-text="service.name"></div>
-                      </template>
-                    </span>
-
-                    <template x-if="item.services.length == 0">
-                      <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="No services"></span>
+                  <td class="border-dashed border-t border-gray-200 purposes">
+                    <ul class="list-disc text-gray-700 px-6 py-3 flex flex-col max-h-24 overflow-y-auto">
+                    <template x-for="(purpose, index) in item.purposes" :key="index">
+                      <li x-text="`${purpose.service.name} ${purpose.name}`"></li>
                     </template>
-                  </td> -->
+                    <template x-if="item.purposes.length == 0">
+                      <li>No purpose attached yet</li>
+                    </template>
+                    </ul>
+                  </td>
                   @break
               @endswitch
               

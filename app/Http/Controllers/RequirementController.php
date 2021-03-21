@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Requirement;
+use App\Purpose;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,11 +23,11 @@ class RequirementController extends Controller
      */
     public function index()
     {
-        $model = Requirement::get()->load('services')->toJson();
+        $model = Requirement::get()->load('purposes', 'purposes.service')->toJson();
         $headings = collect([
             ['key' => 'id', 'value' => 'ID'],
             ['key' => 'name', 'value' => 'Name'],
-            ['key' => 'description', 'value' => 'Prerequisite'],
+            ['key' => 'purposes', 'value' => 'Purposes'],
             /*['key' => 'prerequisite', 'value' => 'Prerequisite'],*/
             /*['key' => 'services', 'value' => 'Services'],*/
             ['key' => 'action', 'value' => 'Action']
@@ -111,12 +112,13 @@ class RequirementController extends Controller
      */
     public function edit(Requirement $requirement)
     {
+        $purposes = Purpose::all();
         $columns = collect([
             ['key' => 'name', 'value' => 'Requirement', 'type' => 'text', 'first' => 'autofocus'],
             ['key' => 'description', 'value' => 'Prerequisites', 'type' => 'textarea'],
             /*['key' => 'prerequisite', 'value' => 'Prerequisites', 'type' => 'text'],*/
         ]);
-        return view('requirement.edit', ['model' => $requirement, 'columns' => $columns]);
+        return view('requirement.edit', ['model' => $requirement, 'columns' => $columns, 'purposes' => $purposes]);
     }
 
     /**
@@ -128,15 +130,13 @@ class RequirementController extends Controller
      */
     public function update(Request $request, Requirement $requirement)
     {
+        //$purposes = $request
         // validate form data
         $validator = Validator::make($request->all(),
             [
-                'name' => 'required|string|unique:requirements',
+                'name' => 'required|string',
                 'description' => 'nullable|string',
             ],
-            [
-                'name.unique' => 'Cannot update the requirement to the one that is already on file.'
-            ]
         );
 
         if ($validator->fails()) {
@@ -150,6 +150,7 @@ class RequirementController extends Controller
 
         try {
             Requirement::findOrFail($requirement->id)->update($data);
+            $requirement->purposes()->sync($request->purposes);
             return redirect()->route('requirements.edit', $requirement->id)->with('status', 'Requirement edited successfully!');
         }
         catch(ModelNotFoundException $err) {
