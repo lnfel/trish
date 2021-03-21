@@ -188,7 +188,7 @@
                   </td>
                   @endauth
                   <td class="border-dashed border-t border-gray-200 status">
-                    <span x-bind:class="item.status == 'Cancelled' || item.status == 'Pending' ? 'text-gray-700 px-6 py-3 flex items-center justify-center text-red-500' : 'text-gray-700 px-6 py-3 flex items-center justify-center text-green-500'" x-text="item.status"></span>
+                    <span x-bind:class="item.status == 'Cancel' || item.status == 'Pending' ? 'text-gray-700 px-6 py-3 flex items-center justify-center text-red-500' : 'text-gray-700 px-6 py-3 flex items-center justify-center text-green-500'" x-text="item.status == 'Cancel' ? 'Cancelled' : item.status "></span>
                   </td>
                   @break
 
@@ -226,12 +226,14 @@
                   @endif
 
                   @if(Auth::getDefaultDriver() == 'web' && $title == 'Appointments')
-                    <div
-                      x-bind:class="item.paid == false ? '' : 'hidden'"
-                      @click="showModal = !showModal, amount = item.service.price"
-                      class="p-1 rounded bg-green-100 hover:bg-green-200 cursor-pointer">
-                      <img src="{{ asset('img/gcash.png') }}" width="30px">
-                    </div>
+                    <template x-if="item.status == 'Pending'">
+                      <div
+                        x-bind:class="item.paid == false ? '' : 'hidden'"
+                        @click="showModal = !showModal, amount = item.service.price"
+                        class="p-1 rounded bg-green-100 hover:bg-green-200 cursor-pointer" style="width: 36px;">
+                        <img src="{{ asset('img/gcash.png') }}" width="40px">
+                      </div>
+                    </template>
                   @endif
                   
                   @if(Auth::getDefaultDriver() == 'admin')
