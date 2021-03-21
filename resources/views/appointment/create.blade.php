@@ -48,7 +48,8 @@
 					() => { 
 						fetchPurposes(form.service);
 					}
-				)
+				),
+				fetchPurposes($refs.service.value),
 			]"
 			method="post" action="{{ route('appointments.store') }}" class="mt-4">
 			@csrf
