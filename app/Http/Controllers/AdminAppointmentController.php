@@ -24,17 +24,19 @@ class AdminAppointmentController extends Controller
 
     public function index()
     {
-    	$model = Appointment::with(['slot', 'service', 'user', 'purpose'])->get()->toJson();
+    	$model = Appointment::with(['slot', 'service', 'user', 'purpose.requirements'])->get()->toJson();
         $headings = collect([
             ['key' => 'id', 'value' => 'ID'],
             ['key' => 'service', 'value' => 'Service'],
             ['key' => 'purpose', 'value' => 'Purpose'],
+            ['key' => 'requirements', 'value' => 'Requirements'],
             ['key' => 'slotDate', 'value' => 'Date'],
             ['key' => 'slotTime', 'value' => 'Time'],
             ['key' => 'user', 'value' => 'Client'],
             ['key' => 'status', 'value' => 'Status'],
             ['key' => 'action', 'value' => 'Action']
         ])->toJson();
+
         return view('admin.appointment-index', ['model' => $model, 'headings' => $headings]);
     }
 
