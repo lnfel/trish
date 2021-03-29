@@ -137,8 +137,17 @@
 				<div class="flex items-center justify-between mb-6">
 		      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">{{ __('Update') }}</button>
 		    </div>
-			@else
+			@elseif($appointment->status === 'Complete')
 				<div class="mb-4">
+					<label for="status" class="inline-block text-gray-500 text-md font-medium mb-2">Status</label>
+					<p class="text-lg text-green-500 font-medium">Complete</p>
+				</div>
+
+				<div class="flex items-center justify-between mb-6">
+		      <a href="{{ route('appointments.create', '') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">{{ __('Renew') }}</a>
+		    </div>
+		  @else
+		  	<div class="mb-4">
 					<label for="status" class="inline-block text-gray-500 text-md font-medium mb-2">Status</label>
 					<p class="text-lg text-red-500 font-medium">Cancelled</p>
 				</div>

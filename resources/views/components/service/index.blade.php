@@ -7,6 +7,10 @@
           @if(Auth::getDefaultDriver() == 'web')
             <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
           @endif
+
+          @if(Auth::getDefaultDriver() == 'admin')
+            <a href="{{ route('client.user.appointments.report') }}" class="p-2 px-4 bg-green-400 text-white hover:bg-green-500 rounded" title="Report"><i class="fas fa-file"></i></a>
+          @endif          
         @else
           <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
         @endif

@@ -6,6 +6,7 @@ use App\Appointment;
 use App\Slot;
 use App\Service;
 use App\User;
+use App\Purpose;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -13,6 +14,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use PDF;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Builder;
 
 class AppointmentController extends Controller
 {
@@ -232,6 +234,108 @@ class AppointmentController extends Controller
         
         // download PDF file with download method
         return $pdf->download($serviceTitle);
+    }
+
+    public function renew()
+    {
+        /*$brgyClearance = Service::where('name', 'Baranggay Clearance')->first();*/
+        $services = Service::all()->pluck('name');
+        //dd($services);
+        //extract($services, EXTR_PREFIX_ALL, 'service_');
+        
+        // merge all query result into one large array
+        foreach ($services as $key => $value) {
+            ${'service_'.$key} = Appointment::whereHas('service', function(Builder $query) use ($value) {
+                $query->where('name', $value);
+            })->where(['user_id' => auth()->user()->id, 'status' => 'Complete'])->orderBy('updated_at', 'desc')->with(['service', 'user'])->first();
+            //dd(${'service_'.$key});
+            $collection = collect(${'service_'.$key});
+            //if ($key > 0) {
+                $merged = $collection->merge(${'service_'.$key});
+            //}
+            $result[] = $merged->all();
+        }
+
+        // remove empty arrays
+        foreach ($result as $key => $value) {
+            if (empty($value)) {
+                unset($result[$key]);
+            }
+        }
+        //dd($result);
+        
+        /*$brgyClearance = Appointment::whereHas('service', function(Builder $query) {
+            $query->where('name', 'Baranggay Clearance');
+        })->where(['user_id' => 1, 'status' => 'Complete'])->orderBy('updated_at', 'desc')->first();
+
+        $busiClearance = Appointment::whereHas('service', function(Builder $query) {
+            $query->where('name', 'Business Clearance');
+        })->where(['user_id' => 1, 'status' => 'Complete'])->orderBy('updated_at', 'desc')->first();
+
+        $bldgClearance = Appointment::whereHas('service', function(Builder $query) {
+            $query->where('name', 'Building Clearance');
+        })->where(['user_id' => 1, 'status' => 'Complete'])->orderBy('updated_at', 'desc')->first();*/
+
+        //dd($brgyClearance, $busiClearance, $bldgClearance);
+
+        return view('appointment.renew', ['appointments' => $result]);
+    }
+
+    public function renewCreate($appointment_id = null)
+    {
+        $appointment = Appointment::findOrFail($appointment_id);
+        if ($appointment->status == 'Complete') {
+            $service = Service::findOrFail($appointment->service->id);
+        } else {
+            abort(404);
+        }
+
+        //dd($appointment, $service);
+        return view('appointment.renew-create', ['service' => $service, 'appointment' => $appointment]);
+    }
+
+    public function renewDownload(Request $request)
+    {
+        // validate form data
+        $validator = Validator::make($request->all(),
+            [
+                'purpose_id' => 'required',
+            ],
+            [
+                'purpose_id.required' => 'The purpose of document request is required.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->only('purpose_id'))->withErrors($validator);
+        }
+
+        //dd($request->all());
+        if ($request->service_id) {
+            $service = Service::findOrFail($request->service_id);
+        }
+        $purpose = Purpose::findOrFail($request->purpose_id);
+        $serviceTitle = $service ? $service->name.'.pdf' : 'Angono-document.pdf';
+        $user = auth()->user();
+        $data = [
+            'serviceTitle' => $serviceTitle,
+            'service' => $service,
+            'user' => $user,
+            'purpose' => $purpose,
+        ];
+
+        $appointment = Appointment::findOrFail($request->appointment_id);
+        $appointment->status = 'Renewing';
+        $appointment->save();
+        $appointment->status = 'Complete';
+        $appointment->save();
+
+        // share data to view
+        $pdf = PDF::loadView('pdf.renew', $data);
+        
+        // download PDF file with download method
+        return $pdf->download($serviceTitle);
+
     }
 
     protected function _login()

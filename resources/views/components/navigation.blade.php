@@ -78,6 +78,11 @@
 			<li class="mb-2">
 				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ Auth::guard('admin')->check() ? route('client.user.appointments') : route('appointments.index') }}" data-target="1"><i class=""></i> Appointments</a>
 			</li>
+			@if(Auth::guard('web')->check())
+				<li class="mb-2">
+					<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('appointments.renew.index') }}" data-target="1"><i class=""></i> Renew</a>
+				</li>
+			@endif
 		</ul>
 		<div class="p-4 text-center text-sm">
 			<!-- <span>Courtesy of <a class="text-indigo-700 font-bold" href="http://bk2o1.tk/">BK2o1</a></span> -->
