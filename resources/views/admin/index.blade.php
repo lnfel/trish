@@ -22,6 +22,10 @@
     <div class="bg-white shadow-md rounded-lg border-b-4 border-yellow-500 hover:bg-yellow-600 hover:text-white">
       <a href="{{ route('requirements.index') }}" class="block p-8 text-xl font-bold"><i class="fas fa-copy mr-2"></i>Requirements</a>
     </div>
+
+    <div class="bg-white shadow-md rounded-lg border-b-4 border-indigo-500 hover:bg-indigo-600 hover:text-white">
+      <a href="{{ route('purposes.index') }}" class="block p-8 text-xl font-bold"><i class="fas fa-copy mr-2"></i>Purposes</a>
+    </div>
   </div>
 </section>
 
