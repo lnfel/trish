@@ -6,7 +6,7 @@
     <a href="{{ URL::to('/') }}">
       <div class="flex items-center justify-center p-4">
         <img src="{{ asset('img/angono_logo.png') }}" width="70px">
-        <h1 class="text-2xl ml-4">{{ config('app.name', 'Laravel') }} &#12290;</h1>
+        <h1 class="login text-2xl ml-4">{{ config('app.name', 'Laravel') }} &#12290;</h1>
       </div>
     </a>
     <form class="px-8 pt-6 pb-8 mb-4 mx-auto" method="POST" action="{{ route('login') }}" style="width: 70%;">
@@ -54,8 +54,8 @@
     </form>
   </div>
   <div class="splash flex-col items-center justify-center p-4 hidden lg:flex">
-    <img src="{{ asset('img/higantes.jpg') }}">
-    <span>Angono is known for its Higantes Festival</span>
+    <img class="rounded-lg shadow-md mb-2" src="{{ asset('img/higantes.jpg') }}">
+    <span class="font-medium tracking-wider">Angono is known for its Higantes Festival</span>
   </div>
 </div>
 @endsection

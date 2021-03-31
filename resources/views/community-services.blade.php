@@ -9,7 +9,7 @@
   <div class="intro-bg"></div>
 </section>
 
-<section class="relative container mx-auto px-4 -mt-80">
+<section class="relative container mx-auto px-4 -mt-80 mb-10">
 	<div class="p-4 bg-white shadow-md rounded-lg">
 		<div class="flex items-center mb-4">
       <h2 class="inline text-3xl border-b-4 border-green-500 mr-4">Services</h2>
@@ -57,8 +57,10 @@
 						    </tr>
 						    @empty
 						    <tr>
-						    	<td colspan="3" class="px-6 py-4 whitespace-nowrap text-center">No service at the moment.</td>
-						    </tr>
+		              <td colspan="100%">
+		                <span class="text-gray-400 font-medium py-8 flex items-center justify-center"><i class="fas fa-inbox text-2xl mr-2"></i> No Available data</span>
+		              </td>
+		            </tr>
 						    @endforelse
 						  </tbody>
 						</table>

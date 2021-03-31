@@ -1,3 +1,5 @@
+<!-- This is just a template file, go to app\views\service\index.blade.php instead -->
+
 <section x-data="datatables()" class="relative container mx-auto px-4">
   <div class="p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-between mb-4">

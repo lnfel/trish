@@ -29,7 +29,7 @@
 
 					@switch($column['type'])
 						@case("text")
-							<input id="name" type="text" name="{{ $column['key'] }}" class="block shadow appearance-none border rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" {{ $column['first'] ?? '' }}>
+							<input id="name" type="text" name="{{ $column['key'] }}" class="block shadow appearance-none border rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" placeholder="{{ $column['value'] }}" {{ $column['first'] ?? '' }}>
 							@break
 
 						@case("date")
@@ -45,8 +45,13 @@
 							@break
 
 						@case("textarea")
-							<textarea id="{{ $column['key'] }}" name="{{ $column['key'] }}" class="block resize-y w-full md:w-1/4 shadow appearance-none border rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" rows="4" placeholder="Describe the service..."></textarea>
+							<textarea id="{{ $column['key'] }}" name="{{ $column['key'] }}" class="block resize-y w-full md:w-1/4 shadow appearance-none border rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" rows="4" placeholder="Describe the {{ rtrim($route, 's') }}..."></textarea>
 							@break
+
+						@case("multiselect")
+							<x-input.multi-select action="create" :model="$services"/>
+							@break
+
 					@endswitch
 
 					@error($column['key'])

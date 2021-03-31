@@ -1,4 +1,4 @@
-<section x-data="datatables()" {{ $attributes->merge(['class' => 'relative container mx-auto px-4']) }}>
+<section x-data="datatables()" {{ $attributes->merge(['class' => 'relative container mx-auto px-4 mb-10']) }}>
   <div class="p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-between mb-4">
       <h2 class="inline text-3xl border-b-4 border-green-500">{{ $title }}</h2>
@@ -7,6 +7,10 @@
           @if(Auth::getDefaultDriver() == 'web')
             <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
           @endif
+
+          @if(Auth::getDefaultDriver() == 'admin')
+            <a href="{{ route('client.user.appointments.report') }}" class="p-2 px-4 bg-green-400 text-white hover:bg-green-500 rounded" title="Report"><i class="fas fa-file"></i></a>
+          @endif          
         @else
           <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
         @endif
@@ -166,17 +170,45 @@
                   <td class="border-dashed border-t border-gray-200 service">
                     <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.service.name"></span>
                   </td>
+                  <td class="border-dashed border-t border-gray-200 purpose">
+                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.purpose.name"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 requirements">
+                    <ul class="list-disc text-gray-700 px-6 py-3 flex flex-col max-h-24 overflow-y-auto">
+                    <template x-for="(requirement, index) in item.purpose.requirements" :key="index">
+                      <li x-text="requirement.name"></li>
+                    </template>
+                    </ul>
+                  </td>
                   <td class="border-dashed border-t border-gray-200 slotDate">
-                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.slot.date"></span>
+                    <span class="whitespace-nowrap text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.slot.date"></span>
                   </td>
                   <td class="border-dashed border-t border-gray-200 slotTime">
-                    <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="new Date(`2021-02-28 ${item.slot.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span>
+                    <span class="whitespace-nowrap text-gray-700 px-6 py-3 flex items-center justify-center" x-text="new Date(`2021-02-28 ${item.slot.time}`).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: true})"></span>
                   </td>
+                  @auth('admin')
                   <td class="border-dashed border-t border-gray-200 user">
                     <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.user.name"></span>
                   </td>
+                  @endauth
                   <td class="border-dashed border-t border-gray-200 status">
-                    <span x-bind:class="item.status == 'Cancelled' || item.status == 'Pending' ? 'text-gray-700 px-6 py-3 flex items-center justify-center text-red-500' : 'text-gray-700 px-6 py-3 flex items-center justify-center text-green-500'" x-text="item.status"></span>
+                    <span x-bind:class="item.status == 'Cancel' || item.status == 'Pending' ? 'text-gray-700 px-6 py-3 flex items-center justify-center text-red-500' : 'text-gray-700 px-6 py-3 flex items-center justify-center text-green-500'" x-text="item.status == 'Cancel' ? 'Cancelled' : item.status "></span>
+                  </td>
+                  @break
+
+                @case("Requirements")
+                  <td class="border-dashed border-t border-gray-200 name">
+                    <span class="text-gray-700 px-6 py-3 flex items-center max-w-sm" x-text="item.name"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 purposes">
+                    <ul class="list-disc text-gray-700 px-6 py-3 flex flex-col max-h-24 overflow-y-auto">
+                    <template x-for="(purpose, index) in item.purposes" :key="index">
+                      <li x-text="`${purpose.service.name} ${purpose.name}`"></li>
+                    </template>
+                    <template x-if="item.purposes.length == 0">
+                      <li>No purpose attached yet</li>
+                    </template>
+                    </ul>
                   </td>
                   @break
               @endswitch
@@ -198,12 +230,14 @@
                   @endif
 
                   @if(Auth::getDefaultDriver() == 'web' && $title == 'Appointments')
-                    <div
-                      x-bind:class="item.paid == false ? '' : 'hidden'"
-                      @click="showModal = !showModal, amount = item.service.price"
-                      class="p-1 rounded bg-green-100 hover:bg-green-200 cursor-pointer">
-                      <img src="{{ asset('img/gcash.png') }}" width="30px">
-                    </div>
+                    <template x-if="item.status == 'Pending'">
+                      <div
+                        x-bind:class="item.paid == false ? '' : 'hidden'"
+                        @click="showModal = !showModal, amount = item.service.price"
+                        class="p-1 rounded bg-green-100 hover:bg-green-200 cursor-pointer" style="width: 36px;">
+                        <img src="{{ asset('img/gcash.png') }}" width="40px">
+                      </div>
+                    </template>
                   @endif
                   
                   @if(Auth::getDefaultDriver() == 'admin')
@@ -219,9 +253,10 @@
           </template>
 
           <template x-if="model.length == 0">
+            <!-- <td class="border-dashed border-t border-gray-200" x-bind:colspan="headings.length == '7' ? '8' : '6'"> -->
             <tr>
-              <td class="border-dashed border-t border-gray-200" x-bind:colspan="headings.length == '7' ? '8' : '6'">
-                <span class="text-gray-700 py-3 flex items-center justify-center">No Available data</span>
+              <td colspan="100%">
+                <span class="text-gray-400 font-medium py-8 flex items-center justify-center"><i class="fas fa-inbox text-2xl mr-2"></i> No Available data</span>
               </td>
             </tr>
           </template>
@@ -275,6 +310,12 @@
                   .toLowerCase()
                   .includes(this.search.toLowerCase());
               }
+              break;
+
+            case "requirements":
+              return item.name
+                .toLowerCase()
+                .includes(this.search.toLowerCase());
               break;
           }
         });

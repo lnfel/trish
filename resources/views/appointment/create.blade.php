@@ -1,4 +1,4 @@
-@extends('layouts.admin-app')
+@extends('layouts.app')
 
 @section('content')
 @if (session('status'))
@@ -40,8 +40,16 @@
 					'form.date',
 					() => { 
 						fetchTimes(form.date);
+					},
+
+				),
+				$watch(
+					'form.service',
+					() => { 
+						fetchPurposes(form.service);
 					}
-				)
+				),
+				fetchPurposes($refs.service.value),
 			]"
 			method="post" action="{{ route('appointments.store') }}" class="mt-4">
 			@csrf
@@ -72,7 +80,7 @@
 	          	<div class="flex flex-col items-base">
 	          		<template x-for="(service, index) in services" :key="index">
 	          			<div 
-	          				@click="{$refs.service.value = service.id, serviceValue = service.name, servicepickerValue = service.name, showServicepicker = false}"
+	          				@click="{$refs.service.value = service.id, form.service = service.id, serviceValue = service.name, servicepickerValue = service.name, showServicepicker = false}"
 	          				x-text="service.name"
 	          				class="cursor-pointer text-sm leading-none leading-loose transition ease-in-out duration-100 px-2 hover:bg-blue-500 hover:text-white">
 									</div>
@@ -174,6 +182,24 @@
 				</div>
 			</template>
 
+			<div class="mb-4">
+				<label for="purpose" class="inline-block text-gray-700 text-md font-bold mb-2 @error('purpose_id') is-invalid @enderror">Purpose</label>
+				<select name="purpose_id" class="block rounded shadow-md px-4 py-3 leading-none rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-gray-600 font-medium">
+		    	<option hidden="">Select Purpose</option>
+		    	<template x-for="(purpose, index) in purposes" :key="index">
+		    		<option x-bind:value="purpose.id" x-text="purpose.name"></option>
+		    	</template>
+		    	<template x-if="purposes.length == 0">
+		    		<option hidden="">No data found</option>
+		    	</template>
+		    </select>
+		    @error('purpose_id')
+	        <span class="is-invalid" role="alert">
+	          <strong>{{ $message }}</strong>
+	        </span>
+	      @enderror
+			</div>
+
 			<div class="flex items-center justify-between mb-6">
 	      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">{{ __('Submit') }}</button>
 	    </div>
@@ -202,8 +228,10 @@
 			slots: {!! $slots !!},
 			availableTimeSlots: [],
 			availableDates: [],
+			purposes: [{!! json_encode($service->purposes ?? '') !!}],
 			form: {
-				date: ''
+				date: '',
+				service: '',
 			},
 			debug() {
 				//console.log(this.slots);
@@ -246,6 +274,19 @@
 				.then(data => {
 				  console.log('Success:', data.data);
 				  this.availableTimeSlots = data.data;
+				})
+				.catch((error) => {
+				  console.error('Error:', error);
+				});
+			},
+			fetchPurposes(selectedService) {
+				fetch(`http://localhost/api/service/${selectedService}/purposes`, {
+					method: 'GET',
+				})
+				.then(response => response.json())
+				.then(data => {
+				  console.log('Success:', data.data);
+				  this.purposes = data.data;
 				})
 				.catch((error) => {
 				  console.error('Error:', error);

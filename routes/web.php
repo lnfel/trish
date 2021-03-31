@@ -22,6 +22,7 @@ Route::get('/community-services', 'MainController@services')->name('client.servi
 Route::get('/admin/appointments/all', 'AdminAppointmentController@index')->name('client.user.appointments');
 Route::get('/admin/appointments/{appointment}/edit', 'AdminAppointmentController@edit')->name('client.user.appointments.edit');
 Route::patch('/admin/appointments/{appointment}', 'AdminAppointmentController@update')->name('client.user.appointments.update');
+Route::get('/admin/appointments/report', 'AdminAppointmentController@report')->name('client.user.appointments.report');
 
 Route::post('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Auth::routes();
@@ -58,6 +59,10 @@ Route::resource('appointments', 'AppointmentController')->parameters([
 /**/
 Route::resource('appointments', 'AppointmentController');
 Route::get('/appointments/create/{service_id}', 'AppointmentController@create')->name('appointments.create');
+Route::patch('/appointments/{appointment}', 'AppointmentController@update')->name('appointments.update');
+Route::get('/docs/renew', 'AppointmentController@renew')->name('appointments.renew.index');
+Route::get('/docs/renew/{appointment_id}', 'AppointmentController@renewCreate')->name('appointments.renew.create');
+Route::post('/docs/renew/download/', 'AppointmentController@renewDownload')->name('appointments.renew.download');
 
 Route::resources([
 	'addresses' => 'AddressController',
@@ -68,7 +73,7 @@ Route::resources([
 
 Route::get('/slots/available-slots/', 'AppointmentController@availableTimeSlots');
 
-Route::get('/download/{service_id}', 'AppointmentController@download')->name('pdf.download');
+Route::get('/docs/download/{service_id}', 'AppointmentController@download')->name('pdf.download');
 Route::post('/e-wallet/pay', 'EWalletPaymentController@pay')->name('ewallet.pay');
 
 //Route::get('/slot', function () {

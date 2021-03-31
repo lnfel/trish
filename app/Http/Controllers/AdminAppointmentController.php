@@ -9,6 +9,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 class AdminAppointmentController extends Controller
 {
@@ -24,16 +25,19 @@ class AdminAppointmentController extends Controller
 
     public function index()
     {
-    	$model = Appointment::with(['slot', 'service', 'user'])->get()->toJson();
+    	$model = Appointment::with(['slot', 'service', 'user', 'purpose.requirements'])->get()->toJson();
         $headings = collect([
             ['key' => 'id', 'value' => 'ID'],
             ['key' => 'service', 'value' => 'Service'],
+            ['key' => 'purpose', 'value' => 'Purpose'],
+            ['key' => 'requirements', 'value' => 'Requirements'],
             ['key' => 'slotDate', 'value' => 'Date'],
             ['key' => 'slotTime', 'value' => 'Time'],
             ['key' => 'user', 'value' => 'Client'],
             ['key' => 'status', 'value' => 'Status'],
             ['key' => 'action', 'value' => 'Action']
         ])->toJson();
+
         return view('admin.appointment-index', ['model' => $model, 'headings' => $headings]);
     }
 
@@ -56,5 +60,28 @@ class AdminAppointmentController extends Controller
       catch(ModelNotFoundException $err) {
         // this won't even run unless app is being attacked via injection
       }
+    }
+
+    public function report()
+    {
+      $appointments = Appointment::with(['slot', 'service', 'user', 'purpose.requirements'])->get();
+      $user = auth()->user();
+      $headers = [
+        'Service', 'Purpose', 'Date', 'Client', 'Status'
+      ];
+
+      $data = [
+        'appointments' => $appointments,
+        'user' => $user,
+        'headers' => $headers,
+      ];
+
+      $filename = 'angono-appointments-report_'.date_format(now(), 'm-d-Y').'.pdf';
+      //dd($appointments, $filename);
+      // share data to view
+      $pdf = PDF::loadView('pdf.appointments-report', $data);
+      
+      // download PDF file with download method
+      return $pdf->download($filename);
     }
 }

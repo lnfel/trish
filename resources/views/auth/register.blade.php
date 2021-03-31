@@ -53,8 +53,8 @@
     </form>
   </div>
   <div class="splash flex-col items-center justify-center p-4 hidden lg:flex">
-    <img src="{{ asset('img/higantes.jpg') }}">
-    <span>Angono is known for its Higantes Festival</span>
+    <img class="rounded-lg shadow-md mb-2" src="{{ asset('img/higantes.jpg') }}">
+    <span class="font-medium tracking-wider">Angono is known for its Higantes Festival</span>
   </div>
 </div>
 @endsection
