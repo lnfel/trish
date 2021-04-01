@@ -9,5 +9,5 @@
   <div class="intro-bg"></div>
 </section>
 
-<x-service.index :model="$model" :headings="$headings" title="Purposes" class="-mt-80"/>
+<x-service.create route="purposes" title="Create Purpose" :model="$model" :columns="$columns" :options="$services" />
 @endsection

@@ -29,7 +29,7 @@
 
 					@switch($column['type'])
 						@case("text")
-							<input id="name" type="text" name="{{ $column['key'] }}" class="block shadow appearance-none border rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" placeholder="{{ $column['value'] }}" {{ $column['first'] ?? '' }}>
+							<input id="name" type="text" name="{{ $column['key'] }}" class="block shadow appearance-none border rounded-lg py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" placeholder="{{ $column['value'] }}" {{ $column['first'] ?? '' }}>
 							@break
 
 						@case("date")
@@ -49,7 +49,11 @@
 							@break
 
 						@case("multiselect")
-							<x-input.multi-select action="create" :model="$services"/>
+							<x-input.multi-select action="create" :model="$services" />
+							@break
+
+						@case('select2')
+							<x-input.select2 action="create" :model="$model" :options="$options" />
 							@break
 
 					@endswitch

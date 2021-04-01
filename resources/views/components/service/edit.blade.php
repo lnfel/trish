@@ -48,6 +48,11 @@
 						@case("textarea")
 							<textarea id="{{ $column['key'] }}" name="{{ $column['key'] }}" class="block resize-y w-full md:w-1/4 shadow appearance-none border border-blue-400 rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" rows="4" placeholder="Describe the {{ rtrim($route, 's') }}...">{{ $model->description }}</textarea>
 							@break
+
+						@case("select2")
+							<x-input.select2 action="edit" :options="$options" :model="$model" />
+							@break
+
 					@endswitch
 
 					@error($column['key'])

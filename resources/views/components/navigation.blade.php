@@ -72,6 +72,9 @@
 				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('requirements.index') }}" data-target="1"><i class=""></i> Requirements</a>
 			</li>
 			<li class="mb-2">
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('purposes.index') }}" data-target="1"><i class=""></i> Purposes</a>
+			</li>
+			<li class="mb-2">
 				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('slots.index') }}" data-target="1"><i class=""></i> Slots</a>
 			</li>
 			@endif

@@ -11,19 +11,21 @@ class Edit extends Component
     public $route;
     public $model;
     public $purposes;
+    public $options;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($columns, $title, $route, $model, $purposes = [])
+    public function __construct($columns, $title, $route, $model, $purposes = [], $options = [])
     {
         $this->columns = $columns;
         $this->title = $title;
         $this->route = $route;
         $this->model = $model;
         $this->purposes = $purposes;
+        $this->options = $options;
     }
 
     /**
