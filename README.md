@@ -125,3 +125,28 @@ factory(App\User::class)->create();
 // Generate 1 Admin, note: password is password
 factory(App\Admin::class)->create();
 ```
+
+### Seeding Data
+- cd to the project folder:
+```
+cd C:\xampp\htdocs\trish
+```
+While inside the project folder you can do the following:
+
+Delete all database tables
+```
+php artisan db:wipe
+```
+
+Run migrations, this will re-populate database tables
+```
+php artisan migrate
+```
+
+Seed the important tables in database such as services table.
+The following line of codes will populate Service, Purpose and Requirement tables respectively. They should be run in order or else we would have errors regarding foreign keys.
+```
+php artisan db:seed --class=ServiceSeeder
+php artisan db:seed --class=PurposeSeeder
+php artisan db:seed --class=RequirementSeeder
+```
