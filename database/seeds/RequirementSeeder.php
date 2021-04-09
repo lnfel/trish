@@ -36,7 +36,7 @@ class RequirementSeeder extends Seeder
             ["name" => "Valid ID (at least 2)",],
         ];
 
-        //DB::table('requirements')->insert($requirements);
+        DB::table('requirements')->insert($requirements);
 
         $cedula = Requirement::where('name', 'Cedula')->first();
         $validId = Requirement::where('name', 'Valid ID')->first();
