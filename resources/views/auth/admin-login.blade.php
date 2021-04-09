@@ -40,9 +40,9 @@
         <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">{{ __('Login') }}</button>
       </div>
 
-      {{-- <div class="">
+      <div class="">
         <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="{{ route('admin.password.request') }}">{{ __('Forgot Your Password?') }}</a>
-      </div> --}}
+      </div>
 
       <div style="border-top: 1px solid #cbd2d6; position: relative; margin: 25px 0 10px; text-align: center;">
         <span style="background-color: #fff; padding: 0 .5em; position: relative; color: #6c7378; top: -.7em;">

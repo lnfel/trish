@@ -18,7 +18,7 @@ class CreatePurposeRequirementsTable extends Migration
             $table->unsignedBigInteger('purpose_id')->nullable();
             $table->foreign('purpose_id')->nullable()->references('id')->on('purposes');
             $table->unsignedBigInteger('requirement_id')->nullable();
-            $table->foreign('requirement_id')->nullable()->references('id')->on('requirements');
+            $table->foreign('requirement_id')->nullable()->onDelete('cascade')->references('id')->on('requirements');
             $table->timestamps();
         });
     }
