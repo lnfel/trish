@@ -21,7 +21,7 @@ class PurposeSeeder extends Seeder
       $signPermit = DB::table('services')->where('name', 'Baranggay (Outdoor Sign) Permit')->first();
       $terminalPermit = DB::table('services')->where('name', 'Baranggay (Terminal) Permit')->first();
       $transPermit = DB::table('services')->where('name', 'Baranggay (Transport Registration) Permit')->first();
-      $surveyPermit = DB::table('services')->where('name', 'Baranggay (Survey) Permit) Permit')->first();
+      $surveyPermit = DB::table('services')->where('name', 'Baranggay (Survey) Permit')->first();
       $waterClearance = DB::table('services')->where('name', 'Baranggay (Manila Water Service) Connection Clearance')->first();
 
     	// assign purposes to services
