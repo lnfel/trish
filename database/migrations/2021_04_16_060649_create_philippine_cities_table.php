@@ -17,8 +17,10 @@ class CreatePhilippineCitiesTable extends Migration
             $table->id();
             $table->string('psgc_code');
             $table->string('name');
-            $table->string('region_code');
-            $table->string('province_code');
+            $table->unsignedBigInteger('region_id')->unique();
+            $table->foreign('region_id')->nullable()->references('id')->on('philippine_regions');
+            $table->unsignedBigInteger('province_id')->unique();
+            $table->foreign('province_id')->nullable()->references('id')->on('philippine_provinces');
             $table->string('city_municipality_code');
             $table->timestamps();
         });

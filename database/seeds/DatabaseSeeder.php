@@ -13,10 +13,13 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UserSeeder::class);
     	$this->call([
-      	PhilippineBarangaysTableSeeder::class,
-      	PhilippineCitiesTableSeeder::class,
-      	PhilippineProvincesTableSeeder::class,
-      	PhilippineRegionsTableSeeder::class
+      	ServiceSeeder::class,
+      	PurposeSeeder::class,
+      	RequirementSeeder::class,
+      	PhilippineRegionSeeder::class,
+        PhilippineProvinceSeeder::class,
+        PhilippineCitySeeder::class,
+        PhilippineBaranggaySeeder::class,
       ]);
     }
 }
