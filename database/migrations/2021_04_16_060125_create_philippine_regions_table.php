@@ -15,8 +15,8 @@ class CreatePhilippineRegionsTable extends Migration
     {
         Schema::create('philippine_regions', function (Blueprint $table) {
             $table->id();
-            $table->string('psgc_code');
             $table->string('name');
+            $table->string('psgc_code');
             $table->string('region_code');
             //$table->timestamps();
         });
