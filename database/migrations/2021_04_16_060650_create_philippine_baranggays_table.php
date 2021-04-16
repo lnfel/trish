@@ -17,11 +17,11 @@ class CreatePhilippineBaranggaysTable extends Migration
             $table->id();
             $table->string('barangay_code');
             $table->string('name');
-            $table->unsignedBigInteger('region_id')->unique();
+            $table->unsignedBigInteger('region_id');
             $table->foreign('region_id')->nullable()->references('id')->on('philippine_regions');
-            $table->unsignedBigInteger('province_id')->unique();
+            $table->unsignedBigInteger('province_id');
             $table->foreign('province_id')->nullable()->references('id')->on('philippine_provinces');
-            $table->unsignedBigInteger('city_id')->unique();
+            $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->nullable()->references('id')->on('philippine_cities');
             //$table->timestamps();
         });
