@@ -15,7 +15,14 @@ class PurposeSeeder extends Seeder
     	// get services info
     	$brgyClearance = DB::table('services')->where('name', 'Baranggay Clearance')->first();
     	$businessClearance = DB::table('services')->where('name', 'Business Clearance')->first();
-    	$bldgClearance = DB::table('services')->where('name', 'Building Clearance')->first();
+    	$bldgClearance = DB::table('services')->where('name', 'Baranggay (Building) Permit')->first();
+      $fencingPermit = DB::table('services')->where('name', 'Baranggay (Fencing) Permit')->first();
+      $cutTreePermit = DB::table('services')->where('name', 'Baranggay (cutting of trees) Permit')->first();
+      $signPermit = DB::table('services')->where('name', 'Baranggay (Outdoor Sign) Permit')->first();
+      $terminalPermit = DB::table('services')->where('name', 'Baranggay (Terminal) Permit')->first();
+      $transPermit = DB::table('services')->where('name', 'Baranggay (Transport Registration) Permit')->first();
+      $surveyPermit = DB::table('services')->where('name', 'Baranggay (Survey) Permit) Permit')->first();
+      $waterClearance = DB::table('services')->where('name', 'Baranggay (Manila Water Service) Connection Clearance')->first();
 
     	// assign purposes to services
       $brgyClearancePurposes = [
@@ -46,6 +53,47 @@ class PurposeSeeder extends Seeder
       $bldgClearancePurposes = [
       	['name' => 'Renovation / Repair', 'service_id' => $bldgClearance->id],
       	['name' => 'New Building for Construction', 'service_id' => $bldgClearance->id],
+      ];
+
+      $fencingPermit = [
+        ['name' => 'For Residencial', 'service_id' => $fencingPermit->id],
+        ['name' => 'For Commercial', 'service_id' => $fencingPermit->id],
+      ];
+
+      $cutTreePermit = [
+        ['name' => 'Non-fruit bearing trees', 'service_id' => $cutTreePermit->id],
+        ['name' => 'Fruit bearing trees', 'service_id' => $cutTreePermit->id],
+        ['name' => 'Special trees such as narra', 'service_id' => $cutTreePermit->id],
+      ];
+
+      $signPermit = [
+        ['name' => 'Billboards', 'service_id' => $signPermit->id],
+        ['name' => 'Advertisment Display', 'service_id' => $signPermit->id],
+      ];
+
+      $terminalPermit = [
+        ['name' => 'Jeepney and FX taxi', 'service_id' => $terminalPermit->id],
+        ['name' => 'Tricycle', 'service_id' => $terminalPermit->id],
+      ];
+
+      $transPermit = [
+        ['name' => 'For motorized bicycle', 'service_id' => $transPermit->id],
+        ['name' => 'For each pedaled tricycle', 'service_id' => $transPermit->id],
+      ];
+
+      $surveyPermit = [
+        ['name' => 'Educational Survey', 'service_id' => $surveyPermit->id],
+        ['name' => 'Business Survey', 'service_id' => $surveyPermit->id],
+        ['name' => 'Others', 'service_id' => $surveyPermit->id],
+      ];
+
+      $waterClearance = [
+        ['name' => 'Residential', 'service_id' => $waterClearance->id],
+        ['name' => 'Commercial (Single Proprietor)', 'service_id' => $waterClearance->id],
+        ['name' => 'Commercial (Partnership and Corporation)', 'service_id' => $waterClearance->id],
+        ['name' => 'Factories/Companies', 'service_id' => $waterClearance->id],
+        ['name' => 'Developers', 'service_id' => $waterClearance->id],
+        ['name' => 'Homeowners Association', 'service_id' => $waterClearance->id],
       ];
 
       // seed to database
