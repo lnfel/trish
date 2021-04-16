@@ -20,7 +20,7 @@ class CreatePhilippineProvincesTable extends Migration
             $table->unsignedBigInteger('region_id')->unique();
             $table->foreign('region_id')->nullable()->references('id')->on('philippine_regions');
             $table->string('province_code');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

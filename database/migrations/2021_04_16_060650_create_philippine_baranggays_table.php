@@ -23,7 +23,7 @@ class CreatePhilippineBaranggaysTable extends Migration
             $table->foreign('province_id')->nullable()->references('id')->on('philippine_provinces');
             $table->unsignedBigInteger('city_id')->unique();
             $table->foreign('city_id')->nullable()->references('id')->on('philippine_cities');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

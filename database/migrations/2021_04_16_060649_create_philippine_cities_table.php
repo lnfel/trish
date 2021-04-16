@@ -22,7 +22,7 @@ class CreatePhilippineCitiesTable extends Migration
             $table->unsignedBigInteger('province_id')->unique();
             $table->foreign('province_id')->nullable()->references('id')->on('philippine_provinces');
             $table->string('city_municipality_code');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
