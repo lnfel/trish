@@ -7,14 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class PhilippineRegion extends Model
 {
     public function provinces() {
-		return $this->hasMany('App\PhilippineProvince');
+		return $this->hasMany('App\PhilippineProvince', 'region_code');
 	}
 
 	public function cities() {
-		return $this->hasMany('App\PhilippineCity');
+		return $this->hasMany('App\PhilippineCity', 'region_code');
 	}
 
 	public function baranggays() {
-		return $this->hasMany('App\PhilippineBaranggay');
+		return $this->hasMany('App\PhilippineBaranggay', 'region_code');
+	}
+
+	public function addresses() {
+		return $this->hasMany('App\PhilippineAddress', 'region_code');
 	}
 }

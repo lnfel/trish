@@ -12,7 +12,7 @@ class PhilippineBaranggaySeeder extends Seeder
      */
     public function run()
     {
-        if(!DB::table('philippine_barangays')->count()) {
+        if(!DB::table('philippine_baranggays')->count()) {
             DB::unprepared(file_get_contents(__DIR__ . '/sql/philippine_barangays.sql'));
         }
     }

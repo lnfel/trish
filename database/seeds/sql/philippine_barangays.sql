@@ -1,4 +1,4 @@
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (1, '012801001', 'Adams (Pob.)', '01', '0128', '012801'),
 (2, '012802001', 'Bani', '01', '0128', '012802'),
 (3, '012802002', 'Buyon', '01', '0128', '012802'),
@@ -864,7 +864,7 @@ INSERT INTO philippine_barangays VALUES
 (863, '012914035', 'Bantay Abot', '01', '0129', '012914'),
 (864, '012915001', 'Banoen', '01', '0129', '012915'),
 (865, '012915002', 'Cayus', '01', '0129', '012915');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (866, '012915003', 'Patungcaleo (Lamag)', '01', '0129', '012915'),
 (867, '012915004', 'Malideg', '01', '0129', '012915'),
 (868, '012915005', 'Namitpit', '01', '0129', '012915'),
@@ -1743,7 +1743,7 @@ INSERT INTO philippine_barangays VALUES
 (1741, '013314025', 'Dalumpinas Este', '01', '0133', '013314'),
 (1742, '013314026', 'Dalumpinas Oeste', '01', '0133', '013314'),
 (1743, '013314027', 'Ilocanos Norte', '01', '0133', '013314');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (1744, '013314028', 'Ilocanos Sur', '01', '0133', '013314'),
 (1745, '013314029', 'Langcuas', '01', '0133', '013314'),
 (1746, '013314030', 'Lingsat', '01', '0133', '013314'),
@@ -2638,7 +2638,7 @@ INSERT INTO philippine_barangays VALUES
 (2635, '015527050', 'Maravilla-Arellano Ext. (Pob.)', '01', '0155', '015527'),
 (2636, '015527051', 'Muelang', '01', '0155', '015527'),
 (2637, '015527052', 'Naguilayan East', '01', '0155', '015527');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (2638, '015527053', 'Naguilayan West', '01', '0155', '015527'),
 (2639, '015527054', 'Nancasalan', '01', '0155', '015527'),
 (2640, '015527055', 'Niog-Cabison-Bulaney', '01', '0155', '015527'),
@@ -3516,7 +3516,7 @@ INSERT INTO philippine_barangays VALUES
 (3512, '021507009', 'Centro West (Pob.)', '02', '0215', '021507'),
 (3513, '021507010', 'Fugu', '02', '0215', '021507'),
 (3514, '021507012', 'Mabuttal East', '02', '0215', '021507');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (3515, '021507013', 'Mabuttal West', '02', '0215', '021507'),
 (3516, '021507014', 'Nararagan', '02', '0215', '021507'),
 (3517, '021507015', 'Palloc', '02', '0215', '021507'),
@@ -4390,7 +4390,7 @@ INSERT INTO philippine_barangays VALUES
 (4385, '023108061', 'San Isidro', '02', '0231', '023108'),
 (4386, '023108062', 'San Luis', '02', '0231', '023108'),
 (4387, '023108064', 'Santa Luciana (Daburab 2)', '02', '0231', '023108');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (4388, '023108065', 'Santa Maria', '02', '0231', '023108'),
 (4389, '023108066', 'Sillawit', '02', '0231', '023108'),
 (4390, '023108067', 'Sinippil', '02', '0231', '023108'),
@@ -5256,7 +5256,7 @@ INSERT INTO philippine_barangays VALUES
 (5250, '025005010', 'Magsaysay', '02', '0250', '025005'),
 (5251, '025005011', 'Masoc', '02', '0250', '025005'),
 (5252, '025005012', 'Paitan', '02', '0250', '025005');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (5253, '025005014', 'Don Domingo Maddela Pob. (District I)', '02', '0250', '025005'),
 (5254, '025005015', 'Don Tomas Maddela Pob. (District II)', '02', '0250', '025005'),
 (5255, '025005016', 'District III Pob. (Don M. Perez)', '02', '0250', '025005'),
@@ -6138,7 +6138,7 @@ INSERT INTO philippine_barangays VALUES
 (6131, '031416013', 'San Vicente', '03', '0314', '031416'),
 (6132, '031416014', 'Santa Cruz', '03', '0314', '031416'),
 (6133, '031416015', 'Santo Niño', '03', '0314', '031416');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (6134, '031416016', 'Santo Rosario', '03', '0314', '031416'),
 (6135, '031417001', 'Agnaya', '03', '0314', '031417'),
 (6136, '031417002', 'Bagong Silang', '03', '0314', '031417'),
@@ -7002,7 +7002,7 @@ INSERT INTO philippine_barangays VALUES
 (6994, '034923033', 'Villa Labrador', '03', '0349', '034923'),
 (6995, '034923034', 'Villa Paraiso', '03', '0349', '034923'),
 (6996, '034923035', 'San Gregorio', '03', '0349', '034923');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (6997, '034924001', 'Buliran', '03', '0349', '034924'),
 (6998, '034924002', 'Cama Juan', '03', '0349', '034924'),
 (6999, '034924003', 'Julo', '03', '0349', '034924'),
@@ -7868,7 +7868,7 @@ INSERT INTO philippine_barangays VALUES
 (7859, '036903064', 'Surgui 2nd', '03', '0369', '036903'),
 (7860, '036903065', 'Surgui 3rd', '03', '0369', '036903'),
 (7861, '036903066', 'Tambugan', '03', '0369', '036903');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (7862, '036903067', 'Telbang', '03', '0369', '036903'),
 (7863, '036903068', 'Tuec', '03', '0369', '036903'),
 (7864, '036904001', 'Aranguren', '03', '0369', '036904'),
@@ -8744,7 +8744,7 @@ INSERT INTO philippine_barangays VALUES
 (8734, '041003018', 'Calzada', '04', '0410', '041003'),
 (8735, '041003019', 'Canda', '04', '0410', '041003'),
 (8736, '041003020', 'Carenahan', '04', '0410', '041003');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (8737, '041003021', 'Caybunga', '04', '0410', '041003'),
 (8738, '041003022', 'Cayponce', '04', '0410', '041003'),
 (8739, '041003023', 'Dalig', '04', '0410', '041003'),
@@ -9615,7 +9615,7 @@ INSERT INTO philippine_barangays VALUES
 (9604, '041029016', 'Imamawo', '04', '0410', '041029'),
 (9605, '041029017', 'Ipil', '04', '0410', '041029'),
 (9606, '041029018', 'Luntal', '04', '0410', '041029');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (9607, '041029019', 'Mahabang Lodlod', '04', '0410', '041029'),
 (9608, '041029020', 'Niogan', '04', '0410', '041029'),
 (9609, '041029021', 'Pansol', '04', '0410', '041029'),
@@ -10441,7 +10441,7 @@ INSERT INTO philippine_barangays VALUES
 (10429, '042118036', 'Barangay V (Pob.)', '04', '0421', '042118'),
 (10430, '042118037', 'Pooc I', '04', '0421', '042118'),
 (10431, '042118038', 'Pulong Bunga', '04', '0421', '042118');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (10432, '042118039', 'Pulong Saging', '04', '0421', '042118'),
 (10433, '042118040', 'Puting Kahoy', '04', '0421', '042118'),
 (10434, '042118041', 'Sabutan', '04', '0421', '042118'),
@@ -11286,7 +11286,7 @@ INSERT INTO philippine_barangays VALUES
 (11273, '045602002', 'Bacong', '04', '0456', '045602'),
 (11274, '045602003', 'Balungay', '04', '0456', '045602'),
 (11275, '045602004', 'Buenavista', '04', '0456', '045602');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (11276, '045602005', 'Caglate', '04', '0456', '045602'),
 (11277, '045602006', 'Camagong', '04', '0456', '045602'),
 (11278, '045602007', 'Gordon', '04', '0456', '045602'),
@@ -12132,7 +12132,7 @@ INSERT INTO philippine_barangays VALUES
 (12118, '045634029', 'Dalampasigan (Pob.)', '04', '0456', '045634'),
 (12119, '045634030', 'Poctol', '04', '0456', '045634'),
 (12120, '045634031', 'Quezon', '04', '0456', '045634');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (12121, '045634032', 'Quinagasan', '04', '0456', '045634'),
 (12122, '045634033', 'Rizalino', '04', '0456', '045634'),
 (12123, '045634034', 'Saguinsinan', '04', '0456', '045634'),
@@ -12994,7 +12994,7 @@ INSERT INTO philippine_barangays VALUES
 (12979, '175107003', 'Lumangbayan', '17', '1751', '175107'),
 (12980, '175107004', 'Mananao', '17', '1751', '175107'),
 (12981, '175107005', 'Marikit', '17', '1751', '175107');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (12982, '175107006', 'Mapalad Pob. (Bgy 1)', '17', '1751', '175107'),
 (12983, '175107007', 'Handang Tumulong Pob. (Bgy 2)', '17', '1751', '175107'),
 (12984, '175107008', 'Silahis Ng Pag-Asa Pob. (Bgy 3)', '17', '1751', '175107'),
@@ -13855,7 +13855,7 @@ INSERT INTO philippine_barangays VALUES
 (13839, '175318019', 'San Isidro', '17', '1753', '175318'),
 (13840, '175318020', 'San Jose', '17', '1753', '175318'),
 (13841, '175318021', 'San Miguel', '17', '1753', '175318');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (13842, '175318022', 'San Nicolas', '17', '1753', '175318'),
 (13843, '175318023', 'Sandoval', '17', '1753', '175318'),
 (13844, '175318024', 'Tagumpay', '17', '1753', '175318'),
@@ -14705,7 +14705,7 @@ INSERT INTO philippine_barangays VALUES
 (14688, '050513026', 'Barangay IV (Pob.)', '05', '0505', '050513'),
 (14689, '050513027', 'Barangay V (Pob.)', '05', '0505', '050513'),
 (14690, '050513028', 'Rawis', '05', '0505', '050513');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (14691, '050513029', 'Salvacion', '05', '0505', '050513'),
 (14692, '050513030', 'Santo Cristo', '05', '0505', '050513'),
 (14693, '050513031', 'Sukip', '05', '0505', '050513'),
@@ -15559,7 +15559,7 @@ INSERT INTO philippine_barangays VALUES
 (15541, '051715027', 'San Jose (Pob.)', '05', '0517', '051715'),
 (15542, '051715028', 'San Juan Bautista (Pob.)', '05', '0517', '051715'),
 (15543, '051715029', 'San Juan Evangelista (Pob.)', '05', '0517', '051715');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (15544, '051715030', 'San Pedro (Aroro)', '05', '0517', '051715'),
 (15545, '051715031', 'Scout Fuentebella', '05', '0517', '051715'),
 (15546, '051715032', 'Tabgon', '05', '0517', '051715'),
@@ -16413,7 +16413,7 @@ INSERT INTO philippine_barangays VALUES
 (16394, '052008022', 'Manambrag', '05', '0520', '052008'),
 (16395, '052008023', 'Mayngaway', '05', '0520', '052008'),
 (16396, '052008024', 'Palawig', '05', '0520', '052008');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (16397, '052008025', 'Puting Baybay', '05', '0520', '052008'),
 (16398, '052008026', 'Rizal', '05', '0520', '052008'),
 (16399, '052008027', 'Salvacion (Pob.)', '05', '0520', '052008'),
@@ -17281,7 +17281,7 @@ INSERT INTO philippine_barangays VALUES
 (17261, '056207012', 'Dancalan', '05', '0562', '056207'),
 (17262, '056207013', 'De Vera', '05', '0562', '056207'),
 (17263, '056207014', 'Gimagaan', '05', '0562', '056207');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (17264, '056207015', 'Girawan', '05', '0562', '056207'),
 (17265, '056207016', 'Gogon', '05', '0562', '056207'),
 (17266, '056207017', 'Gura', '05', '0562', '056207'),
@@ -18161,7 +18161,7 @@ INSERT INTO philippine_barangays VALUES
 (18140, '060607032', 'Lawigan', '06', '0606', '060607'),
 (18141, '060607033', 'Manaling (Cata-an)', '06', '0606', '060607'),
 (18142, '060607034', 'Masayo', '06', '0606', '060607');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (18143, '060607035', 'Nagsubuan', '06', '0606', '060607'),
 (18144, '060607036', 'Paciencia', '06', '0606', '060607'),
 (18145, '060607037', 'Poblacion Norte', '06', '0606', '060607'),
@@ -19036,7 +19036,7 @@ INSERT INTO philippine_barangays VALUES
 (19014, '063001005', 'Bato Biasong', '06', '0630', '063001'),
 (19015, '063001006', 'Bay-ang', '06', '0630', '063001'),
 (19016, '063001007', 'Bucana Bunglas', '06', '0630', '063001');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (19017, '063001008', 'Central', '06', '0630', '063001'),
 (19018, '063001009', 'Culasi', '06', '0630', '063001'),
 (19019, '063001010', 'Lanjagan', '06', '0630', '063001'),
@@ -19895,7 +19895,7 @@ INSERT INTO philippine_barangays VALUES
 (19872, '063022200', 'San Jose (City Proper)', '06', '0630', '063022'),
 (19873, '063022201', 'Tabuc Suba (La Paz)', '06', '0630', '063022'),
 (19874, '063022202', 'Rizal (La Paz)', '06', '0630', '063022');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (19875, '063023001', 'Abangay', '06', '0630', '063023'),
 (19876, '063023002', 'Agcarope', '06', '0630', '063023'),
 (19877, '063023003', 'Aglobong', '06', '0630', '063023'),
@@ -20762,7 +20762,7 @@ INSERT INTO philippine_barangays VALUES
 (20738, '063043055', 'Talanghauan', '06', '0630', '063043'),
 (20739, '063043056', 'Talongadian', '06', '0630', '063043'),
 (20740, '063043057', 'Tigtig', '06', '0630', '063043');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (20741, '063043058', 'Tungay', '06', '0630', '063043'),
 (20742, '063043059', 'Tuburan', '06', '0630', '063043'),
 (20743, '063043060', 'Tugas', '06', '0630', '063043'),
@@ -21615,7 +21615,7 @@ INSERT INTO philippine_barangays VALUES
 (21590, '067901022', 'Piña', '06', '0679', '067901'),
 (21591, '067901023', 'Rizal', '06', '0679', '067901'),
 (21592, '067901024', 'Salvacion', '06', '0679', '067901');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (21593, '067901025', 'San Fernando', '06', '0679', '067901'),
 (21594, '067901026', 'San Isidro', '06', '0679', '067901'),
 (21595, '067901027', 'San Miguel', '06', '0679', '067901'),
@@ -22493,7 +22493,7 @@ INSERT INTO philippine_barangays VALUES
 (22467, '071234019', 'San Carlos', '07', '0712', '071234'),
 (22468, '071234020', 'San Isidro', '07', '0712', '071234'),
 (22469, '071234021', 'San Vicente', '07', '0712', '071234');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (22470, '071235001', 'Aguining', '07', '0712', '071235'),
 (22471, '071235003', 'Basiao', '07', '0712', '071235'),
 (22472, '071235004', 'Baud', '07', '0712', '071235'),
@@ -23374,7 +23374,7 @@ INSERT INTO philippine_barangays VALUES
 (23347, '072223034', 'Sacsac', '07', '0722', '072223'),
 (23348, '072223035', 'Sandayong Norte', '07', '0722', '072223'),
 (23349, '072223036', 'Sandayong Sur', '07', '0722', '072223');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (23350, '072223037', 'Santa Rosa', '07', '0722', '072223'),
 (23351, '072223038', 'Santican', '07', '0722', '072223'),
 (23352, '072223039', 'Sibacan', '07', '0722', '072223'),
@@ -24259,7 +24259,7 @@ INSERT INTO philippine_barangays VALUES
 (24231, '074612002', 'Agutayon', '07', '0746', '074612'),
 (24232, '074612003', 'Apanangon', '07', '0746', '074612'),
 (24233, '074612004', 'Bae', '07', '0746', '074612');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (24234, '074612005', 'Bala-as', '07', '0746', '074612'),
 (24235, '074612006', 'Bangcal', '07', '0746', '074612'),
 (24236, '074612007', 'Banog', '07', '0746', '074612'),
@@ -25124,7 +25124,7 @@ INSERT INTO philippine_barangays VALUES
 (25095, '082617008', 'Binalayan', '08', '0826', '082617'),
 (25096, '082617009', 'Buntay', '08', '0826', '082617'),
 (25097, '082617010', 'Burak', '08', '0826', '082617');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (25098, '082617011', 'Butnga (Pob.)', '08', '0826', '082617'),
 (25099, '082617012', 'Cadian', '08', '0826', '082617'),
 (25100, '082617013', 'Cagdine', '08', '0826', '082617'),
@@ -25984,7 +25984,7 @@ INSERT INTO philippine_barangays VALUES
 (25954, '083720004', 'Bontoc', '08', '0837', '083720'),
 (25955, '083720006', 'Bulacan', '08', '0837', '083720'),
 (25956, '083720007', 'Canha-ayon', '08', '0837', '083720');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (25957, '083720008', 'Capudlosan', '08', '0837', '083720'),
 (25958, '083720009', 'Himacugo', '08', '0837', '083720'),
 (25959, '083720010', 'Doos Del Norte', '08', '0837', '083720'),
@@ -26838,7 +26838,7 @@ INSERT INTO philippine_barangays VALUES
 (26807, '083748008', 'Baras', '08', '0837', '083748'),
 (26808, '083748009', 'Binolo', '08', '0837', '083748'),
 (26809, '083748010', 'Binongto-an', '08', '0837', '083748');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (26810, '083748011', 'Bislig', '08', '0837', '083748'),
 (26811, '083748012', 'Cabalagnan', '08', '0837', '083748'),
 (26812, '083748013', 'Cabarasan Guti', '08', '0837', '083748'),
@@ -27700,7 +27700,7 @@ INSERT INTO philippine_barangays VALUES
 (27668, '086003127', 'Rawis', '08', '0860', '086003'),
 (27669, '086003128', 'Rizal I (Calbayog District)', '08', '0860', '086003'),
 (27670, '086003129', 'Rizal II (Oquendo District)', '08', '0860', '086003');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (27671, '086003130', 'Roxas I (Calbayog District)', '08', '0860', '086003'),
 (27672, '086003131', 'Roxas II (Oquendo District)', '08', '0860', '086003'),
 (27673, '086003132', 'Saljag (Baut)', '08', '0860', '086003'),
@@ -28569,7 +28569,7 @@ INSERT INTO philippine_barangays VALUES
 (28536, '086404011', 'Hubasan', '08', '0864', '086404'),
 (28537, '086404012', 'Cat-iwing', '08', '0864', '086404'),
 (28538, '086404013', 'Lungsodaan', '08', '0864', '086404');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (28539, '086404014', 'Navalita', '08', '0864', '086404'),
 (28540, '086404015', 'Plaridel', '08', '0864', '086404'),
 (28541, '086404016', 'Sabang', '08', '0864', '086404'),
@@ -29445,7 +29445,7 @@ INSERT INTO philippine_barangays VALUES
 (29411, '097214011', 'Liwanag', '09', '0972', '097214'),
 (29412, '097214012', 'Mabuhay', '09', '0972', '097214'),
 (29413, '097214013', 'Macalibre', '09', '0972', '097214');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (29414, '097214014', 'Mahayahay', '09', '0972', '097214'),
 (29415, '097214015', 'Marapong', '09', '0972', '097214'),
 (29416, '097214016', 'Nazareth', '09', '0972', '097214'),
@@ -30324,7 +30324,7 @@ INSERT INTO philippine_barangays VALUES
 (30289, '097328030', 'Riverside (Pob.)', '09', '0973', '097328'),
 (30290, '097328031', 'Sagrada Familia', '09', '0973', '097328'),
 (30291, '097328032', 'San Jose', '09', '0973', '097328');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (30292, '097328034', 'Sumalig', '09', '0973', '097328'),
 (30293, '097328036', 'Tuluan', '09', '0973', '097328'),
 (30294, '097328037', 'Tungawan', '09', '0973', '097328'),
@@ -31196,7 +31196,7 @@ INSERT INTO philippine_barangays VALUES
 (31160, '101311001', 'Capihan', '10', '1013', '101311'),
 (31161, '101311002', 'Crossing', '10', '1013', '101311'),
 (31162, '101311003', 'Gango', '10', '1013', '101311');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (31163, '101311004', 'Kiliog', '10', '1013', '101311'),
 (31164, '101311005', 'Kinawe', '10', '1013', '101311'),
 (31165, '101311006', 'Laturan', '10', '1013', '101311'),
@@ -32073,7 +32073,7 @@ INSERT INTO philippine_barangays VALUES
 (32036, '104202003', 'Lumipac', '10', '1042', '104202'),
 (32037, '104202004', 'Lusot', '10', '1042', '104202'),
 (32038, '104202005', 'Mabini', '10', '1042', '104202');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (32039, '104202006', 'Magsaysay', '10', '1042', '104202'),
 (32040, '104202007', 'Misom', '10', '1042', '104202'),
 (32041, '104202008', 'Mitacas', '10', '1042', '104202'),
@@ -32934,7 +32934,7 @@ INSERT INTO philippine_barangays VALUES
 (32896, '104319018', 'South Poblacion', '10', '1043', '104319'),
 (32897, '104319019', 'Tambagan', '10', '1043', '104319'),
 (32898, '104319020', 'Tup-on', '10', '1043', '104319');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (32899, '104320001', 'Don Pedro', '10', '1043', '104320'),
 (32900, '104320002', 'Linangkayan', '10', '1043', '104320'),
 (32901, '104320003', 'Lubilan', '10', '1043', '104320'),
@@ -33801,7 +33801,7 @@ INSERT INTO philippine_barangays VALUES
 (33762, '112509005', 'Central (Pob.)', '11', '1125', '112509'),
 (33763, '112509006', 'Culian', '11', '1125', '112509'),
 (33764, '112509007', 'Dahican', '11', '1125', '112509');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (33765, '112509008', 'Danao', '11', '1125', '112509'),
 (33766, '112509009', 'Dawan', '11', '1125', '112509'),
 (33767, '112509010', 'Don Enrique Lopez', '11', '1125', '112509'),
@@ -34681,7 +34681,7 @@ INSERT INTO philippine_barangays VALUES
 (34641, '124716014', 'Poblacion II', '12', '1247', '124716'),
 (34642, '124716015', 'Puting-bato', '12', '1247', '124716'),
 (34643, '124716016', 'Solama', '12', '1247', '124716');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (34644, '124716017', 'Thailand', '12', '1247', '124716'),
 (34645, '124716018', 'Tinimbacan', '12', '1247', '124716'),
 (34646, '124716019', 'Tumbao-Camalig', '12', '1247', '124716'),
@@ -35549,7 +35549,7 @@ INSERT INTO philippine_barangays VALUES
 (35508, '133901171', 'Barangay 171', '13', '1339', '133901'),
 (35509, '133901172', 'Barangay 172', '13', '1339', '133901'),
 (35510, '133901173', 'Barangay 173', '13', '1339', '133901');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (35511, '133901174', 'Barangay 174', '13', '1339', '133901'),
 (35512, '133901175', 'Barangay 175', '13', '1339', '133901'),
 (35513, '133901176', 'Barangay 176', '13', '1339', '133901'),
@@ -36383,7 +36383,7 @@ INSERT INTO philippine_barangays VALUES
 (36341, '137404025', 'Culiat', '13', '1374', '137404'),
 (36342, '137404026', 'Damar', '13', '1374', '137404'),
 (36343, '137404027', 'Damayan', '13', '1374', '137404');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (36344, '137404028', 'Damayang Lagi', '13', '1374', '137404'),
 (36345, '137404029', 'Del Monte', '13', '1374', '137404'),
 (36346, '137404030', 'Dioquino Zobel', '13', '1374', '137404'),
@@ -37232,7 +37232,7 @@ INSERT INTO philippine_barangays VALUES
 (37189, '140113001', 'Bonglo (Patagui)', '14', '1401', '140113'),
 (37190, '140113002', 'Bulbulala', '14', '1401', '140113'),
 (37191, '140113003', 'Cawayan', '14', '1401', '140113');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (37192, '140113004', 'Domenglay', '14', '1401', '140113'),
 (37193, '140113005', 'Lenneng', '14', '1401', '140113'),
 (37194, '140113006', 'Mapisla', '14', '1401', '140113'),
@@ -38098,7 +38098,7 @@ INSERT INTO philippine_barangays VALUES
 (38054, '144408005', 'Poblacion', '14', '1444', '144408'),
 (38055, '144408006', 'Sacasacan', '14', '1444', '144408'),
 (38056, '144408007', 'Saclit', '14', '1444', '144408');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (38057, '144408008', 'Demang', '14', '1444', '144408'),
 (38058, '144409001', 'Aguid', '14', '1444', '144409'),
 (38059, '144409002', 'Tetepan Sur', '14', '1444', '144409'),
@@ -38967,7 +38967,7 @@ INSERT INTO philippine_barangays VALUES
 (38922, '153617030', 'Calocan West', '15', '1536', '153617'),
 (38923, '153617032', 'Kormatan Matampay', '15', '1536', '153617'),
 (38924, '153617033', 'Daguduban', '15', '1536', '153617');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (38925, '153617035', 'Dansalan', '15', '1536', '153617'),
 (38926, '153617036', 'Datu Sa Dansalan', '15', '1536', '153617'),
 (38927, '153617037', 'Dayawan', '15', '1536', '153617'),
@@ -39828,7 +39828,7 @@ INSERT INTO philippine_barangays VALUES
 (39782, '153812028', 'Katamlangan (Matampay)', '15', '1538', '153812'),
 (39783, '153812029', 'Matengen', '15', '1538', '153812'),
 (39784, '153812030', 'Mulaug', '15', '1538', '153812');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (39785, '153812031', 'Nalinan', '15', '1538', '153812'),
 (39786, '153812033', 'Nekitan', '15', '1538', '153812'),
 (39787, '153812034', 'Olas', '15', '1538', '153812'),
@@ -40706,7 +40706,7 @@ INSERT INTO philippine_barangays VALUES
 (40659, '157008002', 'Likud Bakkao', '15', '1570', '157008'),
 (40660, '157009001', 'Bakong', '15', '1570', '157009'),
 (40661, '157009002', 'Bas-bas Proper', '15', '1570', '157009');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (40662, '157009003', 'Basnunuk', '15', '1570', '157009'),
 (40663, '157009004', 'Darussalam', '15', '1570', '157009'),
 (40664, '157009005', 'Languyan Proper (Pob.)', '15', '1570', '157009'),
@@ -41569,7 +41569,7 @@ INSERT INTO philippine_barangays VALUES
 (41521, '166722005', 'Lower Patag', '16', '1667', '166722'),
 (41522, '166722006', 'Mabuhay', '16', '1667', '166722'),
 (41523, '166722007', 'Mayag', '16', '1667', '166722');
-INSERT INTO philippine_barangays VALUES
+INSERT INTO philippine_baranggays VALUES
 (41524, '166722008', 'Poblacion (San Pedro)', '16', '1667', '166722'),
 (41525, '166722009', 'San Isidro', '16', '1667', '166722'),
 (41526, '166722010', 'San Pablo', '16', '1667', '166722'),

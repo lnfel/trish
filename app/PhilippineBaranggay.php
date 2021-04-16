@@ -17,4 +17,8 @@ class PhilippineBaranggay extends Model
 	public function city() {
 		return $this->belongsTo('App\PhilippineCity');
 	}
+
+	public function addresses() {
+		return $this->hasMany('App\PhilippineAddress', 'baranggay_code');
+	}
 }
