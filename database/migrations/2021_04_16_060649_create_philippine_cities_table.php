@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePurposesTable extends Migration
+class CreatePhilippineCitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreatePurposesTable extends Migration
      */
     public function up()
     {
-        Schema::create('purposes', function (Blueprint $table) {
+        Schema::create('philippine_cities', function (Blueprint $table) {
             $table->id();
+            $table->string('psgc_code');
             $table->string('name');
-            $table->unsignedBigInteger('service_id');
-            $table->foreign('service_id')->nullable()->onDelete('cascade')->references('id')->on('services');
+            $table->string('region_code');
+            $table->string('province_code');
+            $table->string('city_municipality_code');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreatePurposesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purposes');
+        Schema::dropIfExists('philippine_cities');
     }
 }

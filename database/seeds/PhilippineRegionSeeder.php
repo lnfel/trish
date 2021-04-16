@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PhilippineRegionsTableSeeder extends Seeder
+class PhilippineRegionSeeder extends Seeder
 {
     /**
      * Run the database seeds.

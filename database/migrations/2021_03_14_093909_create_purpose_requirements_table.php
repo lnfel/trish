@@ -16,7 +16,7 @@ class CreatePurposeRequirementsTable extends Migration
         Schema::create('purpose_requirement', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('purpose_id')->nullable();
-            $table->foreign('purpose_id')->nullable()->references('id')->on('purposes');
+            $table->foreign('purpose_id')->nullable()->onDelete('cascade')->references('id')->on('purposes');
             $table->unsignedBigInteger('requirement_id')->nullable();
             $table->foreign('requirement_id')->nullable()->onDelete('cascade')->references('id')->on('requirements');
             $table->timestamps();
