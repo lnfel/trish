@@ -15,14 +15,14 @@ class CreatePhilippineBaranggaysTable extends Migration
     {
         Schema::create('philippine_baranggays', function (Blueprint $table) {
             $table->id();
-            $table->string('barangay_code');
+            $table->index('baranggay_code');
             $table->string('name');
-            $table->unsignedBigInteger('region_id');
-            $table->foreign('region_id')->nullable()->references('id')->on('philippine_regions');
-            $table->unsignedBigInteger('province_id');
-            $table->foreign('province_id')->nullable()->references('id')->on('philippine_provinces');
-            $table->unsignedBigInteger('city_id');
-            $table->foreign('city_id')->nullable()->references('id')->on('philippine_cities');
+            $table->unsignedBigInteger('region_code');
+            $table->foreign('region_code')->nullable()->references('region_code')->on('philippine_regions');
+            $table->unsignedBigInteger('province_code');
+            $table->foreign('province_code')->nullable()->references('province_code')->on('philippine_provinces');
+            $table->unsignedBigInteger('city_code');
+            $table->foreign('city_code')->nullable()->references('city_municipality_code')->on('philippine_cities');
             //$table->timestamps();
         });
     }

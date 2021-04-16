@@ -16,14 +16,14 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->string('street_address')->nullable();
-            $table->unsignedBigInteger('brgy_id')->unique();
-            $table->foreign('brgy_id')->nullable()->references('id')->on('philippine_baranggays');
-            $table->unsignedBigInteger('city_id')->unique();
-            $table->foreign('city_id')->nullable()->references('id')->on('philippine_cities');
-            $table->unsignedBigInteger('province_id')->unique();
-            $table->foreign('province_id')->nullable()->references('id')->on('philippine_provinces');
-            $table->unsignedBigInteger('region_id')->unique();
-            $table->foreign('region_id')->nullable()->references('id')->on('philippine_regions');
+            $table->unsignedBigInteger('brgy_code')->unique();
+            $table->foreign('brgy_code')->nullable()->references('baranggay_code')->on('philippine_baranggays');
+            $table->unsignedBigInteger('city_code')->unique();
+            $table->foreign('city_code')->nullable()->references('city_municipality_code')->on('philippine_cities');
+            $table->unsignedBigInteger('province_code')->unique();
+            $table->foreign('province_code')->nullable()->references('province_code')->on('philippine_provinces');
+            $table->unsignedBigInteger('region_code')->unique();
+            $table->foreign('region_code')->nullable()->references('region_code')->on('philippine_regions');
             $table->string('zip_code')->nullable();
             $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->nullable()->references('id')->on('users');
