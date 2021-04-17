@@ -150,3 +150,9 @@ php artisan db:seed --class=ServiceSeeder
 php artisan db:seed --class=PurposeSeeder
 php artisan db:seed --class=RequirementSeeder
 ```
+
+All the steps for seeding data can be done in a single command:
+```
+php artisan db:rezero
+```
+This will run db:wipe, migrate and db:seed commands respectively.
