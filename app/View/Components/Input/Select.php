@@ -6,17 +6,19 @@ use Illuminate\View\Component;
 
 class Select extends Component
 {
-    public $name, $options;
+    public $name, $options, $label, $parent;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $options = '')
+    public function __construct($name, $options = '', $label = 'Select Purpose', $parent = '')
     {
         $this->name = $name;
         $this->options = $options;
+        $this->label = $label;
+        $this->parent = $parent;
         /*$this->options = [
             'Local employment',
             'National ID',

@@ -24,6 +24,10 @@ Route::post('/register', 'Api\AuthController@register')->name('register');
 Route::get('/all-slot-dates', 'Api\SlotApiController@allSlotDates')->name('allSlotDates');
 Route::get('/all-slot-date-times/{date}', 'Api\SlotApiController@allSlotDateTimes')->name('allSlotDateTimes');
 Route::get('/service/{service}/purposes', 'Api\PurposeApiController@allServicePurposes')->name('allServicePurposes');
+Route::get('/regions', 'Api\PSGCApiController@allRegions')->name('allRegions');
+Route::get('/regions/{region}/provinces', 'Api\PSGCApiController@provinces')->name('provinces');
+Route::get('/provinces/{province}/cities', 'Api\PSGCApiController@cities')->name('cities');
+Route::get('/cities/{city}/brgys', 'Api\PSGCApiController@brgys')->name('brgys');
 
 Route::middleware('auth:api')->group(function() {
 	Route::resource('/slots', 'Api\SlotApiController');

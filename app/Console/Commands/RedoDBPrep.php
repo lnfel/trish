@@ -39,7 +39,7 @@ class RedoDBPrep extends Command
     public function handle()
     {
         $commands = [
-            'db:wipe', 'migrate', 'db:seed',
+            'db:wipe', 'migrate', 'db:seed', 'passport:install', 'cache:clear', 'config:clear', 'config:cache',
         ];
 
         $bar = $this->output->createProgressBar(count($commands));

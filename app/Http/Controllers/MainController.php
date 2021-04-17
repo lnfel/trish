@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Service;
+use App\PhilippineRegion;
 
 class MainController extends Controller
 {
@@ -30,6 +31,13 @@ class MainController extends Controller
 
   public function profile()
   {
-    return view('user.profile');
+    $regions = PhilippineRegion::all();
+    //dd($regions);
+    return view('user.profile', ['regions' => $regions]);
+  }
+
+  public function storeAddress(Request $request)
+  {
+    dd($request->all());
   }
 }
