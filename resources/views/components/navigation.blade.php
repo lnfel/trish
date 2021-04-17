@@ -49,6 +49,7 @@
 				</button>
 
 				<div x-show="dropdownOpen" x-cloak="" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 text-left w-48 bg-white rounded overflow-hidden shadow-xl z-20">
+					<a href="{{ route('client.profile') }}" class="block px-4 py-2 text-sm text-gray-800 bg-white hover:bg-gray-200 border-b">Profile</a>
 					<a href="{{ route('appointments.index') }}" class="block px-4 py-2 text-sm text-gray-800 bg-white hover:bg-gray-200 border-b">My Appointments</a>
 					<form method="POST" action="{{ route('user.logout') }}" class="block">
 						@csrf

@@ -14,7 +14,7 @@ class PhilippineRegion extends Model
 		return $this->hasMany('App\PhilippineCity', 'region_code');
 	}
 
-	public function baranggays() {
+	public function brgys() {
 		return $this->hasMany('App\PhilippineBaranggay', 'region_code');
 	}
 

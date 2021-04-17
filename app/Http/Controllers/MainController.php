@@ -27,4 +27,9 @@ class MainController extends Controller
   {
   	return view('user.appointments');
   }
+
+  public function profile()
+  {
+    return view('user.profile');
+  }
 }

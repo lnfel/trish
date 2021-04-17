@@ -6,7 +6,7 @@
     <a href="{{ URL::to('/') }}">
       <div class="flex items-center justify-center p-4">
         <img src="{{ asset('img/angono_logo.png') }}" width="70px">
-        <h1 class="text-2xl ml-4">{{ config('app.name', 'Laravel') }} &#12290;</h1>
+        <h1 class="login text-2xl ml-4">{{ config('app.name', 'Laravel') }} &#12290;</h1>
       </div>
     </a>
     <form class="px-8 pt-6 pb-8 mb-4 mx-auto" method="POST" action="{{ route('register') }}" style="width: 70%;">
