@@ -12,30 +12,40 @@
 	</div> -->
 </section>
 
-<section class="relative md:flex" style="z-index: 9;">
-	<div class="w-full md:w-8/12 -mt-80" style="z-index: 9;">
-		<div class="w-11/12 bg-white mx-auto rounded-lg min-h-screen shadow-md p-2">
-			<div class="overflow-hidden rounded-lg">
-				<img src="{{ asset('img/angono-header.png') }}">
-			</div>
-			<h4 class="text-2xl my-4">Sample title</h4>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<section class="container mx-auto -mt-80" style="z-index: 9;">
+	<!-- <div class="w-full" style="z-index: 9;"> -->
+	<div class="backdrop-filter backdrop-blur rounded-lg p-8">
+		<!-- <div class="overflow-hidden rounded-lg">
+			<img src="{{ asset('img/angono-header.png') }}">
+		</div> -->
+		<div class="flex items-center justify-center mb-16">
+			<h2 class="text-4xl text-gray-800 tracking-wide font-bold">Angono Baranggay Services &#12290;</h2>
 		</div>
+		<h4 class="text-2xl text-gray-800 my-4">Getting all your required government documents made easy.</h4>
+		<ul class="list-decimal text-xl pl-5 space-y-2">
+			<li>
+				<div class="flex items-center">
+					Create an account first.
+					<a href="{{ route('register') }}" class="px-4 py-1 mr-2 text-sm text-white rounded bg-blue-500 hover:bg-blue-700 ml-2">Register</a>
+				</div>
+			</li>
+			<li>Once registered, complete your profile address and upload a valid id for verification. Once verified you will gain a verified badge and would allow you to request forms and documents through this portal.</li>
+			<li>List of all available services that residents can request online. More services to come so stay tuned!</li>
+		</ul>
 	</div>
-	<div class="w-full md:w-4/12 mt-4 md:mt-0 md:-mt-80" style="z-index: 9;">
+	<!-- </div> -->
+</section>
+
+<!-- <section class="mt-80">
+	<div class="w-full mt-4 md:mt-0 md:-mt-80" style="z-index: 9;">
 		<div class="w-11/12 bg-white mx-auto rounded-lg mb-4 shadow-md p-2">
 			<h3 class="rounded-t-lg text-xl bg-blue-400 text-white p-2">Municipality of Angono Facebook</h3>
-			<div class="fb-post" data-href="https://www.facebook.com/AngonoRizalOfficial/posts/3731921680227787" data-width="500" data-show-text="true"><blockquote cite="https://www.facebook.com/AngonoRizalOfficial/posts/3731921680227787" class="fb-xfbml-parse-ignore">Posted by <a href="https://www.facebook.com/AngonoRizalOfficial/">Municipality of Angono, Rizal</a> on&nbsp;<a href="https://www.facebook.com/AngonoRizalOfficial/posts/3731921680227787">Saturday, February 27, 2021</a></blockquote></div>
+			<div class="fb-post" data-href="https://www.facebook.com/AngonoRizalOfficial/posts/3731921680227787" data-width="750" data-show-text="true"><blockquote cite="https://www.facebook.com/AngonoRizalOfficial/posts/3731921680227787" class="fb-xfbml-parse-ignore">Posted by <a href="https://www.facebook.com/AngonoRizalOfficial/">Municipality of Angono, Rizal</a> on&nbsp;<a href="https://www.facebook.com/AngonoRizalOfficial/posts/3731921680227787">Saturday, February 27, 2021</a></blockquote></div>
 		</div>
 
 		<div class="w-11/12 h-32 bg-white mx-auto rounded-lg shadow-md p-2">
 			
 		</div>
 	</div>
-</section>
+</section> -->
 @endsection
