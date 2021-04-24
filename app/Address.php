@@ -6,19 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    public function region() {
-		return $this->belongsTo('App\PhilippineRegion');
+	// $this->belongsTo(Model, foreign_key, local_key);
+	// $this->belongsTo('App\PhilippineRegion', 'region_code');
+  public function region() {
+		return $this->belongsTo('App\PhilippineRegion', 'region_code');
 	}
 
 	public function province() {
-		return $this->belongsTo('App\PhilippineProvince');
+		return $this->belongsTo('App\PhilippineProvince', 'province_code', 'province_code');
 	}
 
 	public function city() {
-		return $this->belongsTo('App\PhilippineCity');
+		return $this->belongsTo('App\PhilippineCity', 'city_municipality_code', 'city_municipality_code');
 	}
 
 	public function brgy() {
-		return $this->belongsTo('App\PhilippineBaranggay');
+		return $this->belongsTo('App\PhilippineBaranggay', 'baranggay_code', 'baranggay_code');
+	}
+
+	public function user() {
+		return $this->belongsTo('App\User');
 	}
 }

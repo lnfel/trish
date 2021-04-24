@@ -31,8 +31,8 @@ class CreateAddressesTable extends Migration
             $table->string('zip_code')->nullable();
             $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->nullable()->references('id')->on('users');
-            $table->unsignedBigInteger('admin_id')->unique();
-            $table->foreign('admin_id')->nullable()->references('id')->on('admins');
+            //$table->unsignedBigInteger('admin_id')->unique();
+            //$table->foreign('admin_id')->nullable()->references('id')->on('admins');
             $table->timestamps();
         });
     }
