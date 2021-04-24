@@ -22,6 +22,7 @@ Route::get('/community-services', 'MainController@services')->name('client.servi
 Route::get('/profile', 'MainController@profile')->name('client.profile');
 Route::post('/profile/address/store', 'MainController@storeAddress')->name('client.store.address');
 Route::patch('/profile/address/{address}/update', 'MainController@updateAddress')->name('client.update.address');
+Route::patch('/profile/{user}/identification/update', 'MainController@updateIdentification')->name('client.update.identification');
 Route::get('/admin/appointments/all', 'AdminAppointmentController@index')->name('client.user.appointments');
 Route::get('/admin/appointments/{appointment}/edit', 'AdminAppointmentController@edit')->name('client.user.appointments.edit');
 Route::patch('/admin/appointments/{appointment}', 'AdminAppointmentController@update')->name('client.user.appointments.update');

@@ -93,7 +93,7 @@
 
 		<div class="mb-4 flex-1">
 			<label for="zip_code" class="block text-gray-700 text-md font-bold mb-2 @error('zip_code') is-invalid @enderror">{{ __('Zip Code') }}</label>
-			<input id="zip_code" type="text" class="shadow appearance-none border border-blue-400 rounded-lg shadow-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 mb-2" name="zip_code" value="{{ old('zip_code') }}" autocomplete="zip_code">
+			<input id="zip_code" type="text" class="shadow appearance-none border border-blue-400 rounded-lg shadow-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 mb-2" name="zip_code" value="{{ $user->address->zip_code }}" autocomplete="zip_code">
 			@error('zip_code')
 	          <span class="is-invalid pt-2" role="alert">
 	            <strong>{{ $message }}</strong>

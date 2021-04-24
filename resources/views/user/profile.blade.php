@@ -47,13 +47,18 @@
 				</div>
 			</div>
 
-			<div>
+			<div class="mb-4">
 				<h3 class="text-xl font-bold text-gray-700 mb-4">Address</h3>
-				@if($user->address)
+				@if($user->address != null)
 					<x-forms.address-edit :regions="$regions" :user="$user" />
 				@else
 					<x-forms.address-create :regions="$regions" />
 				@endif
+			</div>
+
+			<div class="mb-4">
+				<h3 class="text-xl font-bold text-gray-700 mb-4">Identification</h3>
+					<x-forms.identification-create />
 			</div>
 		</div>
 	</div>
@@ -63,10 +68,10 @@
 	function profile() {
 		return {
 			isLoggedIn: false,
-			region_code: '{!! $user->address->region_code !!}',
-			province_code: '{!! $user->address->province_code !!}',
-			city_municipality_code: '{!! $user->address->city_municipality_code !!}',
-			baranggay_code: '{!! $user->address->baranggay_code !!}',
+			region_code: '{!! $user->address->region_code ?? '' !!}',
+			province_code: '{!! $user->address->province_code ?? '' !!}',
+			city_municipality_code: '{!! $user->address->city_municipality_code ?? '' !!}',
+			baranggay_code: '{!! $user->address->baranggay_code ?? '' !!}',
 			provinces: [],
 			cities: [],
 			brgys: [],
