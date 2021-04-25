@@ -13,7 +13,7 @@ class Address extends Model
 	// $this->belongsTo(Model, foreign_key, local_key);
 	// $this->belongsTo('App\PhilippineRegion', 'region_code');
   public function region() {
-		return $this->belongsTo('App\PhilippineRegion', 'region_code');
+		return $this->belongsTo('App\PhilippineRegion', 'region_code', 'region_code');
 	}
 
 	public function province() {

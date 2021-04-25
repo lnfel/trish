@@ -23,6 +23,8 @@
           @if(Auth::getDefaultDriver() == 'admin')
             <a href="{{ route('client.user.appointments.report') }}" class="p-2 px-4 bg-green-400 text-white hover:bg-green-500 rounded" title="Report"><i class="fas fa-file"></i></a>
           @endif          
+        @elseif($title == 'Users')
+
         @else
           <a href="{{ url('/'.strtolower($title).'/create') }}" class="p-2 bg-green-400 text-white hover:bg-green-500 rounded"><i class="fas fa-plus mr-2"></i>Create</a>
         @endif
@@ -229,6 +231,29 @@
                   </td>
                   <td class="border-dashed border-t border-gray-200 service">
                     <span class="text-gray-700 px-6 py-3 flex items-center justify-center" x-text="item.service.name"></span>
+                  </td>
+                  @break
+                @case("Users")
+                  <td class="border-dashed border-t border-gray-200 avatar">
+                    <div class="flex items-center justify-center py-2">
+                      <img class="h-24 rounded-full overflow-hidden border shadow" x-bind:src="`/storage/img/${item.avatar}`">
+                    </div>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 fullname">
+                    <span class="text-gray-700 px-6 py-3 flex items-center max-w-sm" x-text="item.name + ' ' + item.surname"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 email">
+                    <span class="text-gray-700 px-6 py-3 flex items-center max-w-sm" x-text="item.email"></span>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 address">
+                    <div class="max-w-xs">
+                      <span class="break-words text-gray-700 px-6 py-3 flex items-center max-w-sm" x-text="item.address.street_address + ' Brgy. ' + item.address.brgy.name + ' ' + item.address.city.name + ', ' + item.address.province.name + ' ' + item.address.zip_code"></span>
+                    </div>
+                  </td>
+                  <td class="border-dashed border-t border-gray-200 valid_id">
+                    <div class="flex items-center justify-center py-2">
+                      <img class="h-24 rounded-full overflow-hidden border shadow" x-bind:src="`/storage/img/${item.valid_id}`">
+                    </div>
                   </td>
                   @break
               @endswitch

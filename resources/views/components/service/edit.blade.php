@@ -29,6 +29,10 @@
 							<input type="text" name="{{ $column['key'] }}" value="{{ $model->name }}" class="block shadow appearance-none border border-blue-400 rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" {{ $column['first'] ?? '' }}>
 							@break
 
+						@case("surname")
+							<input type="text" name="{{ $column['key'] }}" value="{{ $model->surname }}" class="block shadow appearance-none border border-blue-400 rounded py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+							@break
+
 						@case("date")
 							<x-input.date-picker action="edit" :model="$model"/>
 							@break
@@ -51,6 +55,32 @@
 
 						@case("select2")
 							<x-input.select2 action="edit" :options="$options" :model="$model" />
+							@break
+
+						@case('uneditable-text')
+							<div class="flex items-center">
+								<span class="mr-2">{{ $model->name.' '.$model->surname }}</span>
+								@if($model->verified == 1) <i class="fa fa-check text-blue-500"></i> @endif
+							</div>
+							@break
+
+						@case('address')
+							<span>{{ $model->address->street_address.' Brgy. '.$model->address->brgy->name.' ' .$model->address->city->name.', '.$model->address->province->name.' '.$model->address->zip_code }}</span>
+							@break
+
+						@case('email')
+							<a class="hover:text-blue-500" href="mailto:{{ $model->email }}">{{ $model->email }}</a>
+							@break
+
+						@case('valid_id')
+							<img class="w-48" src="{{ Storage::disk('image')->url($model->valid_id) }}">
+							@break
+
+						@case('verified')
+							<label class="flex items-center space-x-2">
+								<input type="checkbox" name="{{ $column['key'] }}" value="1" {{ $model->verified == 1 ? 'checked' : '' }}>
+								<span>Verify user info</span>
+							</label>
 							@break
 
 					@endswitch

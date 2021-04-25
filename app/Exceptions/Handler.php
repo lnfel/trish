@@ -38,6 +38,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
+        /*if ($exception instanceof HttpException && $exception->getStatusCode == 403) {
+            return view('errors.unauthorized');
+        }*/
         parent::report($exception);
     }
 
@@ -52,6 +55,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        /*if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+            return response()->view('errors.unauthorized', [], 403);
+        }*/
         return parent::render($request, $exception);
     }
 

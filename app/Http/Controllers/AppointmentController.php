@@ -15,6 +15,7 @@ use GuzzleHttp\Exception\BadResponseException;
 use PDF;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Gate;
 
 class AppointmentController extends Controller
 {
@@ -56,6 +57,10 @@ class AppointmentController extends Controller
      */
     public function create($service_id = null)
     {
+        if (! Gate::allows('request-appointment')) {
+            abort(403);
+        }
+
         $loginStatus = $this->_login();
         $columns = collect([
             ['key' => 'name', 'value' => 'Name', 'type' => 'text', 'first' => 'autofocus'],

@@ -74,6 +74,7 @@ Route::resources([
 	'services' => 'ServiceController',
 	'requirements' => 'RequirementController',
 	'purposes' => 'PurposeController',
+	'users' => 'UserController'
 ]);
 
 Route::get('/slots/available-slots/', 'AppointmentController@availableTimeSlots');
