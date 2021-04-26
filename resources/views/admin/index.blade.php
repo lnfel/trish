@@ -27,7 +27,7 @@
       <a href="{{ route('purposes.index') }}" class="block p-8 text-xl font-bold"><i class="fas fa-question mr-2"></i>Purposes</a>
     </div>
 
-    <div class="bg-white shadow-md rounded-lg border-b-4 border-indigo-500 hover:bg-indigo-600 hover:text-white">
+    <div class="bg-white shadow-md rounded-lg border-b-4 border-pink-400 hover:bg-pink-500 hover:text-white">
       <a href="{{ route('users.index') }}" class="block p-8 text-xl font-bold"><i class="fas fa-user-shield mr-2"></i>User Verification</a>
     </div>
   </div>
