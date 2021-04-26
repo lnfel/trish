@@ -25,12 +25,15 @@
 		<ul class="list-decimal text-xl pl-5 space-y-2">
 			<li>
 				<div class="flex items-center">
-					Create an account first.
-					<a href="{{ route('register') }}" class="px-4 py-1 mr-2 text-sm text-white rounded bg-blue-500 hover:bg-blue-700 ml-2">Register</a>
+					<p>
+						<a class="text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition duration-500" href="{{ route('register') }}">Create an account</a> <span>first.</span>
+					</p>
+					<!-- <a href="{{ route('register') }}" class="px-4 py-1 mr-2 text-sm text-white rounded bg-blue-500 hover:bg-blue-700 ml-2">Register</a> -->
 				</div>
 			</li>
-			<li>Once registered, complete your profile address and upload a valid id for verification. Once verified you will gain a verified badge and would allow you to request forms and documents through this portal.</li>
-			<li>List of all available services that residents can request online. More services to come so stay tuned!</li>
+			<li>Once registered, complete your <a class="text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition duration-500" href="{{ route('client.profile') }}">Profile</a> address and upload a valid id for verification. Once verified you will gain a verified badge and would allow you to request forms and documents through <a class="text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition duration-500" href="{{ route('client.services') }}">Services</a> page.</li>
+			<li>More services to come so stay tuned!</li>
+			<li>For more details you may contact <a class="text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition duration-500" href="tel:02-6513-355">02-6513-355</a> or <a class="text-blue-500 border-b-2 border-transparent hover:border-blue-500 transition duration-500" href="tel:09758504063">09758504063</a></li>
 		</ul>
 	</div>
 	<!-- </div> -->
