@@ -65,7 +65,11 @@
 							@break
 
 						@case('address')
-							<span>{{ $model->address->street_address.' Brgy. '.$model->address->brgy->name.' ' .$model->address->city->name.', '.$model->address->province->name.' '.$model->address->zip_code }}</span>
+							@if($model->address != null)
+								<span>{{ $model->address->street_address.' Brgy. '.$model->address->brgy->name.' ' .$model->address->city->name.', '.$model->address->province->name.' '.$model->address->zip_code }}</span>
+							@else
+								<span class="text-red-500">No address</span>
+							@endif
 							@break
 
 						@case('email')
@@ -73,13 +77,17 @@
 							@break
 
 						@case('valid_id')
-							<img class="w-48" src="{{ Storage::disk('image')->url($model->valid_id) }}">
+							@if($model->valid_id != null)
+								<img class="w-48" src="{{ Storage::disk('image')->url($model->valid_id) }}">
+							@else
+								<span class="text-red-500">No valid id</span>
+							@endif
 							@break
 
 						@case('verified')
 							<label class="flex items-center space-x-2">
-								<input type="checkbox" name="{{ $column['key'] }}" value="1" {{ $model->verified == 1 ? 'checked' : '' }}>
-								<span>Verify user info</span>
+								<input type="checkbox" name="{{ $column['key'] }}" value="1" {{ $model->verified == 1 ? 'checked' : '' }} {{ $model->valid_id != null ? '' : 'disabled' }}>
+								<span class="{{ $model->valid_id != null ? '' : 'disabled' }}">Verify user info</span>
 							</label>
 							@break
 
