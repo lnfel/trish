@@ -247,12 +247,22 @@
                   </td>
                   <td class="border-dashed border-t border-gray-200 address">
                     <div class="max-w-xs">
-                      <span class="break-words text-gray-700 px-6 py-3 flex items-center max-w-sm" x-text="item.address.street_address + ' Brgy. ' + item.address.brgy.name + ' ' + item.address.city.name + ', ' + item.address.province.name + ' ' + item.address.zip_code"></span>
+                      <template x-if="item.address">
+                        <span class="break-words text-gray-700 px-6 py-3 flex items-center max-w-sm" x-text="item.address.street_address + ' Brgy. ' + item.address.brgy.name + ' ' + item.address.city.name + ', ' + item.address.province.name + ' ' + item.address.zip_code"></span>
+                      </template>
+                      <template x-if="!item.address">
+                        <span class="flex items-center justify-center text-red-500 text-center">No address</span>
+                      </template>
                     </div>
                   </td>
                   <td class="border-dashed border-t border-gray-200 valid_id">
                     <div class="flex items-center justify-center py-2">
-                      <img class="h-24 rounded-full overflow-hidden border shadow" x-bind:src="`/storage/img/${item.valid_id}`">
+                      <template x-if="item.valid_id">
+                        <img class="h-24 rounded-full overflow-hidden border shadow" x-bind:src="`/storage/img/${item.valid_id}`">
+                      </template>
+                      <template x-if="!item.valid_id">
+                        <span class="w-full text-red-500 text-center">No valid id</span>
+                      </template>
                     </div>
                   </td>
                   @break
@@ -285,7 +295,7 @@
                     </template>
                   @endif
                   
-                  @if(Auth::getDefaultDriver() == 'admin')
+                  @if(Auth::getDefaultDriver() == 'admin' && Route::current()->getName() !== 'users.index')
                     <form class="text-sm inline" method="post" x-bind:action="'{{ url('/'.strtolower($title)) }}'+ '/' + item.id">
                       @csrf
                       @method('DELETE')
