@@ -77,7 +77,7 @@ class AppointmentController extends Controller
         $services = Service::all();
 
         //$slots = DB::table('slots')->whereDate('date', '>=', Carbon::today()->toDateString())->orderBy('date', 'asc')->get()->toJson();
-        $slots = Slot::where('date', '>=', Carbon::today()->toDateString())->where('slots_left', '>', 0)->groupBy('date')->orderBy('date', 'asc')->get();
+        $slots = Slot::where('date', '>=', Carbon::today()->addDays(3)->toDateString())->where('slots_left', '>', 0)->groupBy('date')->orderBy('date', 'asc')->get();
         //dd($slots);
         //$slots = $this->_fetchDates();
 

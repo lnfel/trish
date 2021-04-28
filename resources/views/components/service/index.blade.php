@@ -258,7 +258,7 @@
                   <td class="border-dashed border-t border-gray-200 valid_id">
                     <div class="flex items-center justify-center py-2">
                       <template x-if="item.valid_id">
-                        <img class="h-24 rounded-full overflow-hidden border shadow" x-bind:src="`/storage/img/${item.valid_id}`">
+                        <img class="h-24 rounded overflow-hidden border shadow" x-bind:src="`/storage/img/${item.valid_id}`">
                       </template>
                       <template x-if="!item.valid_id">
                         <span class="w-full text-red-500 text-center">No valid id</span>
