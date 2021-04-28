@@ -267,6 +267,8 @@ class AppointmentController extends Controller
                 unset($result[$key]);
             }
         }
+
+        $pendingCount = Appointment::where(['user_id' => auth()->user()->id, 'status' => 'Pending'])->count();
         //dd($result);
         
         /*$brgyClearance = Appointment::whereHas('service', function(Builder $query) {
@@ -283,7 +285,7 @@ class AppointmentController extends Controller
 
         //dd($brgyClearance, $busiClearance, $bldgClearance);
 
-        return view('appointment.renew', ['appointments' => $result]);
+        return view('appointment.renew', ['appointments' => $result, 'pendingCount' => $pendingCount]);
     }
 
     public function renewCreate($appointment_id = null)

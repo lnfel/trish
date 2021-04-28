@@ -68,9 +68,14 @@
 						    	<tr>
 						    		<td colspan="3">
 						    			<span class="flex flex-col py-8">
-						    				<span class="flex items-center justify-center mb-4">Nothing to renew at the moment.</span>
+						    				<span class="flex items-center justify-center mb-4">
+						    					Nothing to renew at the moment.
+						    					@if($pendingCount > 0)
+							    					<span class="ml-2">You still have ({{ $pendingCount }}) pending <a class="text-blue-500 border-b-2 border-transparent hover:border-blue-500" href="{{ route('appointments.index') }}">appointment(s)</a>.</span>
+							    				@endif
+						    				</span>
 						    				<span class="flex items-center justify-center">
-						    					<a href="{{  url('/appointments/create') }}" class="px-4 py-2 text-white bg-blue-400 rounded-lg hover:bg-blue-600">Request for a document.</a>
+						    					<a href="{{  url('/appointments/create') }}" class="px-4 py-2 text-white bg-blue-400 rounded-lg hover:bg-blue-600">Request for another document.</a>
 						    				</span>
 						    			</span>
 						    		</td>
