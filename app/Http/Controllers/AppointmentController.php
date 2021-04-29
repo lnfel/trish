@@ -345,6 +345,11 @@ class AppointmentController extends Controller
 
     }
 
+    public function downloadIndex()
+    {
+        return view('appointment.download');
+    }
+
     protected function _login()
     {
         $client = new Client(['base_uri' => config('services.passport.base_uri'),]);
