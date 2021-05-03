@@ -352,6 +352,14 @@ class AppointmentController extends Controller
         return view('appointment.download', ['docs' => $appointments]);
     }
 
+    public function userDownload($appointment_id = null)
+    {
+        if ($appointment_id) {
+            $appointment = Appointment::with(['user', 'user.address', 'service'])->find($appointment_id);
+        }
+        dd($appointment);
+    }
+
     protected function _login()
     {
         $client = new Client(['base_uri' => config('services.passport.base_uri'),]);

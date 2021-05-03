@@ -68,6 +68,7 @@ Route::get('/docs/renew', 'AppointmentController@renew')->name('appointments.ren
 Route::get('/docs/renew/{appointment_id}', 'AppointmentController@renewCreate')->name('appointments.renew.create');
 Route::post('/docs/renew/download/', 'AppointmentController@renewDownload')->name('appointments.renew.download');
 Route::get('/docs/download', 'AppointmentController@downloadIndex')->name('appointments.download.index');
+Route::get('/docs/download/{appointment_id}', 'AppointmentController@userDownload')->name('appointments.download');
 
 Route::resources([
 	'addresses' => 'AddressController',
