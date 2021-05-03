@@ -38,6 +38,35 @@
 									</th>
 								</tr>
 							</thead>
+
+							<tbody class="bg-white divide-y divide-gray-200">
+								@forelse($docs as $item)
+									<tr>
+										<td class="px-6 py-4 whitespace-nowrap">{{ $item->service->name  }}</td>
+										@if($item->status == 'Pending')
+											<td class="px-6 py-4 whitespace-nowrap text-red-500">{{ $item->status  }}</td>
+										@else
+											<td class="px-6 py-4 whitespace-nowrap text-green-500">{{ $item->status  }}</td>
+										@endif
+										<td class="px-6 py-4 whitespace-nowrap">
+											
+										</td>
+									</tr>
+								@empty
+									<tr>
+						    			<td colspan="3">
+						    				<span class="flex flex-col py-8">
+						    					<span class="flex items-center justify-center mb-4">
+						    						You have no requested document(s) yet.
+						    					</span>
+						    					<span class="flex items-center justify-center">
+						    						<a href="{{  url('/appointments/create') }}" class="px-4 py-2 text-white bg-blue-400 rounded-lg hover:bg-blue-600">Request a document.</a>
+						    				</span>
+						    				</span>
+						    			</td>
+						    		</tr>
+								@endforelse
+							</tbody>
 						</table>
 					</div>
 				</div>

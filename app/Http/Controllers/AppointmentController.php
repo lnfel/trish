@@ -347,7 +347,9 @@ class AppointmentController extends Controller
 
     public function downloadIndex()
     {
-        return view('appointment.download');
+        $appointments = Appointment::where('user_id', auth()->user()->id)->with(['service'])->get();
+        //$appointments = (object) [];
+        return view('appointment.download', ['docs' => $appointments]);
     }
 
     protected function _login()
