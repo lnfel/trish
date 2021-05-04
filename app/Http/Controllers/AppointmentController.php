@@ -355,9 +355,22 @@ class AppointmentController extends Controller
     public function userDownload($appointment_id = null)
     {
         if ($appointment_id) {
-            $appointment = Appointment::with(['user', 'user.address', 'service'])->find($appointment_id);
+            $appointment = Appointment::with(['user', 'user.address', 'user.address.region', 'user.address.province', 'user.address.city', 'user.address.brgy', 'service', 'purpose'])->find($appointment_id);
         }
-        dd($appointment);
+        //dd($appointment);
+
+        $filename = $appointment ? $appointment->service->name.'-'.$appointment->user->name.'.pdf' : 'Angono-document.pdf';
+        $user = auth()->user();
+        $data = [
+            'filename' => $filename,
+            'appointment' => $appointment,
+        ];
+
+        // share data to view
+        $pdf = PDF::loadView('pdf.user-download', $data);
+        
+        // download PDF file with download method
+        return $pdf->download($filename);
     }
 
     protected function _login()

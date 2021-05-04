@@ -27,8 +27,8 @@
 	<div class="container mx-auto" style="color: #374151;">
 		<img src="{{ asset('img/angono-file-header.png') }}">
 		<!-- <p class="text-center text-sm" style="margin-top: .25rem;">REQUEST FORM FOR:</p> -->
-		<h1 class="text-3xl text-center mb-2 mt-0" style="color: #ef4444; margin-top: 0px;">{{ $service->name }}</h1>
-		<p class="mb-2">This is to certify that <b>{{ $user->name }}</b> is a bonafide resident of Angono. And as such this document be used for the following purpose: <b>{{ $purpose->name }}</b>.</p>
+		<h1 class="text-3xl text-center mb-2 mt-0" style="color: #ef4444; margin-top: 0px;">{{ $appointment->service->name }}</h1>
+		<p class="mb-2">This is to certify that <b>{{ $appointment->user->name }}</b>, residing at <b>{{ $appointment->user->address ? $appointment->user->address->street_address.' '.$appointment->user->address->region->brgy.' '.$appointment->user->address->city->name.' '.$appointment->user->address->province->name.' '.$appointment->user->address->region->name : '' }}</b> is a bonafide resident of Angono. And as such this document be used for the following purpose: <b>{{ $appointment->purpose->name }}</b>.</p>
 		<p class="mb-2"><b>Note:</b> Any Violation(s) or Illigal act(s) committed by this individual/group will be cause for invalidation of this Document.</p>
 		<span class="block py-4">Issued this {{ date_format(now(), 'jS \d\a\y \of F Y') }}</span>
 		<!-- <table class="min-w-full divide-y divide-gray-200" style="margin: 2rem;">

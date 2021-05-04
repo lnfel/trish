@@ -53,7 +53,7 @@
 												@if($item->status == 'Complete')
 													<a class="rounded-lg text-gray-900 bg-green-500 hover:bg-green-400 px-4 py-2" href="{{ route('appointments.download', $item->id) }}"><i class="fas fa-download"></i> Download</a>
 												@else
-													<span class="text-gray-600">Request is still being reviewed.</span>
+													<div class="rounded-lg text-gray-500 bg-gray-300 px-4 py-2 cursor-not-allowed"><i class="fas fa-download"></i> Download</div>
 												@endif
 											</span>
 										</td>
