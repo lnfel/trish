@@ -32,7 +32,7 @@
 										Status
 										<span class="sr-only">Status</span>
 									</th>
-									<th scope="col" class="relative px-6 py-3 text-left font-medium text-white uppercase tracking-wider">
+									<th scope="col" class="relative px-6 py-3 text-left font-medium text-white text-right uppercase tracking-wider">
 										Download
 										<span class="sr-only">Download</span>
 									</th>
@@ -49,7 +49,13 @@
 											<td class="px-6 py-4 whitespace-nowrap text-green-500">{{ $item->status  }}</td>
 										@endif
 										<td class="px-6 py-4 whitespace-nowrap">
-											
+											<span class="flex items-center justify-end">
+												@if($item->status == 'Complete')
+													<a class="rounded-lg text-gray-900 bg-green-500 hover:bg-green-400 px-4 py-2" href="{{ route('appointments.download', $item->id) }}"><i class="fas fa-download"></i> Download</a>
+												@else
+													<span class="text-gray-600">Request is still being reviewed.</span>
+												@endif
+											</span>
 										</td>
 									</tr>
 								@empty

@@ -84,7 +84,7 @@ h1.login {
 	color: #ef4444;
 }
 
-[x-cloak=""] { display: none; }
+[x-cloak] { display: none; }
 
 .form-checkbox {
 	-webkit-appearance: none;

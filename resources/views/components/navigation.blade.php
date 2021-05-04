@@ -86,6 +86,9 @@
 				<li class="mb-2">
 					<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('appointments.renew.index') }}" data-target="1"><i class=""></i> Renew</a>
 				</li>
+				<li class="mb-2">
+					<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('appointments.download.index') }}" data-target="1"><i class=""></i> Download</a>
+				</li>
 			@endif
 		</ul>
 		<div class="p-4 text-center text-sm">
