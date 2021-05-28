@@ -39,25 +39,38 @@ class RedoDBPrep extends Command
     public function handle()
     {
         $commands = [
-            'db:wipe', 'migrate', 'db:seed', 'passport:install', 'cache:clear', 'config:clear', 'config:cache',
+            'db:wipe', 'migrate', 'db:seed', 'passport:install',// 'cache:clear', 'config:clear', 'config:cache', Note: config:cache clears first then proceeds to cache
         ];
 
-        $bar = $this->output->createProgressBar(count($commands));
+        $bar = $this->output->createProgressBar(count($commands) + 2);
         $this->line('');
         $this->info('Re-building database from the ground up.');
         $bar->start();
 
         foreach ($commands as $command) {
-            //dd($command);
             $this->line('');
             $this->info('Running '.$command);
-            Artisan::call($command);
             $bar->advance();
+            $this->line('');
+            //Artisan::call($command);
+            $this->call($command, ['--force' => true]);
         }
 
         $this->line('');
-        $this->info('Database re-build finished.');
+        $this->info('Running cache:clear');
+        $bar->advance();
+        $this->line('');
+        $this->call('cache:clear');
+
+        $this->line('');
+        $this->info('Running config:cache');
+        $bar->advance();
+        $this->line('');
+        $this->call('config:cache');
+
+        $this->line('');
         $bar->finish();
+        $this->info('Database re-build finished.');
         /*Artisan::call('db:wipe');
         Artisan::call('migrate');
         Artisan::call('db:seed');*/
