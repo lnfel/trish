@@ -61,7 +61,7 @@ echo @php "%~dp0composer" %*>composer.bat
 ```
 cd C:\xampp\htdocs\trish
 ```
-- Then run `~~php~~ composer install` to install our laravel project dependencies
+- Then run `composer install` to install our laravel project dependencies
 
 ### Installing Laravel
 - We haven't installed laravel yet, just enter this code while inside the project directory:
