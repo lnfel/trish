@@ -45,17 +45,23 @@ php --version
 ```
 - If it showed the current php version installed we are good to continue to our composer installation
 - Enter the following lines in sequence (you can read more about the installation guide on composer downloads [page](https://getcomposer.org/download/)):
+- Note: make sure you are in `C:\xampp\php` directory in cmd before entering the commands.
 ```
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php --filename="composer" --install-dir="C:\xampp\htdocs\trish"
+php composer-setup.php --filename="composer" --install-dir="C:\xampp\php"
 ```
+- By installing composer inside php directory we will have the composer already included in our PATH environment variable.
 - Last line of code above installs composer.phar in our project directory and the --filename option changes its name to "composer"
+- Next we can create a .bat file so we can run composer globally, just enter the following command:
+```
+echo @php "%~dp0composer" %*>composer.bat
+```
 - Navigate back to the project directory:
 ```
 cd C:\xampp\htdocs\trish
 ```
-- Then run `php composer install` to install our laravel project dependencies
+- Then run `~~php~~ composer install` to install our laravel project dependencies
 
 ### Installing Laravel
 - We haven't installed laravel yet, just enter this code while inside the project directory:
