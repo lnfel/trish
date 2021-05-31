@@ -28,6 +28,8 @@ Route::get('/admin/appointments/{appointment}/edit', 'AdminAppointmentController
 Route::patch('/admin/appointments/{appointment}', 'AdminAppointmentController@update')->name('client.user.appointments.update');
 Route::get('/admin/appointments/report', 'AdminAppointmentController@report')->name('client.user.appointments.report');
 
+Route::get('/admin/reports', 'ReportController@index')->name('reports.index');
+
 Route::post('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Auth::routes();
 
