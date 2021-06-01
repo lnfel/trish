@@ -78,6 +78,9 @@
 			<li class="mb-2">
 				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('slots.index') }}" data-target="1"><i class=""></i> Slots</a>
 			</li>
+			<li class="mb-2">
+				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ route('reports.index') }}" data-target="1"><i class=""></i> Reports</a>
+			</li>
 			@endif
 			<li class="mb-2">
 				<a class="nav-item block px-4 py-2 hover:bg-blue-500 hover:text-white" href="{{ Auth::guard('admin')->check() ? route('client.user.appointments') : route('appointments.index') }}" data-target="1"><i class=""></i> Appointments</a>
