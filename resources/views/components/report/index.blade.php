@@ -15,7 +15,17 @@
       </div>
       
     </div>
-    
+    <div class="flex flex-col">
+      <div>
+        <label for="appointments">
+        <input type="radio" name="category" value="appointments">
+        Appointments</label>
+      </div>
+      <div>
+        <input type="radio" name="category" value="services">
+        <label for="services">Services</label>
+      </div>
+    </div>
   </div>
 </section>
 
