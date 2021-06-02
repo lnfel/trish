@@ -15,15 +15,39 @@
       </div>
       
     </div>
-    <div class="flex flex-col">
-      <div>
-        <label for="appointments">
-        <input type="radio" name="category" value="appointments">
-        Appointments</label>
+    <div class="flex flex-wrap">
+      <div class="max-w-sm">
+        <h3 class="text-lg tracking-wide bg-gray-200 mb-2 px-2 rounded-lg">Select report</h3>
+        <div class="flex flex-col space-y-2 mb-4">
+          <div>
+            <label class="flex items-center relative pl-6 text-gray-700 cursor-pointer">
+            <input type="radio" name="category" value="appointments" class="absolute opacity-0" style="z-index: -1;">
+            <span class="control-indicator absolute left-0 w-4 h-4 rounded-full bg-gray-300"></span>
+            Appointments</label>
+          </div>
+          <div>
+            <label class="flex items-center relative pl-6 text-gray-700 cursor-pointer">
+            <input type="radio" name="category" value="services" class="absolute opacity-0" style="z-index: -1;">
+            <span class="control-indicator absolute left-0 w-4 h-4 rounded-full bg-gray-300"></span>
+            Services</label>
+          </div>
+        </div>
+
+        <h3 class="text-lg tracking-wide bg-gray-200 mb-2 px-2 rounded-lg">Filter</h3>
+        <div class="flex flex-col space-y-2 mb-4">
+          <div class="space-y-2">
+            <label>From</label>
+            <x-input.date-picker-dynamic action="create" name="from" />
+          </div>
+          <div class="space-y-2">
+            <label>To</label>
+            <x-input.date-picker-dynamic action="create" name="to" />
+          </div>
+        </div>
       </div>
-      <div>
-        <input type="radio" name="category" value="services">
-        <label for="services">Services</label>
+
+      <div class="flex-1 p-4">
+        Report preview here
       </div>
     </div>
   </div>
