@@ -22,12 +22,14 @@
     <div class="flex flex-wrap">
       <form action="{{ route('reports.generate') }}" method="post" class="max-w-sm">
         @csrf
-        <h3 class="text-lg tracking-wide bg-gray-200 mb-2 px-2 rounded-lg" style="min-width: 256px;">Select report</h3>
+        <h3 class="text-lg tracking-wide text-white font-semibold tracking-wide bg-blue-500 mb-2 px-4 py-1 rounded-lg" style="min-width: 256px;">
+          Select report
+        </h3>
         <div class="flex flex-col space-y-2 mb-4">
         @forelse($reports as $report)
         <div>
           <label class="flex items-center relative pl-6 text-gray-700 cursor-pointer">
-            <input type="radio" name="report" x-model="reportSelected" value="{{ $report['name'] }}" {!! old('report') == $report['name'] ? 'checked' : '' !!} class="absolute opacity-0" style="z-index: -1;">
+            <input type="radio" name="report" value="{{ $report['name'] }}" {!! old('report') == $report['name'] ? 'checked' : '' !!} class="absolute opacity-0" style="z-index: -1;">
             <span class="control-indicator absolute left-0 w-4 h-4 rounded-full bg-gray-300"></span>
             <span style="text-transform: capitalize;">{{ $report['name'] }}</span>
           </label>
@@ -58,8 +60,10 @@
           </div> -->
         </div>
 
-        <div x-show.transition="reportSelected == 'appointments'">
-          <h3 class="text-lg tracking-wide bg-gray-200 mb-2 px-2 rounded-lg">Filter</h3>
+        @if(old('report') == 'appointments')
+          <h3 class="text-lg tracking-wide text-white font-semibold tracking-wide bg-blue-500 mb-2 px-4 py-1 rounded-lg">
+            Filter
+          </h3>
           <div class="flex flex-col space-y-2 mb-4">
             <div class="space-y-2">
               <label>From</label>
@@ -70,9 +74,11 @@
               <x-input.date-picker-dynamic action="create" name="to" />
             </div>
           </div>
-        </div>
+        @endif
 
-        <button>Generate</button>
+        <button class="px-4 py-2 text-white tracking-wide bg-blue-500 rounded-md shadow hover:bg-blue-400 focus:outline-none focus:bg-blue-500">
+          {{ old('report') == '' ? 'Select report' : 'Generate' }}
+        </button>
       </form>
 
       <div class="flex-1 p-4">

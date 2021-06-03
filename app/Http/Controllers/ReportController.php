@@ -42,5 +42,6 @@ class ReportController extends Controller
         }
 
         //return redirect()->back()->withInput($request->all());
+        return redirect()->route('reports.index');
     }
 }

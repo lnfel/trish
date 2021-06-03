@@ -30,7 +30,7 @@
 
           <div 
             class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0" 
-            style="width: 17rem" 
+            style="width: 17rem; z-index: 2;" 
             x-show.transition="showDatepicker"
             @click.away="showDatepicker = false">
 
