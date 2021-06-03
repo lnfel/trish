@@ -2,7 +2,7 @@
   'reports'
 ])
 
-<section x-data="data()" {{ $attributes->merge(['class' => 'relative container mx-auto px-4 mb-10']) }}>
+<section x-data="data()" x-init="addListener(), $watch('reportSelected', value => console.log(value))" {{ $attributes->merge(['class' => 'relative container mx-auto px-4 mb-10']) }}>
   <div class="p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-between mb-4">
       <div class="flex items-center">
@@ -27,7 +27,7 @@
         @forelse($reports as $report)
         <div>
           <label class="flex items-center relative pl-6 text-gray-700 cursor-pointer">
-            <input type="radio" name="report" value="{{ $report['name'] }}" {!! old('report') == $report['name'] ? 'checked' : '' !!} class="absolute opacity-0" style="z-index: -1;">
+            <input type="radio" name="report" x-model="reportSelected" value="{{ $report['name'] }}" {!! old('report') == $report['name'] ? 'checked' : '' !!} class="absolute opacity-0" style="z-index: -1;">
             <span class="control-indicator absolute left-0 w-4 h-4 rounded-full bg-gray-300"></span>
             <span style="text-transform: capitalize;">{{ $report['name'] }}</span>
           </label>
@@ -58,7 +58,7 @@
           </div> -->
         </div>
 
-        <div x-show="reportSelected == 'appointments'">
+        <div x-show.transition="reportSelected == 'appointments'">
           <h3 class="text-lg tracking-wide bg-gray-200 mb-2 px-2 rounded-lg">Filter</h3>
           <div class="flex flex-col space-y-2 mb-4">
             <div class="space-y-2">
@@ -83,11 +83,25 @@
 </section>
 
 <script>
+  // https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/
+  
+  /* document.querySelector('').addEventListener('change', function() {
+    let value = this.value;
+    console.log(value)
+  }); */
   function data() {
     return {
       reports: {!! $reports !!},
       reportSelected: '',
 
+      addListener() {
+        document.querySelectorAll('input[type="radio"]').forEach(item => {
+          item.addEventListener('change', event => {
+            let value = item.value;
+            console.log(value);
+          })
+        })
+      }
     }
   }
 </script>
