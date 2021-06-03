@@ -100,13 +100,13 @@
   </div>
 
   <script>
-      const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-      let action = "{!! $action !!}";
+      var action = "{!! $action !!}";
 
       console.log(action);
-      let dummy = document.querySelector("[name='{!! $name !!}']").defaultValue = new Date().toJSON().slice(0,10);
+      var dummy = document.querySelector("[name='{!! $name !!}']").defaultValue = new Date().toJSON().slice(0,10);
       /*switch(action){
         case "create":
           document.querySelector("[name='date']").defaultValue = new Date().toJSON().slice(0,10);

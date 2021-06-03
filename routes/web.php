@@ -29,6 +29,7 @@ Route::patch('/admin/appointments/{appointment}', 'AdminAppointmentController@up
 Route::get('/admin/appointments/report', 'AdminAppointmentController@report')->name('client.user.appointments.report');
 
 Route::get('/admin/reports', 'ReportController@index')->name('reports.index');
+Route::post('/admin/reports', 'ReportController@generate')->name('reports.generate');
 
 Route::post('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Auth::routes();

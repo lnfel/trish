@@ -9,5 +9,5 @@
   <div class="intro-bg"></div>
 </section>
 
-<x-report.index :data="$data" title="Reports" class="-mt-80" />
+<x-report.index :data="$data" :reports="$reports" title="Reports" class="-mt-80" />
 @endsection

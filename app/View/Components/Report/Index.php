@@ -7,16 +7,17 @@ use App\Appointment;
 
 class Index extends Component
 {
-    public $data, $title;
+    public $data, $title, $reports;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($data = null, $title)
+    public function __construct($data = null, $title, $reports)
     {
         $this->data = $data;
         $this->title = $title;
+        $this->reports = $reports;
     }
 
     /**

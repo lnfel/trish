@@ -1,3 +1,7 @@
+@props([
+  'reports'
+])
+
 <section x-data="data()" {{ $attributes->merge(['class' => 'relative container mx-auto px-4 mb-10']) }}>
   <div class="p-4 bg-white shadow-md rounded-lg">
     <div class="flex justify-between mb-4">
@@ -16,35 +20,60 @@
       
     </div>
     <div class="flex flex-wrap">
-      <div class="max-w-sm">
-        <h3 class="text-lg tracking-wide bg-gray-200 mb-2 px-2 rounded-lg">Select report</h3>
+      <form action="{{ route('reports.generate') }}" method="post" class="max-w-sm">
+        @csrf
+        <h3 class="text-lg tracking-wide bg-gray-200 mb-2 px-2 rounded-lg" style="min-width: 256px;">Select report</h3>
         <div class="flex flex-col space-y-2 mb-4">
-          <div>
-            <label class="flex items-center relative pl-6 text-gray-700 cursor-pointer">
-            <input type="radio" name="category" value="appointments" class="absolute opacity-0" style="z-index: -1;">
+        @forelse($reports as $report)
+        <div>
+          <label class="flex items-center relative pl-6 text-gray-700 cursor-pointer">
+            <input type="radio" name="report" value="{{ $report['name'] }}" {!! old('report') == $report['name'] ? 'checked' : '' !!} class="absolute opacity-0" style="z-index: -1;">
             <span class="control-indicator absolute left-0 w-4 h-4 rounded-full bg-gray-300"></span>
-            Appointments</label>
-          </div>
-          <div>
+            <span style="text-transform: capitalize;">{{ $report['name'] }}</span>
+          </label>
+        </div>
+        @empty
+
+        @endforelse
+        @error('report')
+          <span class="is-invalid" role="alert">
+            <strong>{{ $message }}</strong>
+          </span>
+        @enderror
+          <!-- <template x-for="report in reports">
+            <div>
+              <label class="flex items-center relative pl-6 text-gray-700 cursor-pointer">
+                <input type="radio" name="report" x-bind:value="report.name" x-model="reportSelected" class="absolute opacity-0" style="z-index: -1;">
+                <span class="control-indicator absolute left-0 w-4 h-4 rounded-full bg-gray-300"></span>
+                <span x-text="report.name" style="text-transform: capitalize;"></span>
+              </label>
+            </div>
+          </template> -->
+          
+          <!-- <div>
             <label class="flex items-center relative pl-6 text-gray-700 cursor-pointer">
             <input type="radio" name="category" value="services" class="absolute opacity-0" style="z-index: -1;">
             <span class="control-indicator absolute left-0 w-4 h-4 rounded-full bg-gray-300"></span>
             Services</label>
+          </div> -->
+        </div>
+
+        <div x-show="reportSelected == 'appointments'">
+          <h3 class="text-lg tracking-wide bg-gray-200 mb-2 px-2 rounded-lg">Filter</h3>
+          <div class="flex flex-col space-y-2 mb-4">
+            <div class="space-y-2">
+              <label>From</label>
+              <x-input.date-picker-dynamic action="create" name="from" />
+            </div>
+            <div class="space-y-2">
+              <label>To</label>
+              <x-input.date-picker-dynamic action="create" name="to" />
+            </div>
           </div>
         </div>
 
-        <h3 class="text-lg tracking-wide bg-gray-200 mb-2 px-2 rounded-lg">Filter</h3>
-        <div class="flex flex-col space-y-2 mb-4">
-          <div class="space-y-2">
-            <label>From</label>
-            <x-input.date-picker-dynamic action="create" name="from" />
-          </div>
-          <div class="space-y-2">
-            <label>To</label>
-            <x-input.date-picker-dynamic action="create" name="to" />
-          </div>
-        </div>
-      </div>
+        <button>Generate</button>
+      </form>
 
       <div class="flex-1 p-4">
         Report preview here
@@ -56,6 +85,8 @@
 <script>
   function data() {
     return {
+      reports: {!! $reports !!},
+      reportSelected: '',
 
     }
   }
