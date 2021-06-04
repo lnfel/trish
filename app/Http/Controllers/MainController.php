@@ -11,6 +11,7 @@ use App\PhilippineProvince;
 use App\PhilippineCity;
 use App\PhilippineBaranggay;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MainController extends Controller
@@ -151,7 +152,8 @@ class MainController extends Controller
     $avatarName = $formattedName.'_avatar.webp';
 
     if (isset($request->valid_id)) {
-      $valid_id = $request->valid_id->storeAs('img', $validIdName, 'image');
+      $valid_id = Storage::disk('image')->putFileAs('img', $request->valid_id, $validIdName);
+      //$request->valid_id->storeAs('img', $validIdName, 'image');
       $user->valid_id = $validIdName;
     }
 

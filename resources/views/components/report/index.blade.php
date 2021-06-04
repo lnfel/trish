@@ -82,7 +82,7 @@
       </form>
 
       <div class="flex-1 p-4">
-        Report preview here
+        {{ $data ?? '' }}
       </div>
     </div>
   </div>

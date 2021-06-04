@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
+use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -41,7 +43,14 @@ class ReportController extends Controller
             return redirect()->back()->withInput($request->only('report'))->withErrors($validator);
         }
 
+        if ($request['report'] == 'appointments') {
+            $data = Appointment::all();
+        } else {
+            $data = Service::all();
+        }
+
         //return redirect()->back()->withInput($request->all());
-        return redirect()->route('reports.index');
+        //return view('report.index', ['data' => null, 'reports' => $reports]);
+        return redirect()->route('reports.index', ['data' => $data]);
     }
 }
