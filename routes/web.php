@@ -30,6 +30,7 @@ Route::get('/admin/appointments/report', 'AdminAppointmentController@report')->n
 
 Route::get('/admin/reports', 'ReportController@index')->name('reports.index');
 Route::post('/admin/reports', 'ReportController@generate')->name('reports.generate');
+Route::get('/admin/reports/{report}', 'ReportController@displayReport')->name('reports.display');
 
 Route::post('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Auth::routes();

@@ -13,11 +13,14 @@ class Index extends Component
      *
      * @return void
      */
-    public function __construct($data = null, $title, $reports)
+    public function __construct($data, $title, $reports)
     {
         $this->data = $data;
         $this->title = $title;
-        $this->reports = $reports;
+        $this->reports = collect([
+            ['name' => 'appointments'],
+            ['name' => 'services'],
+        ]);
     }
 
     /**
@@ -27,6 +30,6 @@ class Index extends Component
      */
     public function render()
     {
-        return view('components.report.index');
+        return view('components.report.index', ['data' => $this->data, 'title' => $this->title, 'reports' => $this->reports]);
     }
 }

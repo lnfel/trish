@@ -16,26 +16,19 @@ class ReportController extends Controller
 
     public function index()
     {
-        $reports = collect([
-            ['name' => 'appointments'],
-            ['name' => 'services'],
-        ]);
-        return view('report.index', ['data' => null, 'reports' => $reports]);
+        return view('report.index', ['data' => null, 'reports' => null]);
     }
 
     public function generate(Request $request)
     {
-        //dd($request->all());
 
         // validate form data
         $validator = Validator::make($request->all(),
             [
                 'report' => 'required|in:appointments,services',
-                'service_id' => 'required',
             ],
             [
                 'report.required' => 'Please select a report to generate.',
-                'service_id.required' => 'Please select a service to attach the purpose with.'
             ]
         );
 
@@ -43,14 +36,27 @@ class ReportController extends Controller
             return redirect()->back()->withInput($request->only('report'))->withErrors($validator);
         }
 
-        if ($request['report'] == 'appointments') {
-            $data = Appointment::all();
+        return redirect()->route('reports.display', $request['report'])->withInput();
+    }
+
+    public function displayReport($selectedReport)
+    {
+        $reports = collect([
+            ['name' => 'appointments'],
+            ['name' => 'services'],
+        ]);
+
+        if ($selectedReport == 'appointments') {
+            $data = Appointment::with(['user', 'service'])->get();
         } else {
             $data = Service::all();
         }
 
-        //return redirect()->back()->withInput($request->all());
-        //return view('report.index', ['data' => null, 'reports' => $reports]);
-        return redirect()->route('reports.index', ['data' => $data]);
+        //dd($selectedReport, $data, $reports);
+        //session()->put('_old_input.report', $selectedReport);
+        session()->flash('report', $selectedReport);
+        //old('report', $selectedReport);
+        return view('report.index', ['data' => $data, 'reports' => $reports]);
+        //return redirect()->route('reports.index', ['data' => $data, 'reports' => $reports]);
     }
 }
