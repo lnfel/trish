@@ -84,8 +84,26 @@
       </form>
 
       <div class="flex-1 p-4">
-        {{ $data ?? '' }}
-        
+        <table class="w-full">
+          @if(old('report') == 'appointments')
+          <template x-if="reportSelected == 'appointments'" x-for="(item, index) in data" :key="index">
+            <tr>
+              <td class="py-2">
+                <span x-text="item.service.name"></span>
+              </td>
+              <td class="py-2">
+                <span x-text="item.user.name"></span> <span x-text="item.user.surname"></span>
+              </td>
+              <td class="py-2">
+                <span x-text="item.slot.date"></span>
+              </td>
+              <td>
+                <span x-text="item.status"></span>
+              </td>
+            </tr>
+          </template>
+          @endif
+        </table>
       </div>
     </div>
   </div>
@@ -102,6 +120,7 @@
     return {
       reports: {!! $reports !!},
       reportSelected: '{!! session('report') !!}',
+      data: {!! $data !!},
 
       addListener() {
         document.querySelectorAll('input[type="radio"]').forEach(item => {

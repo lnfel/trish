@@ -16,7 +16,7 @@ class ReportController extends Controller
 
     public function index()
     {
-        return view('report.index', ['data' => null, 'reports' => null]);
+        return view('report.index', ['data' => collect([])->toJson(), 'reports' => null]);
     }
 
     public function generate(Request $request)
@@ -47,9 +47,9 @@ class ReportController extends Controller
         ]);
 
         if ($selectedReport == 'appointments') {
-            $data = Appointment::with(['user', 'service'])->get();
+            $data = Appointment::get()->load(['user', 'service', 'slot'])->toJson();
         } else {
-            $data = Service::all();
+            $data = Service::all()->toJson();
         }
 
         //dd($selectedReport, $data, $reports);
