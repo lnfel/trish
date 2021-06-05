@@ -3,7 +3,7 @@
 ])
 
 <section x-data="data()" x-init="addListener(), $watch('reportSelected', value => console.log(value))" {{ $attributes->merge(['class' => 'relative container mx-auto px-4 mb-10']) }}>
-  <div class="p-4 bg-white shadow-md rounded-lg">
+  <div class="p-4 shadow-md rounded-lg backdrop-filter backdrop-blur-sm">
     <div class="flex justify-between mb-4">
       <div class="flex items-center">
         <h2 class="inline text-3xl border-b-4 border-green-500 mr-4">{{ $title }}</h2>
@@ -83,28 +83,55 @@
         </button>
       </form>
 
-      <div class="flex-1 p-4">
-        <table class="w-full">
-          {{$data}}
+      <div class="flex-1 px-8">
+        <h2 x-text="reportSelected" class="text-2xl text-gray-700 tracking-wide mb-4" style="text-transform: capitalize;">{{-- Str::title(old('report')) --}}</h2>
+        <table class="w-full rounded-md overflow-hidden">
           @if(old('report') == 'appointments')
-          <template x-if="reportSelected == 'appointments'" x-for="(item, index) in data" :key="index">
-            <tr>
-              <td class="py-2">
-                <span x-text="item.service.name"></span>
-              </td>
-              <td class="py-2">
-                <span x-text="item.user.name"></span> <span x-text="item.user.surname"></span>
-              </td>
-              <td class="py-2">
-                <span x-text="item.slot.date"></span>
-              </td>
-              <td>
-                <span x-text="item.status"></span>
-              </td>
-            </tr>
+          <template x-if="reportSelected == 'appointments'">
+            <thead>
+              <tr>
+                <th class="text-lg text-white font-semibold tracking-wide text-left bg-blue-500 px-4 py-2">Service</th>
+                <th class="text-lg text-white font-semibold tracking-wide text-left bg-blue-500 px-4 py-2">Client</th>
+                <th class="text-lg text-white font-semibold tracking-wide text-left bg-blue-500 px-4 py-2">Appointment date</th>
+                <th class="text-lg text-white font-semibold tracking-wide text-left bg-blue-500 px-4 py-2">Status</th>
+              </tr>
+            </thead>
           </template>
+          <tbody>
+            <template x-if="reportSelected == 'appointments'" x-for="(item, index) in data" :key="index">
+              <tr class="border-b border-gray-400">
+                <td class="px-4 py-2">
+                  <span x-text="item.service.name"></span>
+                </td>
+                <td class="px-4 py-2">
+                  <span x-text="item.user.name"></span> <span x-text="item.user.surname"></span>
+                </td>
+                <td class="px-4 py-2">
+                  <span x-text="item.slot.date"></span>
+                </td>
+                <td class="px-4 py-2">
+                  <span x-text="item.status" class="font-semibold tracking-wide" :class="{ 'text-green-500': item.status == 'Complete', 'text-red-500': item.status == 'Pending' }"></span>
+                </td>
+              </tr>
+            </template>
+          </tbody>
           @else
-
+          <template x-if="reportSelected == 'services'">
+            <thead>
+              <tr>
+                <th class="text-lg text-white font-semibold tracking-wide text-left bg-blue-500 px-4 py-2">Name</th>
+              </tr>
+            </thead>
+          </template>
+          <tbody>
+            <template x-if="reportSelected == 'services'" x-for="(item, index) in data" :key="index">
+              <tr class="border-b border-gray-400">
+                <td class="px-4 py-2">
+                  <span x-text="item.name"></span>
+                </td>
+              </tr>
+            </template>
+          </tbody>
           @endif
         </table>
       </div>

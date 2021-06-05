@@ -60,9 +60,10 @@ class ReportController extends Controller
             ['name' => 'services'],
         ]);
 
+        $from = Carbon::create(request()->query('from'))->toDateString();
+        $to = Carbon::create(request()->query('to'))->toDateString();
+
         if ($selectedReport == 'appointments') {
-            $from = Carbon::create(request()->query('from'))->toDateString();
-            $to = Carbon::create(request()->query('to'))->toDateString();
             //$data = Appointment::get()->load(['user', 'service', 'slot'])->toJson();
             $data = Appointment::with(['user', 'service', 'slot'])->whereHas('slot', function(Builder $query) use($from, $to) {
                 return $query->whereBetween('date', [$from, $to]);
@@ -71,7 +72,7 @@ class ReportController extends Controller
             $data = Service::all()->toJson();
         }
 
-        //dd($from, $to);
+        //dd($from, $to, $data);
 
         //dd($selectedReport, $data, $reports, $request->fullUrl(), request()->query('from'), request()->query('to'));
         //session()->put('_old_input.report', $selectedReport);
