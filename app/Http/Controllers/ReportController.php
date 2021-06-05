@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 class ReportController extends Controller
 {
@@ -62,15 +63,34 @@ class ReportController extends Controller
 
         $from = Carbon::create(request()->query('from'))->toDateString();
         $to = Carbon::create(request()->query('to'))->toDateString();
+        $user = auth()->user();
 
         if ($selectedReport == 'appointments') {
             //$data = Appointment::get()->load(['user', 'service', 'slot'])->toJson();
             $data = Appointment::with(['user', 'service', 'slot'])->whereHas('slot', function(Builder $query) use($from, $to) {
                 return $query->whereBetween('date', [$from, $to]);
             })->get();
+            $headers = [
+                'Service', 'Client', 'Appointment date', 'Status'
+            ];
         } else {
-            $data = Service::all()->toJson();
+            $data = Service::all();
+            $headers = [
+                'Name'
+            ];
         }
+
+        $pdfData = [
+            'model' => $data,
+            'user' => $user,
+            'headers' => $headers,
+            'report' => $selectedReport,
+        ];
+
+        //dd($pdfData);
+
+        $filename = 'angono-'.$selectedReport.'-report_'.date_format(now(), 'm-d-Y').'.pdf';
+        $pdf = PDF::loadView('pdf.report', $pdfData)->save('storage/reports/'.$filename);
 
         //dd($from, $to, $data);
 
@@ -80,5 +100,10 @@ class ReportController extends Controller
         //old('report', $selectedReport);
         return view('report.index', ['data' => $data, 'reports' => $reports, 'fromDate' => $from, 'toDate' => $to]);
         //return redirect()->route('reports.index', ['data' => $data, 'reports' => $reports]);
+    }
+
+    public function makeFile(Request $request)
+    {
+        dd($request->fullUrl());
     }
 }
