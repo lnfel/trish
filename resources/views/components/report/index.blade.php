@@ -79,7 +79,7 @@
         {{--@endif--}}
 
         <button class="px-4 py-2 text-white tracking-wide bg-blue-500 rounded-md shadow hover:bg-blue-400 focus:outline-none focus:bg-blue-500">
-          {{ old('report') == '' ? 'Select report' : 'Generate' }}
+          Generate
         </button>
       </form>
 
@@ -102,6 +102,8 @@
               </td>
             </tr>
           </template>
+          @else
+          
           @endif
         </table>
       </div>

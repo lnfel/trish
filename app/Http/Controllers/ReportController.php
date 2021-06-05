@@ -21,7 +21,6 @@ class ReportController extends Controller
 
     public function generate(Request $request)
     {
-
         // validate form data
         $validator = Validator::make($request->all(),
             [
@@ -36,10 +35,16 @@ class ReportController extends Controller
             return redirect()->back()->withInput($request->only('report'))->withErrors($validator);
         }
 
-        return redirect()->route('reports.display', $request['report'])->withInput();
+        if ($request['report'] == 'appointments') {
+            $data = ['report' => $request['report'], 'from' => $request['from'], 'to' => $request['from']];
+        } else {
+            $data = ['report' => $request['report']];
+        }
+
+        return redirect()->route('reports.display', $data)->withInput();
     }
 
-    public function displayReport($selectedReport)
+    public function displayReport($selectedReport, Request $request)
     {
         $reports = collect([
             ['name' => 'appointments'],
@@ -52,7 +57,7 @@ class ReportController extends Controller
             $data = Service::all()->toJson();
         }
 
-        //dd($selectedReport, $data, $reports);
+        dd($selectedReport, $data, $reports, $request->fullUrl(), request()->query('from'), request()->query('to'));
         //session()->put('_old_input.report', $selectedReport);
         session()->flash('report', $selectedReport);
         //old('report', $selectedReport);
