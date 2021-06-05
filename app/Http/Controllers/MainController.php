@@ -152,7 +152,8 @@ class MainController extends Controller
     $avatarName = $formattedName.'_avatar.webp';
 
     if (isset($request->valid_id)) {
-      $valid_id = Storage::disk('image')->putFileAs('img', $request->valid_id, $validIdName);
+      //$valid_id = Storage::disk('image')->putFileAs('img', $request->valid_id, $validIdName);
+      $valid_id = $request->valid_id->storeAs('img', $validIdName, 'image');
       //$request->valid_id->storeAs('img', $validIdName, 'image');
       $user->valid_id = $validIdName;
     }

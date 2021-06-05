@@ -58,14 +58,14 @@ return [
         'image' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage/img',
+            'url' => env('APP_URL').'/img',
             'visibility' => 'public',
         ],
 
         'reports' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage/reports',
+            'url' => env('APP_URL').'/reports',
             'visibility' => 'public',
         ],
 
