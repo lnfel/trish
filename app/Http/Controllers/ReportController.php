@@ -92,7 +92,7 @@ class ReportController extends Controller
         //dd($pdfData);
 
         $filename = 'angono-'.$selectedReport.'-report_'.date_format(now(), 'm-d-Y').'.pdf';
-        $pdf = PDF::loadView('pdf.report', $pdfData)->save('/reports/'.$filename);
+        $pdf = PDF::loadView('pdf.report', $pdfData)->save('reports/'.$filename);
         $reportLink = asset('storage/reports/'.$filename);
         //dd($from, $to, $data);
 
