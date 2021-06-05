@@ -85,18 +85,22 @@ class ReportController extends Controller
             'user' => $user,
             'headers' => $headers,
             'report' => $selectedReport,
+            'from' => $from,
+            'to' => $to
         ];
 
         //dd($pdfData);
 
         $filename = 'angono-'.$selectedReport.'-report_'.date_format(now(), 'm-d-Y').'.pdf';
         $pdf = PDF::loadView('pdf.report', $pdfData)->save('storage/reports/'.$filename);
-
+        $reportLink = asset('storage/reports/'.$filename);
         //dd($from, $to, $data);
 
         //dd($selectedReport, $data, $reports, $request->fullUrl(), request()->query('from'), request()->query('to'));
         //session()->put('_old_input.report', $selectedReport);
         session()->flash('report', $selectedReport);
+        session()->flash('status', 'Report has been generated!');
+        session()->flash('reportLink', $reportLink);
         //old('report', $selectedReport);
         return view('report.index', ['data' => $data, 'reports' => $reports, 'fromDate' => $from, 'toDate' => $to]);
         //return redirect()->route('reports.index', ['data' => $data, 'reports' => $reports]);

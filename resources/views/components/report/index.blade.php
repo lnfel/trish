@@ -84,7 +84,10 @@
       </form>
 
       <div class="flex-1 px-8">
-        <h2 x-text="reportSelected" class="text-2xl text-gray-700 tracking-wide mb-4" style="text-transform: capitalize;">{{-- Str::title(old('report')) --}}</h2>
+        <div class="flex items-center justify-between mb-4">
+          <h2 x-text="reportSelected" class="text-2xl text-gray-700 tracking-wide" style="text-transform: capitalize;">{{-- Str::title(old('report')) --}}</h2>
+          <a href="{{ session('reportLink') }}" target="_blank" class="px-4 py-2 text-white font-semibold tracking-wide rounded-md bg-green-500 hover:bg-green-400">Download</a>
+        </div>
         <table class="w-full rounded-md overflow-hidden">
           @if(old('report') == 'appointments')
           <template x-if="reportSelected == 'appointments'">
