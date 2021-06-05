@@ -1,5 +1,5 @@
 @props([
-  'reports', 'data'
+  'reports', 'data', 'fromDate', 'toDate'
 ])
 
 <section x-data="data()" x-init="addListener(), $watch('reportSelected', value => console.log(value))" {{ $attributes->merge(['class' => 'relative container mx-auto px-4 mb-10']) }}>
@@ -68,11 +68,11 @@
           <div class="flex flex-col space-y-2 mb-4">
             <div class="space-y-2">
               <label>From</label>
-              <x-input.date-picker-dynamic action="create" name="from" />
+              <x-input.date-picker-from action="create" inputname="from" :fromDate="$fromDate" />
             </div>
             <div class="space-y-2">
               <label>To</label>
-              <x-input.date-picker-dynamic action="create" name="to" />
+              <x-input.date-picker-to action="create" inputname="to" :toDate="$toDate" />
             </div>
           </div>
         </div>
@@ -85,6 +85,7 @@
 
       <div class="flex-1 p-4">
         <table class="w-full">
+          {{$data}}
           @if(old('report') == 'appointments')
           <template x-if="reportSelected == 'appointments'" x-for="(item, index) in data" :key="index">
             <tr>
@@ -103,7 +104,7 @@
             </tr>
           </template>
           @else
-          
+
           @endif
         </table>
       </div>

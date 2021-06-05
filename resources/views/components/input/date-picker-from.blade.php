@@ -1,9 +1,9 @@
 @props([
-  'action', 'inputname', 'fromDate', 'toDate'
+  'action', 'inputname', 'fromDate'
 ])
 
 <div class="antialiased sans-serif">
-  <div x-data="app()" x-init="[initDate(), getNoOfDays()]" x-cloak>
+  <div x-data="from()" x-init="[initDate(), getNoOfDays()]" x-cloak>
     <div>
       <div class="w-64">
         <div class="relative">
@@ -11,7 +11,7 @@
           <input 
             type="text"
             readonly
-            x-model="datepickerValue"
+            x-model="fromDateValue"
             @click="showDatepicker = !showDatepicker"
             @keydown.escape="showDatepicker = false"
             class="w-full pl-4 pr-10 py-3 border border-blue-400 leading-none rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 text-gray-600 font-medium"
@@ -106,7 +106,8 @@
       var action = "{!! $action !!}";
 
       console.log(action);
-      document.querySelector("[name='{!! $inputname !!}']").defaultValue = new Date().toJSON().slice(0,10);'{!! $toDate !!}'
+      //var dummy = document.querySelector("[name='{!! $inputname !!}']").defaultValue = new Date().toJSON().slice(0,10);
+      document.querySelector("[name='{!! $inputname !!}']").defaultValue = '{!! $fromDate !!}';
       /*switch(action){
         case "create":
           document.querySelector("[name='date']").defaultValue = new Date().toJSON().slice(0,10);
@@ -117,10 +118,10 @@
           break;
       }*/
 
-      function app() {
+      function from() {
           return {
               showDatepicker: false,
-              datepickerValue: '',
+              fromDateValue: '',
 
               month: '',
               year: '',
@@ -133,11 +134,10 @@
                   this.month = today.getMonth();
                   this.year = today.getFullYear();
                   if ("{!! $inputname !!}" == 'from') {
-                    //this.datepickerValue = new Date(this.year, this.month, today.getDate()).toDateString();
-                    this.datepickerValue = new Date('{!! $fromDate !!}').toDateString();
+                    //this.fromDateValue = new Date(this.year, this.month, today.getDate()).toDateString();
+                    this.fromDateValue = new Date('{!! $fromDate !!}').toDateString();
                   } else {
-                    //this.datepickerValue = new Date("{-- $model != null ? $model->date : '' --}").toDateString();
-                    this.datepickerValue = new Date('{!! $toDate !!}').toDateString();
+                    //this.fromDateValue = new Date("{-- $model != null ? $model->date : '' --}").toDateString();
                   }
               },
 
@@ -150,7 +150,7 @@
 
               getDateValue(date) {
                   let selectedDate = new Date(this.year, this.month, date);
-                  this.datepickerValue = selectedDate.toDateString();
+                  this.fromDateValue = selectedDate.toDateString();
 
                   this.$refs.date.value = selectedDate.getFullYear() +"-"+ ('0'+ (selectedDate.getMonth() + 1)).slice(-2) +"-"+ ('0' + selectedDate.getDate()).slice(-2);
 

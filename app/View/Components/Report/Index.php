@@ -7,13 +7,13 @@ use App\Appointment;
 
 class Index extends Component
 {
-    public $data, $title, $reports;
+    public $data, $title, $reports, $fromDate, $toDate;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($data, $title, $reports)
+    public function __construct($data, $title, $reports, $fromDate, $toDate)
     {
         $this->data = $data;
         $this->title = $title;
@@ -21,6 +21,8 @@ class Index extends Component
             ['name' => 'appointments'],
             ['name' => 'services'],
         ]);
+        $this->fromDate = $fromDate;
+        $this->toDate = $toDate;
     }
 
     /**
@@ -30,6 +32,12 @@ class Index extends Component
      */
     public function render()
     {
-        return view('components.report.index', ['data' => $this->data, 'title' => $this->title, 'reports' => $this->reports]);
+        return view('components.report.index', [
+            'data' => $this->data,
+            'title' => $this->title,
+            'reports' => $this->reports,
+            'from' => $this->fromDate,
+            'to' => $this->toDate
+        ]);
     }
 }
